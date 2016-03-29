@@ -30,7 +30,7 @@
 	
 
 	//Sanitize the POST values
-
+$emp_code = clean($_POST['emp_code']);
 echo $first_name = clean($_POST['emp_first_name']);
 $middle_name = clean($_POST['emp_middle_name']);
 $last_name = clean($_POST['emp_last_name']);
@@ -293,10 +293,10 @@ $new_str2=$original2.$first_name;
 $pass_emp=md5($new_str);
 if($report_to=='my')
 {
-$qry = "INSERT INTO t_employee(title, emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, priority_id, assign_to, username, password) VALUES('$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$role', NULL,'$new_str2', '$pass_emp' )";
+$qry = "INSERT INTO t_employee(emp_code, title, emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$role', NULL,'$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);
 }else{
-$qry = "INSERT INTO t_employee(title,emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, priority_id, assign_to, username, password) VALUES('$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$role', '$report_to','$new_str2', '$pass_emp' )";
+$qry = "INSERT INTO t_employee(emp_code, title,emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$role', '$report_to','$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);
 }
 

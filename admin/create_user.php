@@ -684,6 +684,13 @@ $i=1;
 
 <form class="form-horizontal" action="create_user_process.php" method="post" enctype="multipart/form-data" role="form">
 
+ <div class="form-group">
+      <label class="control-label col-sm-2" for="email"><strong>Employee Code</strong></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Employee Code" name="emp_code" id="emp_code" required>
+      </div>
+    </div>
+	
 
 	<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Title</strong></label>
