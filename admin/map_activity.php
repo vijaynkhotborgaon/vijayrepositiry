@@ -89,7 +89,7 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script>
 function changecontent1() {
    window.location="emp-details.php";
@@ -114,6 +114,29 @@ function change2() {
 function change3() {
    window.location="main.php";
 }
+
+
+
+
+  
+
+function callfunction(i) {
+
+    if ($('.main_group'+i+':checked')) {
+	alert("checked");
+        $('.group'+i)
+            .prop('disabled', false);
+            
+    }else{
+	
+	alert("uncked");
+        $('.group'+i)
+            .prop('disabled', true);
+            
+    } 
+}
+
+
 
 
 </script>
@@ -461,22 +484,22 @@ while($rowindustry = mysql_fetch_array($resultid)){
 ?>
 <div class="checkbox-inline">
 						
-                        <input type="checkbox" name="Industry_1[]" id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" /><?php echo $rowindustry['act_name']; ?> 
+                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]" onclick='callfunction(<?php echo $rowindustry['act_id']; ?>)' id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" /><?php echo $rowindustry['act_name']; ?> 
 						
 						
 						<ul class="checkbox-inline">
 						
 						<li>
-						<input type="checkbox" name="Previlages" value="View"> View  </li>
+						<input type="checkbox" name="Previlages" class='group<?php echo $rowindustry['act_id']; ?>' value="View" disabled> View  </li>
 						
 					
 						<li>
-						<input type="checkbox" name="Previlages" value="Edit"> Edit 
+						<input type="checkbox" name="Previlages" class='group<?php echo $rowindustry['act_id']; ?>' value="Edit" disabled> Edit 
 						</li>
 						
 						<li>
 						
-						<input type="checkbox" name="Previlages" value="Delete"> Delete 
+						<input type="checkbox" name="Previlages" class='group<?php echo $rowindustry['act_id']; ?>' value="Delete" disabled> Delete 
 						</li>
 						
 						</ul>
