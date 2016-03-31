@@ -33,8 +33,7 @@
 
 
 $role_id=clean($_POST['Industry']);
-$act_id=$_POST['Industry_1'];
-$priv_id=$_POST['Previlages'];
+
 
 	
 if($role_id == '') {
@@ -60,26 +59,7 @@ if($role_id == '') {
 	
 	
 	
-if($act_id == '') {
 
-
-
-
-
-		$errmsg_arr[] = 'Select activity';
-
-
-
-
-
-		$errflag = true;
-
-
-
-
-
-	}
-	
 	
 	
 	/*if($middle_name == '') {
@@ -132,7 +112,7 @@ if($act_id == '') {
 
 
 
-		header("location: map_activity.php");
+		header("location: View_RoleActivity.php");
 
 
 
@@ -146,43 +126,58 @@ if($act_id == '') {
 
 	}
 	
-
-
-	
 	
 
-	
+$qry="SELECT * FROM t_manage_activity WHERE priority_id='$role_id'";
+$result=mysql_query($qry);
 
-foreach ($priv_id as $priv_id){	
-$string_array = explode("(",$priv_id); 
-echo $id = rtrim($string_array[1], ")");
-
-$mystring = $priv_id;
-$first = strtok($mystring, '(');
-
-
-
-$qry = "INSERT INTO t_manage_activity(act_id, priority_id,pri_id) VALUES('$id','$role_id','$first')";
-$result = @mysql_query($qry);
-
-}
 
 
 if($result) {
 
-			$_SESSION['CAMREGMESG'] = 1;
+		if(mysql_num_rows($result) > 0) {
+
+			//Login Successful
+
+			session_regenerate_id();
+
+			$user = mysql_fetch_assoc($result);
+			
+			$_SESSION['successful_emp_search'] = 1;
+			$_SESSION['SESS_ID'] = $role_id;
+			
+			//$_SESSION['SESS_PHOTO'] = $user['photo'];
+			
 
 			session_write_close();
 
-			header("location: map_activity.php");
+			header("location: View_RoleActivity.php");
 
 			exit();
 
 		}else {
+			
+			$errmsg_arr[] = 'No Activity Assigned';
 
-			die("Query failed");
+		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+
+		session_write_close();
+
+		header("location: View_RoleActivity.php");
+
+			exit();
 
 		}
+
+	}
+	else {
+
+		die("Query failed");
+
+	}
+
+
+		
 		
 		
 		
