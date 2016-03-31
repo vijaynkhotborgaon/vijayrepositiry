@@ -89,7 +89,7 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
 	<script>
 function changecontent1() {
    window.location="emp-details.php";
@@ -114,31 +114,6 @@ function change2() {
 function change3() {
    window.location="main.php";
 }
-
-
-
-
-  
-
-function callfunction(i) {
-$(document).ready(function() {
-    if ($('.main_group'+i).is(':checked')) {
-	
-        $('.group'+i)
-            .prop('disabled', false);
-            
-    }else{
-	
-
-        $('.group'+i)
-            .prop('disabled', true)
-			.prop('checked', false);
-            
-    } 
-	});
-}
-
-
 
 
 </script>
@@ -382,7 +357,7 @@ $(document).ready(function() {
 
 
 <div class="alert alert-success">
-  <strong>Activities are Mapped to the Role Succesfully</strong>
+  <strong>Activities assigned to selected Role:</strong>
 </div>
 
 
@@ -444,6 +419,42 @@ $(document).ready(function() {
 
 
 
+<?php
+
+
+
+$emp_id=$_SESSION['SESS_ID'];
+
+
+
+$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id'");
+
+
+
+
+
+
+
+
+$row = mysql_fetch_assoc($result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
 
 
 
@@ -457,7 +468,7 @@ $(document).ready(function() {
 			
 
 
-<form class="form-horizontal" action="map_activity_process.php" method="post"  role="form">
+<form class="form-horizontal" action="View_RoleActivity_process.php" method="post"  role="form">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Select Role</strong></label>
       <div class="col-sm-10">
@@ -475,54 +486,194 @@ while($rowindustry = mysql_fetch_array($resultid)){
     </div>
 	
 
-	
-	
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Activities </strong></label>
-      <div class="col-sm-10">
-        <?php
-$resultid = mysql_query("SELECT * FROM t_activity");
-while($rowindustry = mysql_fetch_array($resultid)){
-?>
-<div class="checkbox-inline">
-						
-                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]" onclick='callfunction(<?php echo $rowindustry['act_id']; ?>)' id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" /><?php echo $rowindustry['act_name']; ?> 
-						
-						<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
-						<ul class="checkbox-inline">
-						
-						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled> View  </li>
-						
-					
-						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled> Edit 
-						</li>
-						
-						<li>
-						
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled> Delete 
-						</li>
-						
-						</ul>
-						</div>
-						
-						
-</div>  
-<?php
-} ?>
-      </div>
-    </div>
-   
    
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-	  
-        </br>
-		 <input type="submit" class="btn btn-info" value="Map Activities">
+        
+		
+		
+		 <input type="submit" class="btn btn-info" value="View Activities and Previlages">
       </div>
     </div>
   </form>
+  </br>
+  
+  
+  <?php if(isset($_SESSION['successful_emp_search']) && $_SESSION['successful_emp_search'] == 1)
+
+
+{
+
+
+
+
+
+
+?>
+
+
+ <div class="table-responsive">  
+<table class="table">
+<tbody>
+<tr>
+<?php
+$result_role = mysql_query("SELECT * FROM t_priority_role WHERE priority_id='$emp_id' ");
+
+$row_role = mysql_fetch_array($result_role);
+
+
+?>
+<td colspan="6"><h4><strong>Role : <?php echo $row_role['role_name'];?></strong></h4></td>
+</tr>
+<tr style="text-align: center;">
+<td style="text-align: center;"><strong>No.</strong></td>
+<td><strong>Activities</strong></td>
+
+<td colspan="3"><strong>Previligies</strong></td>
+
+</tr>
+<?php
+if($emp_id != '')
+{
+$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id' Group by act_id ");
+$i=1;
+while($row = mysql_fetch_array($result))
+{ 
+
+?>
+<tr style="text-align: center;">
+<td><?php echo $i; ?></td>
+
+<?php
+$activity=$row['act_id'];
+$result_act = mysql_query("SELECT * FROM t_activity WHERE act_id='$activity' ");
+
+$row_act = mysql_fetch_array($result_act);
+
+
+?>
+
+
+<td><?php echo $row_act['act_name']; ?></td>
+<?php
+$act_id=$row['act_id'];
+$result_act = mysql_query("SELECT * FROM t_manage_activity WHERE act_id='$act_id' AND priority_id='$emp_id'");
+while($row_act = mysql_fetch_array($result_act))
+{ 
+
+$activity_pri=$row_act['pri_id'];
+$result_act_1 = mysql_query("SELECT * FROM t_privilage WHERE pri_id='$activity_pri' ");
+
+while($row_act_1 = mysql_fetch_array($result_act_1))
+{
+
+
+?>
+
+
+
+
+<td><?php echo $row_act_1['pri_name']; ?></td>
+
+<?php }}?>
+</tr>
+<?php   $i++; }} ?>
+
+
+
+</tbody>
+</table>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- //Article -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- //MAIN CONTENT -->
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['successful_emp_search']);
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
 
 
  
