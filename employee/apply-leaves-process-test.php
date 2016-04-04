@@ -41,7 +41,7 @@ $original_cl=$row_total['c_l'];
 	
 $result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
 $row = mysql_fetch_assoc($result);
-$row_pending=$row['status'];
+//$row_pending=$row['status'];
 
 $timestamp = $row['timestamp'];
 $datetime = explode(" ",$timestamp);

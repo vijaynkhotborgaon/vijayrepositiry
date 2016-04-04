@@ -5,7 +5,9 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo"><span class="lite">Admin</span></a>
+			<a href="#" class="pull-left"><img src="img/imageedit_6_7284757439.png" class="img-rounded" alt="Cinque Terre" style="margin-top:15px;"></a>
+           
+           
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu" >

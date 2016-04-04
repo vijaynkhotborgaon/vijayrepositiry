@@ -45,11 +45,11 @@
                       </ul>
                   </li> 
 
- <li class="sub-menu">
+ <!--<li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>
                         <span>Asset System</span>
-                            <!--<span class="menu-arrow arrow_carrot-right"></span>-->
+                           
                       </a>
                       <ul class="sub">
 					   <li style="background-color:gray;"><a class="" href="create_weekends.php">Assign Assets</a></li>
@@ -58,7 +58,8 @@
                          
 						  
                       </ul>
-                  </li>       				  
+                  </li>-->
+				  
                   <!--<li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>

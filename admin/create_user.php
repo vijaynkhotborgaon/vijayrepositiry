@@ -89,34 +89,47 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	
+	<link href='css/fullcalendar.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='js/jquery-1.9.1.min.js'></script>
+<script src='js/jquery-ui-1.10.2.custom.min.js'></script>
+<script src='js/fullcalendar.min.js'></script>
 	<script>
-function changecontent1() {
-   window.location="emp-details.php";
-}
+	/*$(document).ready(function() {
+	$("#dept").change(function(){
+	
+	$.ajax({
 
-function changecontent2(){
-   window.location="asset-man.php";
-}
-
-function changecontent3() {
-   window.location="leave-man.php";
-}
-
-function change1() {
-   window.location="main.php";
-}
-
-function change2() {
-   window.location="main.php";
-}
-
-function change3() {
-   window.location="main.php";
-}
-
-
-</script>
+			url: 'dept_process_with_report_to.php',
+			
+	        type: 'POST', // Send post data
+		
+	        data: {
+            'selected' : $(this).val()
+        },
+	        async: false,
+		dataType: "json",
+			
+			
+	        success: function(data){
+	        	//alert(freshevents = s);
+			
+			 
+			$.each(data, function (i, jsondata) {
+				
+                 options += "<option value='" + jsondata.emp_id + "'>" + jsondata.emp_id + "</option>";  				
+    
+			});
+		$('#Industry_1').append(options);
+       
+                   
+	        }
+		
+		});
+	});
+	
+	});*/
+	</script>
 
     <link rel="shortcut icon" href="img/favicon.png">
 
@@ -131,7 +144,7 @@ function change3() {
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
     <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <!--<link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     <!-- easy pie chart-->
     <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -139,7 +152,7 @@ function change3() {
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
 	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<link rel="stylesheet" href="css/fullcalendar.css">
+	<!--<link rel="stylesheet" href="css/fullcalendar.css">-->
 	<link href="css/widgets.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -752,6 +765,30 @@ $i=1;
 	
 	
 	<div class="form-group">
+      <label class="control-label col-sm-2" for="email"><strong>Select Department</strong></label>
+      <div class="col-sm-10">
+        <select name="dept" id="dept" class="form-control" required>
+<option value="">Select Any One</option>
+<?php
+$resultid = mysql_query("SELECT * FROM t_dept");
+while($rowindustry = mysql_fetch_array($resultid)){
+?>
+<option value="<?php echo $rowindustry['no']; ?>"><?php echo $rowindustry['dept_name']; ?></option>
+<?php
+} ?>
+</select>
+
+
+	
+      </div>
+    </div>
+	
+	
+	
+	
+	
+	
+	<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Select Role</strong></label>
       <div class="col-sm-10">
         <select name="Industry" id="Industry" class="form-control" required>
@@ -797,8 +834,13 @@ while($rowindustry = mysql_fetch_array($resultid)){
       <label class="control-label col-sm-2" for="email"><strong>Report To</strong></label>
       <div class="col-sm-10">
         <select name="Industry_1" id="Industry_1" class="form-control">
+		<?php
+		$rows = mysql_result(mysql_query('SELECT COUNT(*) FROM t_employee'), 0);
+		if (!$rows) {
+		?>
 <option value="my">Himself/Herself</option>
 <?php
+}
 $resultid = mysql_query("SELECT * FROM t_employee");
 while($rowindustry = mysql_fetch_array($resultid)){
 $pr_id=$rowindustry['priority_id'];
@@ -811,7 +853,6 @@ $rowindustry_1 = mysql_fetch_array($resultid_1);
 </select>
       </div>
     </div>
-   
    
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
@@ -846,10 +887,10 @@ $rowindustry_1 = mysql_fetch_array($resultid_1);
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <!--<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
-    <script src="js/calendar-custom.js"></script>
+    <!--<script src="js/calendar-custom.js"></script>-->
 	<script src="js/jquery.rateit.min.js"></script>
     <!-- custom select -->
     <script src="js/jquery.customSelect.min.js" ></script>

@@ -25,8 +25,60 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
+	
+		<link href='css/fullcalendar.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='js/jquery-1.9.1.min.js'></script>
+<script src='js/jquery-ui-1.10.2.custom.min.js'></script>
+<script src='js/fullcalendar.min.js'></script>
 
-    <title>Admin Dashboard</title>
+   
+	
+	
+	<script>
+	$(document).ready(function() {
+	$("#dept").change(function(){
+	
+	$.ajax({
+
+			url: 'dept_process_with_report_to.php',
+			
+	        type: 'POST', // Send post data
+		
+	        data: {
+            'selected' : $(this).val()
+        },
+	        async: false,
+		dataType: "json",
+			
+			
+	        success: function(data){
+	        	//alert(freshevents = s);
+			
+			 option ='';
+			$.each(data, function (i, jsondata) {
+			
+			if(jsondata.status=='success'){
+			
+          
+option += '<option value=' +jsondata.emp_id + '>' +jsondata.emp_first_name+ ' ['+jsondata.role_name+']</option>';			 
+    }
+	else
+	{
+	option="<option value=' '>select</option>";
+	}
+	  $("#Industry_1").empty().append(option);
+                   
+			});
+		
+     
+	        }
+		
+		});
+	});
+	
+	});
+	</script>
 
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -140,14 +192,54 @@
 				</div>
 			</div>
 			<article>
-<form >
+
 	
 
 
 
 
 
-<td colspan="9"><h4 style="float:left;"><strong>Leave Requests</strong></h4></td>
+<h4 style="float:left;"><strong>Leave Requests</strong></h4>
+ <form action="leave_req_list_search.php" class="form-inline" role="form" style="float:right;">
+   <div class="col-sm-4">
+        <select name="dept" id="dept" class="form-control">
+<option value="">Select Any One</option>
+<?php
+$resultid = mysql_query("SELECT * FROM t_dept");
+while($rowindustry = mysql_fetch_array($resultid)){
+?>
+<option value="<?php echo $rowindustry['no']; ?>"><?php echo $rowindustry['dept_name']; ?></option>
+<?php
+} ?>
+</select>
+
+
+	
+      </div>
+   <div class="col-sm-3">
+        <select name="dept" id="Industry_1" class="form-control">
+
+
+</select>
+
+
+	
+      </div>
+	   
+     
+      <div class="col-sm-3">
+        <input type="text" class="form-control" placeholder="Employee Code" name="emp_code" id="emp_code">
+      </div>
+   
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+
+
+
+
+
+
 
 
 <table class="table" >
@@ -505,7 +597,7 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 
 </article>
-</form>
+
 
 
 

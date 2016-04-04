@@ -11,13 +11,13 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-				  <li class="sub-menu">
+				 <!--<li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
-                          <span>Tasks</span>
+                          <span>Tasks</span>-->
                           <!--<span class="menu-arrow arrow_carrot-right"></span>-->
-                      </a>
-                      <ul class="sub" >
+                     <!-- </a>
+                      <ul class="sub" >-->
 					  
 					  
 					  
@@ -25,7 +25,7 @@
 					  
 			<?php
 			
-			
+			//coding for Tasks
 			
 			$id_priority=activity($user_id);
 			$result_act = mysql_query("SELECT * FROM t_manage_activity where priority_id='$id_priority'");	
@@ -86,8 +86,8 @@
                                                   
                           
 						  
-                      </ul>
-                  </li>  
+                      <!--</ul>
+                  </li>  -->
 
 					  <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -138,13 +138,13 @@
 						  
                       </ul>
                   </li> 
-
+<!--
  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>
-                          <span>Asset System</span>
+                          <span>Asset System</span>-->
                           <!--<span class="menu-arrow arrow_carrot-right"></span>-->
-                      </a>
+                     <!-- </a>
                       <ul class="sub">
 					   <li style="background-color:gray;"><a class="" href="create_weekends.php">Assign Assets</a></li>
 					   <li style="background-color:gray;"><a class="" href="delete_weekends.php">Edit Assets Details</a></li>
@@ -152,7 +152,7 @@
                          
 						  
                       </ul>
-                  </li>       				  
+                  </li> -->      				  
                   <!--<li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>

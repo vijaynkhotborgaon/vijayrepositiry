@@ -419,7 +419,26 @@
 
 <div class="alert alert-success">
 
-<p id="update_success" style="margin:10px auto;"><?php die("request approved");?></p>
+<p id="update_success" style="margin:10px auto;"><?php echo "request approved";?></p>
+<?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['CAMREGMESG']);
+
+
+
+
+
+
+
+
+	}?>
 
 </div>
 
@@ -446,25 +465,7 @@
 
 
 
-<?php
 
-
-
-
-
-
-
-
-		unset($_SESSION['CAMREGMESG']);
-
-
-
-
-
-
-
-
-	}?>
 	
 	
 	<?php
@@ -512,7 +513,7 @@
 
 <div class="alert alert-danger">
 
-<p id="error_msg"><?php die("Request Rejected");?></p>
+<p id="error_msg"><?php echo "Request Rejected";?></p>
 
 </div>
 
@@ -708,6 +709,7 @@ $row = mysql_fetch_assoc($result);
 
     <form action="leave_request_process_update.php" method="post">
 	
+	<input type="hidden" name="emp_id" value="<?php echo $row['emp_id'];?>">
 	<input type="hidden" name="leave_id" value="<?php echo $row['leave_id'];?>">
 	<input type="hidden" name="days" value="<?php echo $row['number_of_day'];?>">
 	<input type="hidden" name="plcl" value="<?php echo $row['leave_type'];?>">

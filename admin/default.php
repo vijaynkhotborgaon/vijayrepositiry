@@ -414,6 +414,7 @@ $(document).ready(function() {
 	  
 	  
   </section>
+  
   <!-- container section start -->
 
     <!-- javascripts -->

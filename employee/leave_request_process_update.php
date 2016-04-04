@@ -30,7 +30,7 @@
 	
 
 	//Sanitize the POST values
-
+$emp_id=clean($_POST['emp_id']);
 $leave_id = clean($_POST['leave_id']);
 $days = clean($_POST['days']);
 $plcl = clean($_POST['plcl']);
@@ -212,13 +212,10 @@ if (isset($_POST['approve']))
 
 	$pl=$pl-$days;
 	$qry = "UPDATE leave_employee_new SET status='Approved', comment='$comment',p_l=$pl   WHERE leave_id=$leave_id";
+	$result = @mysql_query($qry);
 
-
-
-
-
-		$result = @mysql_query($qry);
-
+	$qry_1 = "UPDATE leave_employee_new SET p_l=$pl   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);
 
 
 
@@ -254,7 +251,8 @@ if (isset($_POST['approve']))
 
 		$result = @mysql_query($qry);
 
-
+   $qry_1 = "UPDATE leave_employee_new SET c_l=$cl   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);
 
 
 
@@ -291,7 +289,8 @@ if (isset($_POST['approve']))
 
 
 		$result = @mysql_query($qry);
-
+    $qry_1 = "UPDATE leave_employee_new SET e_l=$el   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);
 
 
 

@@ -10,6 +10,7 @@ $dbname = "archonsystem";
 
 
 $id=$_POST['id'];
+$reason=$_POST['reason'];
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -20,7 +21,7 @@ if (!$conn) {
 
 // sql to delete a record
 
-$delete = mysqli_query($conn,"UPDATE leave_employee_new SET status='cancled' WHERE leave_id='$id'");
+$delete = mysqli_query($conn,"UPDATE leave_employee_new SET status='cancled', comment='$reason' WHERE leave_id='$id'");
 
  if($delete)
      echo json_encode(array('status'=>'success'));

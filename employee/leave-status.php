@@ -31,10 +31,13 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 	
+	
 	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function()
+/*	
+//for delating row and slide down(hide) a row
+$(document).ready(function()
 	{
 		$('table#delTable td a.delete').click(function()
 		{
@@ -62,10 +65,42 @@
 			}
 		});
 		
-		// style the table with alternate colors
-		// sets specified color for every odd row
 		
-	});
+		
+	});*/
+	
+	$(document).ready(function()
+	
+	{
+	
+		$('table#delTable td a.delete').click(function()
+		{
+	 var reason = prompt("Reason");
+    if (reason === null) {
+        return; //break out of the function early
+    }
+    
+    var id = $(this).parent().parent().attr('id');
+				var data = 'id=' + id + '&reason=' +reason;
+				var parent = $(this).parent().parent();
+
+				$.ajax(
+				{
+					   type: "POST",
+					   url: "delete_pending_process.php",
+					   data: data,
+					   cache: false,
+					
+					   success: function(json)
+					   {
+					   
+					location.reload();
+							
+							
+					   }
+				 });				
+});
+});
 	
 </script>
 	
@@ -575,17 +610,21 @@ while($row = mysql_fetch_array($result))
 <?php } ?>
 
 
-<td><?php echo $row['comment']; ?></td>
-<?php if($row['status']=='Pending') {?>
-<td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
+
+
+<?php if($row['status']=='cancled') {?>
+<td  style="color:#086A87"><?php echo 'cancelled'; ?></td>
 <?php 
 }
 ?>
 
+<td><?php echo $row['comment']; ?></td>
 
-
-
-
+<?php if($row['status']=='Pending') {?>
+<td><a href="#" class="delete">  <button type="button" class="btn btn-danger">Cancel Leave</button></a> </td>
+<?php 
+}
+?>
 
 
 
