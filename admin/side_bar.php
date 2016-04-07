@@ -23,6 +23,7 @@
 						  <li style="background-color:gray;"><a class="" href="View_RoleActivity.php">View Roles & Activities</a></li>                          
 						   <li style="background-color:gray;"><a class="" href="create_user.php">Create Employee</a></li>
 						   <li style="background-color:gray;"><a class="" href="employee_list.php">Employee List</a></li>
+						   <li style="background-color:gray;"><a class="" href="Ex_employee_list.php">Ex-Employee List</a></li>
                       </ul>
                   </li>  
 

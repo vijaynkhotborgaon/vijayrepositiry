@@ -14,11 +14,43 @@
 
 
 	
-			$emp_code=$_GET['emp_code'];
 			$emp_id=$_GET['emp_id'];
+		$name=$_GET['name'];
+		
+		$role=$_GET['role'];
 
 
 ?>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 			  
 	
 
@@ -409,7 +441,7 @@
 <?php 
 
 
-$resultid = mysql_query("SELECT * FROM t_employee where emp_code='$emp_code'");
+$resultid = mysql_query("SELECT * FROM t_ex_employee where emp_id='$emp_id'");
 $i=1;
 
 
@@ -417,7 +449,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
 ?>
 
 <tr>
-    <td><b>Employee code</b></td>
+    <td><b>Employee Code</b></td>
     <td><?php echo $rowindustry['emp_code']; ?></td>
 </tr>
 <tr>
@@ -449,24 +481,15 @@ while($rowindustry = mysql_fetch_array($resultid)){
     <td><?php echo $rowindustry['email']; ?></td>
 </tr>
 <tr>
-    <td><b>Date of Joining</b></td>
-    <td><?php echo $rowindustry['JoiningDate']; ?></td>
-</tr>
-
-<tr>
     <td><b>Report To</b></td>
     <td>
-	<?php 
+	 
+<?php 
 
 
-$resultcam = mysql_query("SELECT * FROM t_employee WHERE emp_id='$emp_id'");
-$row_1 = mysql_fetch_array($resultcam);
-
-$result_final = mysql_query("SELECT * FROM t_employee WHERE emp_id=".$row_1['assign_to']);
-$row_2 = mysql_fetch_array($result_final);
-$full_name=$row_2['emp_first_name']." ".$row_2['emp_middle_name']." ".$row_2['emp_last_name'];
-echo $full_name;
+echo $name;
  ?>
+ 
 	</td>
 </tr>
 <tr>
@@ -474,10 +497,11 @@ echo $full_name;
     <td>
 	<?php 
 
-$result_final = mysql_query("SELECT * FROM t_priority_role WHERE priority_id=".$row_1['priority_id']);
-$row_2 = mysql_fetch_array($result_final);
 
-echo $row_2['role_name'];
+
+
+
+echo $role;
  ?>
 	
 	</td>
@@ -516,88 +540,6 @@ echo $row_2['role_name'];
  </div>
  
  
-<div class="col-sm-6" style="background:#D8D8D8;">
-
-  <h3><b>Reportee's</b></h3><table class="table"><tbody><tr style="text-align: center;">
-<td style="text-align: center;"><strong>SlNo.</strong></td>
-<td style="text-align: center;"><strong>Employee Code</strong></td>
-<td><strong>Employee Name</strong></td>
-<td><strong>Mobile</strong></td>
-<td><strong>Email ID</strong></td>
-
-<td><strong>Designation</strong></td>
-
-</tr>
-
-
-  
-  <?php
-  $resultid = mysql_query("SELECT * FROM t_employee where assign_to='$emp_id'");
-$i=1;
-
-
-while($rowindustry = mysql_fetch_array($resultid)){
-?>
-
-<tr style="text-align: center;">
-
-
-<td><?php echo $i; ?></td>
-
-
-<td><?php echo $rowindustry['emp_code']; ?></td>
-
-
-
-<?php
-$full_name=$rowindustry['emp_first_name']." ".$rowindustry['emp_middle_name']." ".$rowindustry['emp_last_name'];
-?>
-
-
-<td><?php echo $full_name; ?></td>
-
-
-<td><?php echo $rowindustry['mobile']; ?></td>
-
-
-<td><?php echo $rowindustry['email']; ?></td>
-
-<?php 
-
-
-$resultcam = mysql_query("SELECT * FROM t_employee WHERE emp_id=".$rowindustry['emp_id']);
-$row_1 = mysql_fetch_array($resultcam);
-$result_final = mysql_query("SELECT * FROM t_priority_role WHERE priority_id=".$row_1['priority_id']);
-$row_2 = mysql_fetch_array($result_final);
-
-
- ?>
-
-
-<td>
-<?php 
-
-
-
-
-
-
-echo $row_2['role_name'];
- ?>
-</td>
-
-</tr>
-
-
-
-
-<?php   
-$i++; } 
-?>
-
-
-
-  </div>
            
           </section>
       </section>

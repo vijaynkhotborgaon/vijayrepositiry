@@ -31,28 +31,30 @@
 
 	//Sanitize the POST values
 $emp_code = clean($_POST['emp_code']);
-echo $first_name = clean($_POST['emp_first_name']);
+$title=clean($_POST['title']);
+$first_name = clean($_POST['emp_first_name']);
 $middle_name = clean($_POST['emp_middle_name']);
 $last_name = clean($_POST['emp_last_name']);
-
 $mobile = clean($_POST['mobile']);
 $address = clean($_POST['address']);
-
+$email = clean($_POST['email']);
+$dateofjoining = clean($_POST['DOJ']);
 $dept=clean($_POST['dept']);
-
-
-
-
-echo $role=clean($_POST['Industry']);
+$role=clean($_POST['Industry']);
 
 /*$result_role = mysql_query("SELECT * FROM employee_role WHERE role_id='$role'");
 $role_1 = mysql_fetch_array($result_role);
 $role_new=$role_1['role'];*/
 
-
-$email = clean($_POST['email']);
 $report_to=clean($_POST['Industry_1']);
-$title=clean($_POST['title']);
+
+if($emp_code=='')
+{
+
+$errmsg_arr[] = 'Please provide employee code';
+
+}
+
 
 if($title=='')
 {
@@ -76,10 +78,6 @@ if($first_name == '') {
 
 
 		$errflag = true;
-
-
-
-
 
 	}
 	
@@ -211,6 +209,16 @@ if($first_name == '') {
 
 	}
 	
+	
+	if($dateofjoining == '') {
+
+		$errmsg_arr[] = 'Enter Date of Joining of the employee';
+
+		$errflag = true;
+
+	}
+	
+	
 	if($role == '') {
 
 
@@ -226,17 +234,7 @@ if($first_name == '') {
 		$errflag = true;
 
 
-
-
-
 	}
-	
-
-
-
-
-
-
 	
 
 		if($errflag) {
@@ -286,24 +284,47 @@ $new_str=$original.$sub;
 //echo "password : " .$new_str ."</br>";
 $new_str2=$original2.$first_name;
 //echo "username : " .$new_str2;
-
-
-
-
 $pass_emp=md5($new_str);
+
+
+$qry="SELECT COUNT(*) FROM t_ex_employee where emp_code='$emp_code'";
+$ExEmpCodeCompare=mysql_result(mysql_query($qry),0);
+
+$qry1="SELECT COUNT(*) FROM t_employee where emp_code='$emp_code'";
+$EmpCodeCompare=mysql_result(mysql_query($qry1),0);
+
+//echo "ExEmployee".$ExEmpCompare;
+if($ExEmpCodeCompare!=0)
+{
+	//echo "ExEmployee".$ExEmpCompare. "exists as Ex Employee";
+	
+	$_SESSION['ERRMSG_ARR1'] = 100;
+	header("location: create_user.php");
+
+	exit();
+}
+
+if($EmpCodeCompare!=0)
+{
+	//echo "ExEmployee".$ExEmpCompare. "exists as Ex Employee";
+	
+	$_SESSION['ERRMSG_ARR1'] = 100;
+	header("location: create_user.php");
+
+	exit();
+}
+
 if($report_to=='my')
 {
-$qry = "INSERT INTO t_employee(emp_code, title, emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, dept_id,  priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$dept','$role', NULL,'$new_str2', '$pass_emp' )";
+$qry = "INSERT INTO t_employee(emp_code, title, emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, JoiningDate, dept_id,  priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email', '$dateofjoining','$dept','$role', NULL,'$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);
 }else{
-$qry = "INSERT INTO t_employee(emp_code, title,emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, dept_id, priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email','$dept','$role', '$report_to','$new_str2', '$pass_emp' )";
+$qry = "INSERT INTO t_employee(emp_code, title,emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, JoiningDate, dept_id, priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email', '$dateofjoining', '$dept','$role', '$report_to','$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);
 }
 
 if($result)
 {
-
- 
 
 /*$query1 = mysql_query("select * from employee_seq ORDER BY emp_id DESC LIMIT 1");
 $row1=  mysql_fetch_assoc($query1);*/

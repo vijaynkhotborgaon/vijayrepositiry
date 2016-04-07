@@ -372,7 +372,7 @@ unset($_SESSION['till_date']);
 
 
 <div class="col-sm-6">
-<form class="form-horizontal" action="apply-leaves-process-test.php" method="post" enctype="multipart/form-data" role="form">
+<form class="form-horizontal" action="apply-leaves-process-test-latest.php" method="post" enctype="multipart/form-data" role="form">
 
 
 	<div class="form-group">
@@ -399,7 +399,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
 	 <div class="form-group">
       <label class="control-label col-sm-4" for="email" ><strong>From Date</strong></label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" placeholder="From" name="activefrom" id="emp_first_name" onchange="calculate()"/>
+        <input type="text" class="form-control" placeholder="From" name="activefrom" id="emp_first_name" />
 		
       </div>
     </div>

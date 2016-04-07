@@ -79,25 +79,23 @@
 	//Sanitize the POST values
 
 $title = clean($_POST['title']);
-	$first_name = clean($_POST['emp_first_name']);
- $middle_name = clean($_POST['emp_middle_name']);
+$first_name = clean($_POST['emp_first_name']);
+$middle_name = clean($_POST['emp_middle_name']);
 $last_name = clean($_POST['emp_last_name']);
 $mobile = clean($_POST['mobile']);
 $address = clean($_POST['address']);
 
 $email = clean($_POST['email']);
+$dateofjoining = clean($_POST['DOJ']);
 $role = clean($_POST['Industry']);
-
-echo $roport_to = clean($_POST['Industry_1']);
-$emp_id_hidden = clean($_POST['country']);
-
-
+$roport_to = clean($_POST['Industry_1']);
+$emp_code_hidden = clean($_POST['country']);
 
 if($roport_to=='my')
 {
 
 
-$qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_middle_name='$middle_name', emp_last_name='$last_name', mobile='$mobile', address='$address', email='$email', priority_id='$role' WHERE emp_id='$emp_id_hidden'";
+$qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_middle_name='$middle_name', emp_last_name='$last_name', mobile='$mobile', address='$address', email='$email', JoiningDate='$dateofjoining', priority_id='$role' WHERE emp_id='$emp_code_hidden'";
 
 
 
@@ -107,7 +105,7 @@ $qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_
 
 
 
-	$qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_middle_name='$middle_name', emp_last_name='$last_name', mobile='$mobile', address='$address', email='$email', priority_id='$role', assign_to='$roport_to' WHERE emp_id='$emp_id_hidden'";
+	$qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_middle_name='$middle_name', emp_last_name='$last_name', mobile='$mobile', address='$address', email='$email', JoiningDate='$dateofjoining', priority_id='$role', assign_to='$roport_to' WHERE emp_id='$emp_code_hidden'";
 
 
 
@@ -115,17 +113,6 @@ $qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_
 
 }
 	
-
-
-
-
-
-
-
-
-
-
-
 
 
 		if($result) {
@@ -146,7 +133,7 @@ $qry = "UPDATE t_employee SET title='$title', emp_first_name='$first_name', emp_
 
 
 
-			header("location: employee_edit.php?emp_id=$emp_id_hidden");
+			header("location: employee_edit.php?emp_id=$emp_code_hidden");
 
 
 

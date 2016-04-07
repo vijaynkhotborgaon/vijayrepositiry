@@ -8,7 +8,9 @@
 	
 	require_once('auth.php');
 
-
+$dept=$_POST['dept'];
+$Industry_1=$_POST['Industry_1'];
+$emp_code=$_POST['emp_code'];
 	
 
 
@@ -36,7 +38,7 @@
 	
 	
 	<script>
-	$(document).ready(function() {
+	/*$(document).ready(function() {
 	$("#dept").change(function(){
 	
 	$.ajax({
@@ -54,8 +56,10 @@
 			
 	        success: function(data){
 	        	//alert(freshevents = s);
+				
 			
 			 option ='';
+			 option += "<option value=''>Select Manager</option>";
 			$.each(data, function (i, jsondata) {
 			
 			if(jsondata.status=='success'){
@@ -65,7 +69,7 @@ option += '<option value=' +jsondata.emp_id + '>' +jsondata.emp_first_name+ ' ['
     }
 	else
 	{
-	option="<option value=' '>select</option>";
+	option="<option value=''>Select Manager</option>";
 	}
 	  $("#Industry_1").empty().append(option);
                    
@@ -77,7 +81,7 @@ option += '<option value=' +jsondata.emp_id + '>' +jsondata.emp_first_name+ ' ['
 		});
 	});
 	
-	});
+	});*/
 	</script>
 
     <!-- Bootstrap CSS -->    
@@ -198,12 +202,12 @@ option += '<option value=' +jsondata.emp_id + '>' +jsondata.emp_first_name+ ' ['
 
 
 
-
 <h4 style="float:left;"><strong>Leave Requests</strong></h4>
- <form action="leave_req_list_search.php" class="form-inline" role="form" style="float:right;">
-   <div class="col-sm-4">
+
+ <form action="leave_req_list.php" class="form-inline" role="form" style="float:right;" method="post">
+   <div class="col-sm-8">
         <select name="dept" id="dept" class="form-control">
-<option value="">Select Any One</option>
+<option value="">Select Department</option>
 <?php
 $resultid = mysql_query("SELECT * FROM t_dept");
 while($rowindustry = mysql_fetch_array($resultid)){
@@ -216,226 +220,75 @@ while($rowindustry = mysql_fetch_array($resultid)){
 
 	
       </div>
-   <div class="col-sm-3">
-        <select name="dept" id="Industry_1" class="form-control">
-
-
+	   <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+	  
+	  <form action="leave_req_list.php" class="form-inline" role="form" style="float:right;" method="post">
+   <div class="col-sm-8">
+        <select name="Industry_1" id="Industry_1" class="form-control">
+		<option value=''>Select Manager</option>
+		<?php
+$resultid = mysql_query("SELECT * FROM t_employee");
+while($rowindustry = mysql_fetch_array($resultid)){
+?>
+<option value="<?php echo $rowindustry['emp_id']; ?>"><?php echo $rowindustry['emp_first_name']; ?></option>
+<?php
+} ?>
 </select>
 
 
 	
       </div>
-	   
+	  <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  
+  
+	 
+<form action="leave_req_list.php" class="form-inline" role="form" style="float:right;" method="post">	 
      
-      <div class="col-sm-3">
+      <div class="col-sm-8">
         <input type="text" class="form-control" placeholder="Employee Code" name="emp_code" id="emp_code">
       </div>
    
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 
-
-
-
-
-
-
-
-
-<table class="table" >
-
-
-
-
-
-
-
-
-<tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<tr style="text-align: center;">
-
-
-
-
-
-
-
-
-<td style="text-align: center;"><strong>No.</strong></td>
-
-
-
-
-
-<td><strong>Employee ID</strong></td>
-<td><strong>Employee Name</strong></td>
-<td><strong>Report To</strong></td>
-<td><strong>Leave Type</strong></td>
-
-
-
-
-
-
-
-
-<td><strong>From</strong></td>
-
-
-
-
-
-
-
-
-<td><strong>To</strong></td>
-
-
-
-
-
-
-
-
-
-
-<td><strong>Number of Days</strong></td>
-
-
-<td><strong>Purpose</strong></td>
-
-<td><strong>Comment from manager</strong></td>
-
-
-
-
-
-
-<td><strong>Status</strong></td>
-
-
-
-
-
-
-
-
-
-
-
-</tr>
-
-
-
-
+</br>
+</br>
 
 
 
 
 <?php
-
-
-
-
-
-
-
-
+if($dept=='' AND $Industry_1=='' AND $emp_code=='')
+{
+?>
+<table class="table" >
+<tbody>
+<tr style="text-align: center;">
+<td style="text-align: center;"><strong>No.</strong></td>
+<td><strong>Employee ID</strong></td>
+<td><strong>Employee Name</strong></td>
+<td><strong>Report To</strong></td>
+<td><strong>Leave Type</strong></td>
+<td><strong>From</strong></td>
+<td><strong>To</strong></td>
+<td><strong>Number of Days</strong></td>
+<td><strong>Purpose</strong></td>
+<td><strong>Comment from manager</strong></td>
+<td><strong>Status</strong></td>
+</tr>
+<?php
 $result = mysql_query("SELECT * FROM leave_employee_new");
-
-
-
-
-
-
-
-
-  $i=1;
-
-
-
-
-
-
-
+$i=1;
 
 while($row = mysql_fetch_array($result))
 
-
-
-
-
-
-
-
   { 
-
-
-
-
-
-
-
 
 ?>
 
-
-
-
-
-
-
-
 <tr style="text-align: center;">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <td><?php echo $i; ?></td>
 
@@ -471,41 +324,15 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 <td><?php echo $row['leave_type']; ?></td>
 
-
-
-
-
-
-
-
 <td><?php echo $row['from_date']; ?></td>
 
-
-
-
-
-
-
-
 <td><?php echo $row['till']; ?></td>
-
-
-
-
-
-
-
-
-
 
 
 <td><?php echo $row['number_of_day']; ?></td>
 <td><?php echo $row['purpose']; ?></td>
 
 <td><?php echo $row['comment']; ?></td>
-
-
-
 
 <?php if($row['status']=='Pending') {?>
 
@@ -532,27 +359,7 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </tr>
-
-
-
-
-
 
 
 
@@ -561,6 +368,133 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 
 
+</tbody>
+
+
+</table>
+
+<?php }?>
+
+
+
+
+
+<?php
+if($dept !=''AND $Industry_1=='' AND $emp_code=='')
+{
+
+?>
+<table class="table" >
+<tbody>
+<tr style="text-align: center;">
+<td style="text-align: center;"><strong>No.</strong></td>
+<td><strong>Employee ID</strong></td>
+<td><strong>Employee Name</strong></td>
+<td><strong>Report To</strong></td>
+<td><strong>Leave Type</strong></td>
+<td><strong>From</strong></td>
+<td><strong>To</strong></td>
+<td><strong>Number of Days</strong></td>
+<td><strong>Purpose</strong></td>
+<td><strong>Comment from manager</strong></td>
+<td><strong>Status</strong></td>
+</tr>
+<?php
+
+$result = mysql_query("SELECT * FROM t_employee where dept_id=$dept");
+$i=1;
+
+while($row = mysql_fetch_array($result))
+
+  {
+
+     $emp_id=$row['emp_id'];
+
+    $result_1 = mysql_query("SELECT * FROM leave_employee_new where emp_id=$emp_id");
+	echo mysql_num_rows($result_1);
+	while($row_1 = mysql_fetch_array($result_1))
+
+	  { 
+	  
+	  
+	  
+?>
+
+  
+
+
+
+<tr style="text-align: center;">
+
+<td><?php echo $i; ?></td>
+
+<td><?php echo $row_1['emp_id']; ?></td>
+
+
+<?php
+
+$emp_name=$row['emp_first_name'];
+$emp_mid_name=$row['emp_middle_name'];
+$emp_last_name=$row['emp_last_name'];
+
+$result_w = mysql_query("SELECT * FROM t_employee where assign_to=".$row_1['assign_to']);
+	
+$row_w = mysql_fetch_array($result_w);
+
+$result_w = mysql_query("SELECT * FROM t_employee where emp_id=".$row_w['assign_to']);
+	
+$row_q = mysql_fetch_array($result_w);
+
+
+?>
+
+
+<td><?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<td><?php echo $row_q['emp_first_name'];?></td>
+
+<td><?php echo $row_1['leave_type']; ?></td>
+
+<td><?php echo $row_1['from_date']; ?></td>
+
+<td><?php echo $row_1['till']; ?></td>
+
+
+<td><?php echo $row_1['number_of_day']; ?></td>
+<td><?php echo $row_1['purpose']; ?></td>
+
+<td><?php echo $row_1['comment']; ?></td>
+
+<?php if($row_1['status']=='Pending') {?>
+
+<td style="color:red;">Pending</td>
+<?php }?>
+
+<?php if($row_1['status']=='Approved') {?>
+
+<td style="color:green;">Approved</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='Rejected') {?>
+
+<td style="color:#B09EC8;">Rejected</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='cancled') {?>
+
+<td style="color:#210B61;">Cancelled By <?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<?php }?>
+
+
+
+</tr>
+
+
+
+<?php   $i++; }}?>
 
 
 
@@ -568,14 +502,146 @@ $emp_last_name_1=$row_2['emp_last_name'];
 </tbody>
 
 
+</table>
+
+<?php 
+ 
+
+}
+
+?>
 
 
 
 
+
+
+<?php
+if($dept=='' AND $Industry_1!='' AND $emp_code=='')
+{
+
+?>
+<table class="table" >
+<tbody>
+<tr style="text-align: center;">
+<td style="text-align: center;"><strong>No.</strong></td>
+<td><strong>Employee ID</strong></td>
+<td><strong>Employee Name</strong></td>
+<td><strong>Report To</strong></td>
+<td><strong>Leave Type</strong></td>
+<td><strong>From</strong></td>
+<td><strong>To</strong></td>
+<td><strong>Number of Days</strong></td>
+<td><strong>Purpose</strong></td>
+<td><strong>Comment from manager</strong></td>
+<td><strong>Status</strong></td>
+</tr>
+<?php
+
+$result = mysql_query("SELECT * FROM t_employee where emp_id=$Industry_1");
+$i=1;
+while($row = mysql_fetch_array($result))
+
+  {
+
+    $emp_id=$row['emp_id'];
+
+    $result_1 = mysql_query("SELECT * FROM leave_employee_new where assign_to=$emp_id");
+	
+	while($row_1 = mysql_fetch_array($result_1))
+
+	  {
+	  
+	
+?>
+
+  
+
+
+
+<tr style="text-align: center;">
+
+<td><?php echo $i; ?></td>
+
+<td><?php echo $row_1['emp_id']; ?></td>
+
+
+<?php
+$emp_name=$row['emp_first_name'];
+$emp_mid_name=$row['emp_middle_name'];
+$emp_last_name=$row['emp_last_name'];
+
+$result_w = mysql_query("SELECT * FROM t_employee where assign_to=".$row_1['assign_to']);
+	
+$row_w = mysql_fetch_array($result_w);
+
+$result_w = mysql_query("SELECT * FROM t_employee where emp_id=".$row_w['assign_to']);
+	
+$row_q = mysql_fetch_array($result_w);
+
+
+?>
+
+
+<td><?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<td><?php echo  $row_q['emp_first_name']; ?></td>
+
+<td><?php echo $row_1['leave_type']; ?></td>
+
+<td><?php echo $row_1['from_date']; ?></td>
+
+<td><?php echo $row_1['till']; ?></td>
+
+
+<td><?php echo $row_1['number_of_day']; ?></td>
+<td><?php echo $row_1['purpose']; ?></td>
+
+<td><?php echo $row_1['comment']; ?></td>
+
+<?php if($row_1['status']=='Pending') {?>
+
+<td style="color:red;">Pending</td>
+<?php }?>
+
+<?php if($row_1['status']=='Approved') {?>
+
+<td style="color:green;">Approved</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='Rejected') {?>
+
+<td style="color:#B09EC8;">Rejected</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='cancled') {?>
+
+<td style="color:#210B61;">Cancelled By <?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<?php }?>
+
+
+
+</tr>
+
+
+
+<?php   $i++; } ?>
+
+
+
+
+</tbody>
 
 
 </table>
 
+<?php }
+}
+
+?>
 
 
 
@@ -583,9 +649,133 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 
 
+<?php
+if($dept=='' AND $Industry_1=='' AND $emp_code!='')
+{
+
+?>
+<table class="table" >
+<tbody>
+<tr style="text-align: center;">
+<td style="text-align: center;"><strong>No.</strong></td>
+<td><strong>Employee ID</strong></td>
+<td><strong>Employee Name</strong></td>
+<td><strong>Report To</strong></td>
+<td><strong>Leave Type</strong></td>
+<td><strong>From</strong></td>
+<td><strong>To</strong></td>
+<td><strong>Number of Days</strong></td>
+<td><strong>Purpose</strong></td>
+<td><strong>Comment from manager</strong></td>
+<td><strong>Status</strong></td>
+</tr>
+<?php
+
+$result = mysql_query("SELECT * FROM t_employee where emp_code='$emp_code'");
+$i=1;
+
+while($row = mysql_fetch_array($result))
+
+  {
+
+    $emp_id=$row['emp_id'];
+
+    $result_1 = mysql_query("SELECT * FROM leave_employee_new where emp_id=$emp_id");
+	
+	while($row_1 = mysql_fetch_array($result_1))
+
+	  {
+	  
+	
+?>
+
+  
 
 
 
+<tr style="text-align: center;">
+
+<td><?php echo $i; ?></td>
+
+<td><?php echo $row_1['emp_id']; ?></td>
+
+
+<?php
+$emp_name=$row['emp_first_name'];
+$emp_mid_name=$row['emp_middle_name'];
+$emp_last_name=$row['emp_last_name'];
+
+$result_w = mysql_query("SELECT * FROM t_employee where assign_to=".$row_1['assign_to']);
+	
+$row_w = mysql_fetch_array($result_w);
+
+$result_w = mysql_query("SELECT * FROM t_employee where emp_id=".$row_w['assign_to']);
+	
+$row_q = mysql_fetch_array($result_w);
+
+
+?>
+
+
+<td><?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<td><?php echo  $row_q['emp_first_name']; ?></td>
+
+<td><?php echo $row_1['leave_type']; ?></td>
+
+<td><?php echo $row_1['from_date']; ?></td>
+
+<td><?php echo $row_1['till']; ?></td>
+
+
+<td><?php echo $row_1['number_of_day']; ?></td>
+<td><?php echo $row_1['purpose']; ?></td>
+
+<td><?php echo $row_1['comment']; ?></td>
+
+<?php if($row_1['status']=='Pending') {?>
+
+<td style="color:red;">Pending</td>
+<?php }?>
+
+<?php if($row_1['status']=='Approved') {?>
+
+<td style="color:green;">Approved</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='Rejected') {?>
+
+<td style="color:#B09EC8;">Rejected</td>
+
+<?php }?>
+
+<?php if($row_1['status']=='cancled') {?>
+
+<td style="color:#210B61;">Cancelled By <?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+
+<?php }?>
+
+
+
+</tr>
+
+
+
+<?php   $i++; } ?>
+
+
+
+
+</tbody>
+
+
+</table>
+
+<?php }
+}
+
+?>
 
 
 
@@ -624,7 +814,7 @@ $emp_last_name_1=$row_2['emp_last_name'];
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>

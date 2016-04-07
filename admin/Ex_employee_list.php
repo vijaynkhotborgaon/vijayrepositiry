@@ -102,40 +102,12 @@
 
   });
 
-  
-  
-  
-
- function camdelete(str)
-
-{
-
-	if(confirm("Do you want to delete the selected Employee's Record?"))
-
-	{
-
-  location.href='delete_emp.php?camid='+str;
-
-
-}
-
-}
 
 
 
   </script>
 
-
-
-
-
 </head>
-
-
-
-
-
-
 
 
 <body>
@@ -161,150 +133,13 @@
 				</div>
 			</div>
 			
-
-
-<div id="content"><!-- TemplateBeginEditable name="edit1" -->
-			  
-			  
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-	if(isset($_SESSION['delete_emp']) && $_SESSION['delete_emp']==1 ) {
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-  <div id="system-message">
-
-
-
-
-
-
-
-
-							<div class="alert alert-success">
-
-
-
-
-
-
-
-
-<p id="update_success">Employee Record deleted successfully.</p>
-
-
-
-
-
-
-
-
-       									</div>
-
-
-
-
-
-
-
-
-					</div>	
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['delete_emp']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-?>
 <article>
 <form >
 	
 
 
 
-<h4 style="float:left;"><strong>Employee Lists</strong></h4><span style="float:right;"><a href="create_user.php" title="Create Employee"><img src="img/user_add.png" alt="Add Employee" /></a></span>
+<h4 style="float:left;"><strong>Employee Lists</strong></h4>
 
 
 
@@ -396,20 +231,12 @@
 
 <td><strong>Email ID</strong></td>
 
-<td><strong>Reports To</strong></td>
+<td><strong>Was Reporting To</strong></td>
 
-<td><strong>Designation</strong></td>
-
-
+<td><strong>Last Designation</strong></td>
 
 
-<td><strong>Update</strong></td>
-
-
-
-
-
-
+<td><strong>View Record</strong></td>
 
 
 
@@ -432,7 +259,7 @@
 
 
 
-$result = mysql_query("SELECT * FROM t_employee");
+$result = mysql_query("SELECT * FROM t_ex_employee");
 
 
 
@@ -515,11 +342,29 @@ $full_name=$row['emp_first_name']." ".$row['emp_middle_name']." ".$row['emp_last
 <?php 
 
 
-$resultcam = mysql_query("SELECT * FROM t_employee WHERE emp_id=".$row['emp_id']);
+$resultcam = mysql_query("SELECT * FROM t_ex_employee WHERE emp_id=".$row['emp_id']);
 $row_1 = mysql_fetch_array($resultcam);
+$assign_to=$row_1['assign_to'];
 
-$result_final = mysql_query("SELECT * FROM t_employee WHERE emp_id=".$row_1['assign_to']);
-$row_2 = mysql_fetch_array($result_final);
+
+$result_Emp = mysql_query("SELECT * FROM t_employee WHERE emp_id=$assign_to");
+$count=mysql_num_rows($result_Emp);
+
+
+$result_Ex_Emp = mysql_query("SELECT * FROM t_ex_employee WHERE emp_id=$assign_to");
+$count_1=mysql_num_rows($result_Ex_Emp);
+
+if($count!=0)
+{
+$row_2 = mysql_fetch_array($result_Emp);
+}
+
+if($count_1!=0)
+{
+$row_2 = mysql_fetch_array($result_Ex_Emp);
+}
+
+
 $full_name=$row_2['emp_first_name']." ".$row_2['emp_middle_name']." ".$row_2['emp_last_name'];
 echo $full_name;
  ?>
@@ -540,85 +385,19 @@ echo $row_2['role_name'];
 
 
 
-<td><a href="employee_edit.php?emp_id=<?php echo $row['emp_id']; ?>" title="edit"><img src="img/edit.png" alt="Edit Employee Details" /></a>
-
-<a href="employee_detail.php?emp_id=<?php echo $row['emp_id']; ?>&emp_code=<?php echo $row['emp_code']; ?>" title="View Details"><img src="img/View-detail.png" alt="View Details" /></a>
-
-
-
-
-<?php 
-
-
-$resultcam = mysql_query("SELECT * FROM t_employee WHERE assign_to=".$row['emp_id']);
-
-
-$companycam = mysql_num_rows($resultcam);
-
-
-if($companycam!=0){ ?>
-
-
-
-
-
-<a href="javascript:void(0);" onClick="alert('You can not delete this User as there are employees reporting him/her.')" title="Delete Employee"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete CAM" /></a>
-
-
-<?php
-
-
-} else {
-
-
-?>
-
-
-
-
-
-<a href="javascript:void(0);" onClick="camdelete('<?php echo $row['emp_code']; ?>')" title="Delete Employee"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete CAM" /></a> 
-
-
-
-
-
-<?php } ?>
-
+<td>
+<a href="Ex_employee_details.php?emp_id=<?php echo $row['emp_id']; ?>&name=<?php echo "$full_name"; ?>&role=<?php echo $row_2['role_name']; ?>" title="View Details"><img src="img/View-detail.png" alt="View Details" /></a>
 
 </td>
 
 
 </tr>
 
-
-
-
-
-
-
-
 <?php   $i++; } ?>
-
-
-
-
-
-
-
 
 </tbody>
 
-
-
-
-
-
-
-
 </table>
-
-
 
 
 </article>

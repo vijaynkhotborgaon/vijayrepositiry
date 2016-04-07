@@ -207,7 +207,7 @@ if (isset($_POST['approve']))
 {
 
 
-	if($plcl=='P. L.')
+	if($plcl=='S. L.')
 	{
 
 	$pl=$pl-$days;

@@ -6,7 +6,8 @@
 		$till=$_GET['data_2'];
 		$half_day=$_GET['data_3']/2;
 		
-		
+		/*code for excluding sunday, sat, holidays*/
+		/*
 		$holidays=array();
 $result = mysql_query("SELECT * from holidays");
 while($holidays_1 = mysql_fetch_assoc($result))
@@ -38,6 +39,15 @@ $dayOfWeek = $date->format( 'N' );
 		
 	}
 }
+*/
+
+/* code for including sunday,sat,holidays*/
+$begin = new DateTime("$from" );
+$end = new DateTime("$till");
+$end = $end->modify( '+1 day' ); 
+$date_1=0;
+$interval = $end->diff($begin);
+$date_1=$interval->format('%a');
 
 
 

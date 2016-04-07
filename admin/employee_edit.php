@@ -89,8 +89,80 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap CSS -->    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />    
+    <!-- full calendar css-->
+    <!--<link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />-->
+    <!-- easy pie chart-->
+    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+	<link rel="stylesheet" href="css/fullcalendar.css">
+	<link href="css/widgets.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+	<link href="css/xcharts.min.css" rel=" stylesheet">	
+	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+ 
+
+  <link rel="stylesheet" href="../css/css-be258.css" type="text/css">
+
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script>
+	
+	$(function() {
+
+
+    $( "#DOJ" ).datepicker({ dateFormat: 'dd-mm-yy' });
+	
+
+
+  });
+  
 function changecontent1() {
    window.location="emp-details.php";
 }
@@ -351,78 +423,14 @@ $i=1;
 
 
 
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>New Employee added successfully</strong>
-</div>
-
-
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
-
-
-
-
-
-
 <?php
-
-
-
-
-
-
 
 
 		unset($_SESSION['CAMREGMESG']);
 
 
 
-
-
-
-
-
 	}
-
-
-
-
-
 
 
 
@@ -451,28 +459,6 @@ $i=1;
 
 
 		foreach($_SESSION['ERRMSG_ARR'] as $msg) { ?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
 
 
 
@@ -612,27 +598,8 @@ $i=1;
 
 
 <div class="alert alert-success">
-<p id="update_success">Employee updated successfully</p>
+<p id="update_success">Employee Record updated successfully!</p>
 </div>
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
 
 
 
@@ -681,41 +648,10 @@ $i=1;
 $result = mysql_query("SELECT * FROM t_employee WHERE emp_id='$emp_id'");
 
 
-
-
-
-
-
-
 $row = mysql_fetch_assoc($result);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-
-			
-			
+?>	
 
 
 <form class="form-horizontal" action="employee-update-process.php" method="post" enctype="multipart/form-data" role="form">
@@ -778,19 +714,41 @@ $row = mysql_fetch_assoc($result);
 		 <input type="text" class="form-control" placeholder="Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="pattern should be : ABC@example.com" value="<?php echo $row['email']; ?>" required>
       </div>
     </div>
+	
+	
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="email" ><strong>Date of Joining </strong></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Date of Joining" required name="DOJ" id="DOJ" value="<?php echo $row['JoiningDate']; ?>"/>
+		
+      </div>
+    </div>
+	
+	
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="email"><strong>Select Department</strong></label>
+      <div class="col-sm-10">
+        <select name="dept" id="dept" class="form-control" required>
+<option value="">Select Any One</option>
+<?php
+$resultid = mysql_query("SELECT * FROM t_dept");
+while($rowindustry = mysql_fetch_array($resultid)){
+?>
+<option value="<?php echo $rowindustry['no']; ?>"<?php if($rowindustry['no']==$row['dept_id']){ ?> selected<?php } ?>><?php echo $rowindustry['dept_name']; ?></option>
+<?php
+} ?>
+</select>
+
+
+	
+      </div>
+    </div>
+	
+	
+	
 	<?php 
 $result_1 = mysql_query('SELECT * FROM  t_priority_role WHERE priority_id='.$row['priority_id']);
-
-
-
-
-
-
-
-
 $row_1 = mysql_fetch_assoc($result_1);
-
-
 
 
 	?>
@@ -811,29 +769,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
       </div>
     </div>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
 	
 	
 	<div class="form-group">
