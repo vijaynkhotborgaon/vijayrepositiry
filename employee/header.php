@@ -1,5 +1,10 @@
 <?php
 
+require_once('../config.php');
+	
+	require_once('auth.php');
+
+
 include('config_files/manage_act.php');
 $user_id=$_SESSION['SESS_USER_ID'];
 $result = mysql_query("SELECT * FROM t_employee where emp_id='$user_id'");	
@@ -207,21 +212,37 @@ $row_id = mysql_fetch_assoc($result);
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                             <i class="icon-bell-l"></i>
-                            <span class="badge bg-important">0</span>
+							
+							<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' AND status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending=mysql_num_rows($result);
+
+                                ?>
+
+                            <span class="badge bg-important"><?php echo $num_of_pending;?></span>
                         </a>
                         <ul class="dropdown-menu extended notification">
                             <div class="notify-arrow notify-arrow-blue"></div>
                             <li>
-                                <p class="blue">You have 4 new notifications</p>
+                                <p class="blue">Notifications</p>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="leave_request.php">
                                     <span class="label label-primary"><i class="icon_profile"></i></span> 
-                                    Friend Request
-                                    <span class="small italic pull-right">5 mins</span>
+                                    Pending Leaves
+									
+								<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' AND status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending=mysql_num_rows($result);
+
+                                ?>
+
+                                    <span class="small italic pull-right" style="color:red;"><?php echo $num_of_pending;?></span>
                                 </a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="#">
                                     <span class="label label-warning"><i class="icon_pin"></i></span>  
                                     John location.
@@ -244,7 +265,7 @@ $row_id = mysql_fetch_assoc($result);
                             </li>                            
                             <li>
                                 <a href="#">See all notifications</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <!-- alert notification end-->
@@ -263,9 +284,9 @@ $row_id = mysql_fetch_assoc($result);
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
-                            <li class="eborder-top">
-                                <a href="#"><i class="icon_mail_alt"></i> My Profile</a>
-                            </li>
+                            <!--<li class="eborder-top">
+                                <a href="my_profile.php"><i class="icon_mail_alt"></i> My Profile</a>
+                            </li>-->
                           <li>
                                 <a href="self-details.php"><i  class="icon_profile"></i>Change Password</a>
                             </li>

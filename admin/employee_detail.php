@@ -151,7 +151,7 @@
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="fa fa-laptop"></i>Dashboard</li>						  	
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
 					</ol>
 				</div>
 			</div>
@@ -518,7 +518,9 @@ echo $row_2['role_name'];
  
 <div class="col-sm-6" style="background:#D8D8D8;">
 
-  <h3><b>Reportee's</b></h3><table class="table"><tbody><tr style="text-align: center;">
+  <h3><b>Reportee's</b></h3>
+  <div class="table-responsive">
+  <table class="table"><tbody><tr style="text-align: center;">
 <td style="text-align: center;"><strong>SlNo.</strong></td>
 <td style="text-align: center;"><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
@@ -595,7 +597,8 @@ echo $row_2['role_name'];
 $i++; } 
 ?>
 
-
+</table>
+</div>
 
   </div>
            

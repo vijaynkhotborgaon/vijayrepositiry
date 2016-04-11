@@ -364,7 +364,7 @@ exit();
 
 	}
 
-	$result_t = mysql_query("SELECT * FROM leave_employee_new");
+	$result_t = mysql_query("SELECT * FROM leave_employee_new  where emp_id='$uid'");
 $num_rows = mysql_num_rows($result_t);
 	
 	if(($last_year != $current_year) AND ($num_rows != 0))

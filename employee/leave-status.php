@@ -217,7 +217,7 @@ $(document).ready(function()
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="fa fa-laptop"></i>Dashboard</li>
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
 						
 					</ol>
 				</div>

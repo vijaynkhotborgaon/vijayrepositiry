@@ -174,21 +174,33 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                             <i class="icon-bell-l"></i>
-                            <span class="badge bg-important">0</span>
+							<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending=mysql_num_rows($result);
+
+                                ?>
+                            <span class="badge bg-important"><?php echo $num_of_pending;?></span>
                         </a>
                         <ul class="dropdown-menu extended notification">
                             <div class="notify-arrow notify-arrow-blue"></div>
                             <li>
-                                <p class="blue">You have 4 new notifications</p>
+                                <p class="blue">Notifications</p>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="leave_req_list.php">
                                     <span class="label label-primary"><i class="icon_profile"></i></span> 
-                                    Friend Request
-                                    <span class="small italic pull-right">5 mins</span>
+									<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending=mysql_num_rows($result);
+
+                                ?>
+                                    Pending Leaves
+                                    <span class="small italic pull-right" style="color:red;"><?php echo $num_of_pending;?></span>
                                 </a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="#">
                                     <span class="label label-warning"><i class="icon_pin"></i></span>  
                                     John location.
@@ -211,7 +223,7 @@
                             </li>                            
                             <li>
                                 <a href="#">See all notifications</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <!-- alert notification end-->
@@ -227,11 +239,9 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                                <a href="my_profile.php"><i class="icon_profile"></i> My Profile</a>
                             </li>
-                            <li>
-                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
-                            </li>
+                          
                             
                            
                            

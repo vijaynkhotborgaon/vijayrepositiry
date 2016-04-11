@@ -12,7 +12,7 @@
 	
 	require_once('auth.php');
 
-
+	$emp_id=$_GET['emp_id'];
 	
 
 
@@ -84,7 +84,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
@@ -154,7 +154,7 @@
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script>
 	
-	 $(function() {
+	$(function() {
 
 
     $( "#DOJ" ).datepicker({ dateFormat: 'dd-mm-yy' });
@@ -163,41 +163,32 @@
 
   });
   
-	/*$(document).ready(function() {
-	$("#dept").change(function(){
-	
-	$.ajax({
+function changecontent1() {
+   window.location="emp-details.php";
+}
 
-			url: 'dept_process_with_report_to.php',
-			
-	        type: 'POST', // Send post data
-		
-	        data: {
-            'selected' : $(this).val()
-        },
-	        async: false,
-		dataType: "json",
-			
-			
-	        success: function(data){
-	        	//alert(freshevents = s);
-			
-			 
-			$.each(data, function (i, jsondata) {
-				
-                 options += "<option value='" + jsondata.emp_id + "'>" + jsondata.emp_id + "</option>";  				
-    
-			});
-		$('#Industry_1').append(options);
-       
-                   
-	        }
-		
-		});
-	});
-	
-	});*/
-	</script>
+function changecontent2(){
+   window.location="asset-man.php";
+}
+
+function changecontent3() {
+   window.location="leave-man.php";
+}
+
+function change1() {
+   window.location="main.php";
+}
+
+function change2() {
+   window.location="main.php";
+}
+
+function change3() {
+   window.location="main.php";
+}
+
+
+</script>
 
     <link rel="shortcut icon" href="img/favicon.png">
 
@@ -212,7 +203,7 @@
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
     <!-- full calendar css-->
-    <!--<link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     <!-- easy pie chart-->
     <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -220,7 +211,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
 	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<!--<link rel="stylesheet" href="css/fullcalendar.css">-->
+	<link rel="stylesheet" href="css/fullcalendar.css">
 	<link href="css/widgets.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -250,12 +241,12 @@
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->								  	
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
 					</ol>
 				</div>
 			</div>
 		
-
+ <div class="col-sm-8">
 
 
 
@@ -432,180 +423,14 @@ $i=1;
 
 
 
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>New Employee added successfully</strong>
-</div>
-
-
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
-
-
-
-
-
-
 <?php
-
-
-
-
-
-
 
 
 		unset($_SESSION['CAMREGMESG']);
 
 
 
-
-
-
-
-
 	}
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-	if(isset($_SESSION['ERRMSG_ARR1']) && $_SESSION['ERRMSG_ARR1']==100 ) {
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>Employee Code already exists! Please provide unique employee code.</strong>
-</div>
-
-
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['ERRMSG_ARR1']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
 
 
 
@@ -634,28 +459,6 @@ $i=1;
 
 
 		foreach($_SESSION['ERRMSG_ARR'] as $msg) { ?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
 
 
 
@@ -768,7 +571,7 @@ $i=1;
 
 
 
-	if(isset($_SESSION['CAMREGMESG']) && $_SESSION['CAMREGMESG']==1 ) {
+	if(isset($_SESSION['USERUPDATE']) && $_SESSION['USERUPDATE']==1 ) {
 
 
 
@@ -794,28 +597,9 @@ $i=1;
 
 
 
-
-<p id="update_success">New Employee added successfully</p>
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
+<div class="alert alert-success">
+<p id="update_success">Admin Details updated successfully!</p>
+</div>
 
 
 
@@ -831,7 +615,7 @@ $i=1;
 
 
 
-		unset($_SESSION['CAMREGMESG']);
+		unset($_SESSION['USERUPDATE']);
 
 
 
@@ -852,6 +636,7 @@ $i=1;
 ?>
 
 
+<?php
 
 
 
@@ -860,52 +645,49 @@ $i=1;
 
 
 
-
-			
-			
+$result = mysql_query("SELECT * FROM users WHERE user_id=1");
 
 
-<form class="form-horizontal" action="create_user_process.php" method="post" enctype="multipart/form-data" role="form">
+$row = mysql_fetch_assoc($result);
 
- <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Employee Code</strong></label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Employee Code" name="emp_code" id="emp_code" required>
-      </div>
-    </div>
-	
 
-	<div class="form-group">
+?>	
+
+
+<form class="form-horizontal" action="admin-update-process.php" method="post" enctype="multipart/form-data" role="form">
+
+
+	<!--<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Title</strong></label>
       <div class="col-sm-10">
         <select name="title" id="title" class="form-control" required>
-<option value="">Select One</option>
+<option value="">Select Title</option>
 
-<option value="mr">Mr.</option>
-<option value="ms">Ms.</option>
+<option value="mr" <?php //if($row['title']=='mr'){ ?> selected<?php //} ?>>Mr.</option>
+<option value="ms" <?php //if($row['title']=='ms'){ ?> selected<?php //} ?>>Ms.</option>
 
 </select>
       </div>
-    </div>
-    
+    </div>-->
+    <h3><strong>Edit Details</strong></h3></br>
 	 <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Employee First Name</strong></label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="First Name" name="emp_first_name" id="emp_first_name" required>
+      <label class="control-label col-sm-4" for="email"><strong>Username</strong></label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="First Name" name="username" id="emp_first_name" value="<?php echo $row['user_name']; ?>" required>
       </div>
     </div>
 	
 	<div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Employee Middle Name</strong></label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Middle Name" name="emp_middle_name" id="emp_middle_name" >
+      <label class="control-label col-sm-4" for="email"><strong>Email ID</strong></label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Middle Name" name="email" id="emp_middle_name" value="<?php echo $row['email_admin']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="pattern should be : ABC@example.com" required>
       </div>
     </div>
 	
-	<div class="form-group">
+	<!--<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Employee Last Name</strong></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Last Name" name="emp_last_name" id="emp_last_name" required>
+        <input type="text" class="form-control" placeholder="Last Name" name="emp_last_name" id="emp_last_name" value="<?php //echo $row['emp_last_name']; ?>" required>
       </div>
     </div>
 	
@@ -913,7 +695,7 @@ $i=1;
 	<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Mobile</strong></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Mobile" name="mobile" id="mobile" maxlength="10"  pattern="[0-9]{10}"  title="Mobile number should be 10 digits" required>
+        <input type="text" class="form-control" placeholder="Mobile" name="mobile" id="mobile" maxlength="10"  pattern="[0-9]{10}"  title="Mobile number should be 10 digits" value="<?php echo $row['mobile']; ?>" required>
       </div>
     </div>
 	
@@ -921,7 +703,7 @@ $i=1;
       <label class="control-label col-sm-2" for="email"><strong>Address</strong></label>
       <div class="col-sm-10">
         
-		<textarea class="form-control" rows="5" id="address" name="address" placeholder="Address" required></textarea>
+		<textarea class="form-control" rows="5" id="address" name="address" placeholder="Address" required><?php echo $row['address']; ?></textarea>
       </div>
     </div>
 	
@@ -929,14 +711,15 @@ $i=1;
       <label class="control-label col-sm-2" for="email"><strong>Email</strong></label>
       <div class="col-sm-10">
         
-		 <input type="text" class="form-control" placeholder="Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="pattern should be : ABC@example.com" required>
+		 <input type="text" class="form-control" placeholder="Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="pattern should be : ABC@example.com" value="<?php echo $row['email']; ?>" required>
       </div>
     </div>
+	
 	
 	<div class="form-group">
       <label class="control-label col-sm-2" for="email" ><strong>Date of Joining </strong></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Date of Joining" required name="DOJ" id="DOJ"/>
+        <input type="text" class="form-control" placeholder="Date of Joining" required name="DOJ" id="DOJ" value="<?php //echo $row['JoiningDate']; ?>"/>
 		
       </div>
     </div>
@@ -948,12 +731,12 @@ $i=1;
         <select name="dept" id="dept" class="form-control" required>
 <option value="">Select Any One</option>
 <?php
-$resultid = mysql_query("SELECT * FROM t_dept");
-while($rowindustry = mysql_fetch_array($resultid)){
+//$resultid = mysql_query("SELECT * FROM t_dept");
+//while($rowindustry = mysql_fetch_array($resultid)){
 ?>
-<option value="<?php echo $rowindustry['no']; ?>"><?php echo $rowindustry['dept_name']; ?></option>
+<option value="<?php //echo $rowindustry['no']; ?>"<?php //if($rowindustry['no']==$row['dept_id']){ ?> selected<?php //} ?>><?php //echo $rowindustry['dept_name']; ?></option>
 <?php
-} ?>
+//} ?>
 </select>
 
 
@@ -963,63 +746,71 @@ while($rowindustry = mysql_fetch_array($resultid)){
 	
 	
 	
-	
-	
+	<?php 
+//$result_1 = mysql_query('SELECT * FROM  t_priority_role WHERE priority_id='.$row['priority_id']);
+//$row_1 = mysql_fetch_assoc($result_1);
+
+
+	?>
 	
 	<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Select Role</strong></label>
       <div class="col-sm-10">
         <select name="Industry" id="Industry" class="form-control" required>
-<option value="">Select Any One</option>
+<option value="">Select Role</option>
 <?php
-$resultid = mysql_query("SELECT * FROM t_priority_role");
-while($rowindustry = mysql_fetch_array($resultid)){
+//$resultid = mysql_query("SELECT * FROM t_priority_role");
+//while($rowindustry = mysql_fetch_array($resultid)){
 ?>
-<option value="<?php echo $rowindustry['priority_id']; ?>"><?php echo $rowindustry['role_name']; ?></option>
+<option value="<?php //echo $rowindustry['priority_id']; ?>"<?php //if($rowindustry['priority_id']==$row['priority_id']){ ?> selected<?php //} ?>><?php //echo $rowindustry['role_name']; ?></option>
 <?php
-} ?>
+//} ?>
 </select>
       </div>
     </div>
 	
-	
-	
+
 	
 	
 	<div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Report To</strong></label>
       <div class="col-sm-10">
-        <select name="Industry_1" id="Industry_1" class="form-control">
+        <select name="Industry_1" id="Industry_1" class="form-control" >
+		
+		<option value="my">Himself/Herself</option>
 		<?php
-		$rows = mysql_result(mysql_query('SELECT COUNT(*) FROM t_employee'), 0);
-		if (!$rows) {
-		?>
-<option value="my">Himself/Herself</option>
-<?php
-}
-$resultid = mysql_query("SELECT * FROM t_employee");
-while($rowindustry = mysql_fetch_array($resultid)){
-$pr_id=$rowindustry['priority_id'];
-$resultid_1 = mysql_query("SELECT * FROM t_priority_role where priority_id='$pr_id'");
-$rowindustry_1 = mysql_fetch_array($resultid_1);
+//$resultid = mysql_query("SELECT * FROM t_employee");
+//while($rowindustry = mysql_fetch_array($resultid)){
+//$pr_id=$rowindustry['priority_id'];
+//$resultid_1 = mysql_query("SELECT * FROM t_priority_role where priority_id='$pr_id'");
+//$rowindustry_1 = mysql_fetch_array($resultid_1);
 ?>
-<option value="<?php echo $rowindustry['emp_id']; ?>"><?php echo $rowindustry['emp_first_name']."  [ ".$rowindustry_1 ['role_name']." ]"; ?></option>
+
+
+<option value="<?php //echo $rowindustry['emp_id']; ?>"<?php //if($rowindustry['emp_id']==$row['assign_to']){ ?> selected<?php //} ?>><?php //echo $rowindustry['emp_first_name'] ." [ ".$rowindustry_1['role_name']." ] "; ?></option>
+
+
 <?php
-} ?>
+//} ?>
 </select>
+
       </div>
     </div>
+	
+	
+	<input type="hidden" name="country" value="<?php //echo $emp_id;?>">-->
+   
    
     <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
+      <div class="col-sm-offset-4 col-sm-8">
         
-		 <input type="submit" class="btn btn-info" value="Submit">
+		 <input type="submit" class="btn btn-info" value="Update">
       </div>
     </div>
   </form>
 
 
- 
+ </div>
            
           </section>
       </section>
@@ -1043,10 +834,10 @@ $rowindustry_1 = mysql_fetch_array($resultid_1);
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <!--<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
-    <!--<script src="js/calendar-custom.js"></script>-->
+    <script src="js/calendar-custom.js"></script>
 	<script src="js/jquery.rateit.min.js"></script>
     <!-- custom select -->
     <script src="js/jquery.customSelect.min.js" ></script>
