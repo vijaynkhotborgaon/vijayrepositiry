@@ -384,10 +384,27 @@ unset($_SESSION['till_date']);
 <?php
 $resultid = mysql_query("SELECT * FROM leave_type");
 while($rowindustry = mysql_fetch_array($resultid)){
+
 ?>
-<option value="<?php echo $rowindustry['leave_type_id']; ?>"><?php echo $rowindustry['type_name']; ?></option>
+<?php if($rowindustry['type_name']=='S. L.') 
+{
+?>
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Sick Leave (SL)</option>  
+<?php } 
+else if($rowindustry['type_name']=='C. L.') 
+{?>
+
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Casual Leave (CL)</option> 
+<?php } 
+else 
+{?>
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Earned Leave (EL)</option>
+
+
+
 <?php
-} ?>
+} 
+}?>
 
 </select>
 
@@ -562,7 +579,7 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
     <tbody>
       <tr>
         <td>1</td>
-        <td>S.L.</td>
+        <td>Sick Leave (SL)</td>
         <td>0</td>
 		<td><?php echo $pl;?></td>
         <td><?php echo $pl+0;?></td>
@@ -570,7 +587,7 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
       </tr>
       <tr>
         <td>2</td>
-        <td>C.L.</td>
+        <td>Casual Leave (CL)</td>
         <td>0</td>
 		<td><?php echo $cl;?></td>
         <td><?php echo $cl+0;?></td>
@@ -578,7 +595,7 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
       </tr>
       <tr>
         <td>3</td>
-        <td>E.L.</td>
+        <td>Earned Leave (EL)</td>
         <td><?php echo $forward;?></td>
 		<td><?php echo $el;?></td>
         <td><?php echo $el+$forward;?></td>
@@ -688,7 +705,7 @@ $num_rows = mysql_num_rows($result_t);
     <tbody>
       <tr>
         <td>1</td>
-        <td>S.L.</td>
+        <td>Sick Leave (SL)</td>
         <td>0</td>
 		<td><?php echo $pl_assign;?></td>
         <td><?php echo $pl_assign+0;?></td>
@@ -696,7 +713,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>2</td>
-        <td>C.L.</td>
+        <td>Casual Leave (CL)</td>
         <td>0</td>
 		<td><?php echo $cl_assign;?></td>
         <td><?php echo $cl_assign+0;?></td>
@@ -704,7 +721,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>3</td>
-        <td>E.L.</td>
+        <td>Earned Leave (EL)</td>
         <td><?php echo $forward;?></td>
 		<td><?php echo $el_assign;?></td>
         <td><?php echo $el_assign+$forward;?></td>
@@ -765,7 +782,7 @@ $num_rows = mysql_num_rows($result_t);
     <tbody>
       <tr>
         <td>1</td>
-        <td>S.L.</td>
+        <td>Sick Leave (SL)</td>
         <td>0</td>
 		<td><?php echo $pl_assign;?></td>
         <td><?php echo $pl_assign+0;?></td>
@@ -773,7 +790,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>2</td>
-        <td>C.L.</td>
+        <td>Casual Leave (CL)</td>
         <td>0</td>
 		<td><?php echo $cl_assign;?></td>
         <td><?php echo $cl_assign+0;?></td>
@@ -781,7 +798,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>3</td>
-        <td>E.L.</td>
+        <td>Earned Leave (EL)</td>
         <td><?php echo $forward;?></td>
 		<td><?php echo $el_assign;?></td>
         <td><?php echo $el_assign+$forward;?></td>

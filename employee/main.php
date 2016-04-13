@@ -20,7 +20,7 @@ $last_year = date('Y', strtotime($date));
 
 $current_year=date("Y");
 
- echo $el_days=$row['e_l'];
+$el_days=$row['e_l'];
  
  $result_t = mysql_query("SELECT * FROM leave_employee_new");
 $num_rows = mysql_num_rows($result_t);
@@ -31,13 +31,13 @@ $num_rows = mysql_num_rows($result_t);
  
  
 		
-		 if($el_days>5)
+		 if($el_days>=15)
 		 {
-		 $qry_five = "INSERT INTO t_carry_forward(no, id, carry_forward_days) VALUES('','$uid',5)";
+		 $qry_five = "INSERT INTO t_carry_forward(no, id, carry_forward_days) VALUES('','$uid',15)";
 			$result_five = mysql_query($qry_five);
 			
 			
-			$qry_total = "INSERT INTO total_carry_forward_with_assigned(no, id, total_days, forward) VALUES('','$uid','$original_el', 5)";
+			$qry_total = "INSERT INTO total_carry_forward_with_assigned(no, id, total_days, forward) VALUES('','$uid','$original_el', 15)";
 			$result_total = mysql_query($qry_total);
 			
 		}
