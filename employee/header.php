@@ -287,6 +287,11 @@ $row_id = mysql_fetch_assoc($result);
                             <!--<li class="eborder-top">
                                 <a href="my_profile.php"><i class="icon_mail_alt"></i> My Profile</a>
                             </li>-->
+							
+							<li>
+                                <a href="my_profile.php"><i  class="icon_profile"></i>My Profile</a>
+                            </li>
+							
                           <li>
                                 <a href="self-details.php"><i  class="icon_profile"></i>Change Password</a>
                             </li>

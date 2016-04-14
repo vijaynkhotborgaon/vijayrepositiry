@@ -175,7 +175,7 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
@@ -448,14 +448,21 @@ $i=1;
 
 
 while($rowindustry = mysql_fetch_array($resultid)){
+
+$start=$rowindustry['start'];;
+$newDate_start = date("d-m-Y", strtotime($start));
+$end=$rowindustry['end'];
+$newDate_end = date("d-m-Y", strtotime($end));
+
+
 ?>
 
 
     <tr id="<?php echo $rowindustry['id']; ?>">
       <th scope="row"><?php echo $i++;?></th>
       <td><?php echo $rowindustry['title'];?></td>
-      <td><?php echo $rowindustry['start'];?></td>
-      <td><?php echo $rowindustry['end'];?></td>
+      <td><?php echo $newDate_start;?></td>
+      <td><?php echo $newDate_end;?></td>
 	   <td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
     </tr>
    

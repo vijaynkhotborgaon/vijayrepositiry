@@ -1,10 +1,3 @@
-
-
-<!--new code-->
-
-
-
-
 <?php
 
 
@@ -12,6 +5,62 @@
 	
 	require_once('auth.php');
 
+$result_total = mysql_query("SELECT * FROM leave_assign");
+$row_total = mysql_fetch_assoc($result_total);
+$original_el=$row_total['e_l'];	
+	
+$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
+$row = mysql_fetch_assoc($result);
+
+
+$timestamp = $row['timestamp'];
+$datetime = explode(" ",$timestamp);
+$date = $datetime[0];
+$last_year = date('Y', strtotime($date));
+
+$current_year=date("Y");
+
+ echo $el_days=$row['e_l'];
+ 
+ $result_t = mysql_query("SELECT * FROM leave_employee_new");
+$num_rows = mysql_num_rows($result_t);
+ 
+ 
+ if(($last_year != $current_year) AND ($num_rows != 0))
+ {
+ 
+ 
+		
+		 if($el_days>5)
+		 {
+		 $qry_five = "INSERT INTO t_carry_forward(no, id, carry_forward_days) VALUES('','$uid',5)";
+			$result_five = mysql_query($qry_five);
+			
+			
+			$qry_total = "INSERT INTO total_carry_forward_with_assigned(no, id, total_days, forward) VALUES('','$uid','$original_el', 5)";
+			$result_total = mysql_query($qry_total);
+			
+		}
+		 else
+		 {
+		 
+		 $qry_less = "INSERT INTO t_carry_forward(no, id, carry_forward_days) VALUES('','$uid','$el_days')";
+					mysql_query($qry_less);
+				
+		 
+		$qry_total = "INSERT INTO total_carry_forward_with_assigned(no, id, total_days, forward) VALUES('','$uid','$original_el','$el_days')";
+			$result_total = mysql_query($qry_total);
+		 
+		 }
+				 
+		
+ }
+
+
+
+
+
+	
 
 	
 
@@ -20,67 +69,6 @@
 
 
 
-
-
-
-
-
-  
-
-
-  
-
-
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-			  
-	
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
-
-
-
-
-											
-
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -89,47 +77,9 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript">
-
-	$(document).ready(function()
-	{
-		$('table#delTable td a.delete').click(function()
-		{
-			if (confirm("Are you sure you want to delete this row?"))
-			{
-				var id = $(this).parent().parent().attr('id');
-				var data = 'id=' + id ;
-				var parent = $(this).parent().parent();
-
-				$.ajax(
-				{
-					   type: "POST",
-					   url: "delete_weekends_process.php",
-					   data: data,
-					   cache: false,
-					
-					   success: function(json)
-					   {
-					   
-					
-							parent.fadeOut('slow', function() {$(this).remove();});
-							
-					   }
-				 });				
-			}
-		});
-		
-		// style the table with alternate colors
-		// sets specified color for every odd row
-		
-	});
-	
-</script>
-
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Creative - Bootstrap Admin Template</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -178,11 +128,29 @@
 					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->								  	
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
+						
 					</ol>
 				</div>
 			</div>
-		
+			
+			
+			
+
+
+
+
+
+
+
+
+
+	<article>
+
+
+
+
+
 
 
 
@@ -213,41 +181,30 @@
 
 
 
-  
+ 
 
 
 
 
-
-
-
-
-							
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-danger">
-  <strong><?php echo $msg; ?></strong> 
-</div>
-
-
-			
 
 
 
 
 <?php
+
+
+
+
+
+
+
+
+			echo '<p id="error_msg" style="color:red;">',$msg,'</p>'; 
+
+
+
+
+
 
 
 
@@ -270,16 +227,6 @@
 
 
        									
-
-
-
-
-
-
-
-
-				
-
 
 
 
@@ -328,7 +275,8 @@
 
 
 
-		  
+
+
 
 
 <?php
@@ -340,7 +288,7 @@
 
 
 
-	if(isset($_SESSION['CAMREGMESG']) && $_SESSION['CAMREGMESG']==1 ) {
+	if(isset($_SESSION['USERUPDATE']) && $_SESSION['USERUPDATE']==1 ) {
 
 
 
@@ -358,16 +306,7 @@
 
 
 
-  
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>Activity</strong> Assign to Role
-</div>
+ 
 
 
 
@@ -376,10 +315,25 @@
 
 
 
+							
 
 
 
-       									
+
+
+
+
+
+<p id="update_success">Updated Employee Details successfully</p>
+
+
+
+
+
+
+
+
+       								
 
 
 
@@ -406,7 +360,7 @@
 
 
 
-		unset($_SESSION['CAMREGMESG']);
+		unset($_SESSION['USERUPDATE']);
 
 
 
@@ -425,70 +379,162 @@
 
 
 ?>
-<table class="table" id="delTable">
-  <thead class="thead-inverse">
-    <tr>
-      <th>#</th>
-      <th>TITLE	</th>
-      <th>ACTION</th>
-      
-    </tr>
-  </thead>
-  
-<tbody>
 
 
 
-<?php 
 
 
-$resultid = mysql_query("SELECT * FROM holidays where id IS NULL");
-$i=1;
 
 
-while($rowindustry = mysql_fetch_array($resultid)){
 
-$holiday=$rowindustry['holiday'];
-$newDate = date("d-m-Y", strtotime($holiday));
+<?php
+
+
+
+
+
+
+
+
+	if(isset($_SESSION['PASSCNG']) && $_SESSION['PASSCNG']==1 ) {
+
+
+
+
+
+
+
 
 ?>
 
 
-    <tr id="<?php echo $rowindustry['no']; ?>">
-      <th scope="row"><?php echo $i++;?></th>
-      <td><?php echo $newDate;?></td>
-     
-	   <td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
-    </tr>
-   
-  
 
 
 
-<?php
-} ?>
-
-</tbody>
-</table>
-
-
-
-
-
-
-
-    
-
-
-
-
-
-			
 
 
 
  
-           
+
+
+
+
+
+
+
+
+<p id="update_success" style="color:green;">Password Changed successfully</p>
+
+
+
+
+
+
+
+
+       									
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['PASSCNG']);
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+?>
+
+
+
+<h3><strong>Change Password</strong></h3>	</br>		
+			
+			
+
+<form class="form-horizontal" action="password-change.php"  method="post" enctype="multipart/form-data" role="form">
+
+
+
+
+
+
+<div class="form-group">
+      <label class="control-label col-sm-2" for="email"><strong>New Password</strong></label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" placeholder="New Password" name="pword" id="pword" required>
+      </div>
+    </div>
+
+
+
+
+
+
+<div class="form-group">
+      <label class="control-label col-sm-2" for="email"><strong>Verify New Password</strong></label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" placeholder="Verify New Password" name="vpword" id="vpword" required>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        
+		 <input type="submit" class="btn btn-info" value="Change Password" name="submit">
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</form>
+
+			
+		
+
           </section>
       </section>
       <!--main content end-->
@@ -587,7 +633,3 @@ $newDate = date("d-m-Y", strtotime($holiday));
 
   </body>
 </html>
-			      			        
-
-
-			      			  		</div></div></div></body></html>

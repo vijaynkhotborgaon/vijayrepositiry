@@ -282,7 +282,7 @@ function calculate() {
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
@@ -818,8 +818,8 @@ $num_rows = mysql_num_rows($result_t);
 ?>
 
 
-
-
+<!-- div for full calendar -->
+<!-- 
 <div id="formWrapper">
 <fieldset class="fBlock" id="Corporate_Details" >
 <legend>Holiday's Calendar</legend>
@@ -829,7 +829,7 @@ $num_rows = mysql_num_rows($result_t);
 
 
 </fieldset>
-</div>
+</div>-->
 
 </article>
 

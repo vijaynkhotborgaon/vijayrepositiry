@@ -180,7 +180,7 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
@@ -481,7 +481,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
     <td><?php echo $rowindustry['email']; ?></td>
 </tr>
 <tr>
-    <td><b>Report To</b></td>
+    <td><b>Was reporting</b></td>
     <td>
 	 
 <?php 
@@ -493,7 +493,7 @@ echo $name;
 	</td>
 </tr>
 <tr>
-    <td><b>Designation</b></td>
+    <td><b>Last Designation</b></td>
     <td>
 	<?php 
 

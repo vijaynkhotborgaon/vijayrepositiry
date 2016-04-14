@@ -2,9 +2,6 @@
 
 <!--new code-->
 
-
-
-
 <?php
 
 
@@ -166,7 +163,7 @@ function change3() {
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
@@ -510,8 +507,9 @@ while($rowindustry = mysql_fetch_array($resultid)){
 
 
 ?>
+</br>
 
-
+ <div class="col-sm-8">
  <div class="table-responsive">  
 <table class="table">
 <tbody>
@@ -541,8 +539,8 @@ while($row = mysql_fetch_array($result))
 { 
 
 ?>
-<tr style="text-align: center;">
-<td><?php echo $i; ?></td>
+<tr style="text-align: center; border:none;">
+<td style="border:none;"><?php echo $i; ?></td>
 
 <?php
 $activity=$row['act_id'];
@@ -554,7 +552,7 @@ $row_act = mysql_fetch_array($result_act);
 ?>
 
 
-<td><?php echo $row_act['act_name']; ?></td>
+<td style="border:none;"><?php echo $row_act['act_name']; ?></td>
 <?php
 $act_id=$row['act_id'];
 $result_act = mysql_query("SELECT * FROM t_manage_activity WHERE act_id='$act_id' AND priority_id='$emp_id'");
@@ -573,7 +571,7 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 
 
 
-<td><?php echo $row_act_1['pri_name']; ?></td>
+<td style="border:none;"><?php echo $row_act_1['pri_name']; ?></td>
 
 <?php }}?>
 </tr>
@@ -585,7 +583,7 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 </table>
 
 </div>
-
+</div>
 
 
 

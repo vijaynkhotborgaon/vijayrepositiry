@@ -125,7 +125,7 @@ $num_rows = mysql_num_rows($result_t);
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
@@ -525,67 +525,6 @@ $rowindustry = mysql_fetch_array($resultid);
 
 
 </br>
-
-<h3><strong>Change Password</strong></h3>	</br>		
-			
-			
-
-<form class="form-horizontal" action="password-change.php"  method="post" enctype="multipart/form-data" role="form">
-
-
-
-
-
-
-<div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>New Password</strong></label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" placeholder="New Password" name="pword" id="pword" required>
-      </div>
-    </div>
-
-
-
-
-
-
-<div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Verify New Password</strong></label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" placeholder="Verify New Password" name="vpword" id="vpword" required>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        
-		 <input type="submit" class="btn btn-info" value="Change Password" name="submit">
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-</form>
-
 			
 		
 

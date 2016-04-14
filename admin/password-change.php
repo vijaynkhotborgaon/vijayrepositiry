@@ -254,7 +254,7 @@ $vpword = clean($_POST['vpword']);
 
 
 
-			header("location: my_profile.php");
+			header("location: change_pass_admin.php");
 
 
 

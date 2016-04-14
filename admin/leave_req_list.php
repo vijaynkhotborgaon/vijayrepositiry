@@ -187,7 +187,7 @@ option += '<option value=' +jsondata.emp_id + '>' +jsondata.emp_first_name+ ' ['
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
@@ -267,7 +267,7 @@ if($dept=='' AND $Industry_1=='' AND $emp_code=='')
 <tbody>
 <tr style="text-align: center;">
 <td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Employee ID</strong></td>
+<td><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
 <td><strong>Report To</strong></td>
 <td><strong>Leave Type</strong></td>
@@ -292,14 +292,16 @@ while($row = mysql_fetch_array($result))
 
 <td><?php echo $i; ?></td>
 
-<td><?php echo $row['emp_id']; ?></td>
+
 
 
 <?php
 $emp_id_1=$row['emp_id'];
 $result_1 = mysql_query("SELECT * FROM t_employee where emp_id='$emp_id_1'");
 while($row_1 = mysql_fetch_array($result_1))
-{
+{?>
+<td><?php echo $row_1['emp_code']; ?></td>
+<?php
 $emp_name=$row_1['emp_first_name'];
 $emp_mid_name=$row_1['emp_middle_name'];
 $emp_last_name=$row_1['emp_last_name'];

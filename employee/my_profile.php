@@ -1,15 +1,9 @@
-
-  
-  
-  <?php
+<?php
 
 
 	require_once('../config.php');
 	
 	require_once('auth.php');
-
-
-	
 
 
 ?>
@@ -57,68 +51,9 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
- 
+  </head>
 
-  <link rel="stylesheet" href="../css/css-be258.css" type="text/css">
-
-
-
-
-
-
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-
-
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
-
-  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-
-<script>
-
-
-  $(function() {
-
-
-    $( "#emp_first_name" ).datepicker({ dateFormat: 'dd-mm-yy' });
-	 $( "#emp_middle_name" ).datepicker({ dateFormat: 'dd-mm-yy' });
-
-
-  });
-
-
-  </script>
-
-
-
-
-
-</head>
-
-
-
-
-
-
-
-
-<body>
-
+  <body>
   <!-- container section start -->
   <section id="container" class="">
      
@@ -139,18 +74,407 @@
 					</ol>
 				</div>
 			</div>
-			<article>
-<form >
-	
+			
+			
+			
 
 
 
 
 
-<td colspan="9"><h4 style="float:left;"><strong>Leave Requests</strong></h4></td>
 
 
-<table class="table" >
+
+
+	<article>
+
+
+
+
+
+
+
+
+											<?php
+
+
+
+
+
+
+
+
+	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
+
+
+
+
+
+
+
+
+		foreach($_SESSION['ERRMSG_ARR'] as $msg) { ?>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+			echo '<p id="error_msg" style="color:red;">',$msg,'</p>'; 
+
+
+
+
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+		?>
+
+
+
+
+
+
+
+
+       									
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+        <?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['ERRMSG_ARR']);
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+	if(isset($_SESSION['USERUPDATE']) && $_SESSION['USERUPDATE']==1 ) {
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+							
+
+
+
+
+
+
+
+
+<p id="update_success">Updated Employee Details successfully</p>
+
+
+
+
+
+
+
+
+       								
+
+
+
+
+
+
+
+
+					
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['USERUPDATE']);
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+	if(isset($_SESSION['PASSCNG']) && $_SESSION['PASSCNG']==1 ) {
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<p id="update_success" style="color:green;">Password Changed successfully</p>
+
+
+
+
+
+
+
+
+       									
+
+
+
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+		unset($_SESSION['PASSCNG']);
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
+$result = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
+
+
+
+
+
+
+
+
+$row = mysql_fetch_assoc($result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-responsive">
+
+
+<table class="table">
 
 
 
@@ -168,6 +492,7 @@
 
 
 
+<tr>
 
 
 
@@ -176,86 +501,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<tr style="text-align: center;">
-
-
-
-
-
-
-
-
-<td style="text-align: center;"><strong>No.</strong></td>
-
-
-
-
-
-<td><strong>Employee ID</strong></td>
-<td><strong>Employee Name</strong></td>
-
-<td><strong>Leave Type</strong></td>
-
-
-
-
-
-
-
-
-<td><strong>From</strong></td>
-
-
-
-
-
-
-
-
-<td><strong>Till</strong></td>
-
-
-
-
-
-
-
-
-
-
-<td><strong>Number of Days</strong></td>
-
-
-
-
-
-
-
-
-
-<td><strong>Action</strong></td>
-
-
-
+<td colspan="2"><h4><strong>Profile Details</strong></h4></td>
 
 
 
@@ -273,7 +519,7 @@
 
 
 
-<?php
+<tr >
 
 
 
@@ -282,97 +528,19 @@
 
 
 
-$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' ORDER BY leave_id DESC");
-
-
-
-
-
-
-
-
-  $i=1;
-
-
-
-
-
-
-
-
-while($row = mysql_fetch_array($result))
-
-
-
-
-
-
-
-
-  { 
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-<tr style="text-align: center;">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<td><?php echo $i; ?></td>
-
-<td><?php echo $row['emp_id']; ?></td>
-
+<td><strong>Employee Code</strong></td>
 
 <?php
 $emp_id_1=$row['emp_id'];
 $result_1 = mysql_query("SELECT * FROM t_employee where emp_id='$emp_id_1'");
-while($row_1 = mysql_fetch_array($result_1))
-{
-$emp_name=$row_1['emp_first_name'];
-$emp_mid_name=$row_1['emp_middle_name'];
-$emp_last_name=$row_1['emp_last_name'];
-}
+$row_1 = mysql_fetch_array($result_1);
 
 ?>
 
 
-<td><?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
-
-<td><?php echo $row['leave_type']; ?></td>
 
 
-
-
-
-
-
-
-<td><?php echo $row['from_date']; ?></td>
+<td><?php echo $row_1['emp_code']; ?></td>
 
 
 
@@ -381,7 +549,11 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 
-<td><?php echo $row['till']; ?></td>
+</tr>
+
+
+
+<tr>
 
 
 
@@ -390,37 +562,29 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 
+<td><strong>Title</strong></td>
 
 
 
-<td><?php echo $row['number_of_day']; ?></td>
 
 
 
-<?php if($row['status']=='Pending') {?>
 
-<td><a href="leave_request_process.php?request=<?php echo $row['leave_id']; ?>" title="Take action"><img src="img/action_now.png" class="img-rounded" alt="Action" width="120" height="40">
-</a></td>
 
-<?php }?>
+<!--<td><input name="emp_first_name" id="emp_first_name" type="text" value="<?php //echo $row['emp_first_name']; ?>"></td>-->
 
-<?php if($row['status']=='Approved') {?>
+<td><?php echo $row['title']; ?></td>
 
-<td style="color:green;">Approved</td>
 
-<?php }?>
 
-<?php if($row['status']=='Rejected') {?>
 
-<td style="color:#B09EC8;">Rejected</td>
 
-<?php }?>
 
-<?php if($row['status']=='cancled') {?>
 
-<td style="color:#210B61;">Cancelled By <?php echo $emp_name." ".$emp_mid_name." ".$emp_last_name;  ?></td>
+</tr>
 
-<?php }?>
+
+<tr>
 
 
 
@@ -430,6 +594,298 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 
+
+<tr>
+
+
+
+
+
+
+
+
+<td><strong>Employee First Name</strong></td>
+
+
+
+
+
+
+
+
+<!--<td><input name="emp_first_name" id="emp_first_name" type="text" value="<?php //echo $row['emp_first_name']; ?>"></td>-->
+
+<td><?php echo $row['emp_first_name']; ?></td>
+
+
+
+
+
+
+
+</tr>
+
+
+<tr>
+
+
+
+
+
+
+
+
+<td><strong>Employee Middle Name</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['emp_middle_name']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+<tr>
+
+
+
+
+
+
+
+
+<td><strong>Employee Last Name</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['emp_last_name']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+<tr>
+<td><strong>Mobile</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['mobile']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+<tr>
+
+
+<td><strong>Address</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['address']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+<!--<tr>
+
+
+<td><strong>Employee Status</strong></td>
+
+
+
+
+
+
+
+
+<td><?php //echo $row['emp_status']; ?></td>
+
+
+
+
+
+
+
+
+</tr>-->
+
+
+<tr>
+
+
+<td><strong>Email ID</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['email']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td><strong>joining Date</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row['JoiningDate']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td><strong>Department</strong></td>
+
+
+
+<?php
+$dept=$row['dept_id'];
+$result_1 = mysql_query("SELECT * FROM t_dept where no='$dept'");
+$row_dept = mysql_fetch_array($result_1);
+
+
+$priority=$row['priority_id'];
+$result_2 = mysql_query("SELECT * FROM t_priority_role where priority_id='$priority'");
+$row_priority = mysql_fetch_array($result_2);
+
+
+$assign=$row['assign_to'];
+$result_3 = mysql_query("SELECT * FROM t_employee where emp_id='$assign'");
+$row_assign = mysql_fetch_array($result_3);
+
+?>
+
+
+
+
+<td><?php echo $row_dept['dept_name']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+<tr>
+
+
+<td><strong>Designation</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row_priority['role_name']; ?></td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td><strong>Reports To</strong></td>
+
+
+
+
+
+
+
+
+<td><?php echo $row_assign['emp_first_name']." ".$row_assign['emp_middle_name']." ".$row_assign['emp_last_name']; ?></td>
 
 
 
@@ -447,7 +903,39 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 
-<?php   $i++; } ?>
+
+
+
+
+
+
+
+<tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -467,6 +955,7 @@ $emp_last_name=$row_1['emp_last_name'];
 
 </table>
 
+</div>
 
 
 
@@ -474,21 +963,6 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-</form>
 
 
 
@@ -515,7 +989,7 @@ $emp_last_name=$row_1['emp_last_name'];
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>

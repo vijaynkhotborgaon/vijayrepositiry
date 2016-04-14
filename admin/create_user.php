@@ -247,7 +247,7 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->								  	
@@ -987,7 +987,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
 	
 	
 	<div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Report To</strong></label>
+      <label class="control-label col-sm-2" for="email"><strong>Reports To</strong></label>
       <div class="col-sm-10">
         <select name="Industry_1" id="Industry_1" class="form-control">
 		<?php
