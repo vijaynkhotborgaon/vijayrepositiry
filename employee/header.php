@@ -37,7 +37,7 @@ $row_id = mysql_fetch_assoc($result);
 			 
 			  
 			
-      <header class="header dark-bg" >
+      <header class="header dark-bg" style="background-color:;">
             <div class="toggle-nav" >
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
@@ -217,10 +217,15 @@ $row_id = mysql_fetch_assoc($result);
 									$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' AND status='Pending' ORDER BY leave_id DESC");
 									
 									$num_of_pending=mysql_num_rows($result);
+									
+									$result_1 = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending_self=mysql_num_rows($result_1);
+									
 
                                 ?>
 
-                            <span class="badge bg-important"><?php echo $num_of_pending;?></span>
+                            <span class="badge bg-important"><?php echo $num_of_pending + $num_of_pending_self;?></span>
                         </a>
                         <ul class="dropdown-menu extended notification">
                             <div class="notify-arrow notify-arrow-blue"></div>
@@ -230,7 +235,7 @@ $row_id = mysql_fetch_assoc($result);
                             <li>
                                 <a href="leave_request.php">
                                     <span class="label label-primary"><i class="icon_profile"></i></span> 
-                                    Pending Leaves
+                                    Team Pending Leaves
 									
 								<?php	
 									$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' AND status='Pending' ORDER BY leave_id DESC");
@@ -241,6 +246,31 @@ $row_id = mysql_fetch_assoc($result);
 
                                     <span class="small italic pull-right" style="color:red;"><?php echo $num_of_pending;?></span>
                                 </a>
+								
+								
+								
+								
+                            </li>
+							
+							
+							  <li>
+                                <a href="leave-status.php">
+                                    <span class="label label-primary"><i class="icon_profile"></i></span> 
+                                    Self Pending Leaves
+									
+								<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending_self=mysql_num_rows($result);
+
+                                ?>
+
+                                    <span class="small italic pull-right" style="color:red;"><?php echo $num_of_pending_self;?></span>
+                                </a>
+								
+								
+								
+								
                             </li>
                             <!--<li>
                                 <a href="#">

@@ -18,6 +18,7 @@
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
+	<link href="css/DashboardButtonStyles.css" rel="stylesheet">
     <!-- full calendar css-->
     <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
@@ -42,29 +43,43 @@
   </head>
 
   <body>
+
   <!-- container section start -->
+
   <section id="container" class="">
      
-      <?php include('header.php');?>
-
-     <?php include('side_bar.php');?>
+	<?php include('header.php');?>
+	<?php include('side_bar.php');?>
+      
       <!--main content start-->
+	 
       <section id="main-content">
-          <section class="wrapper">            
+         <section class="wrapper">  
               <!--overview start-->
+			  <!--
 			  <div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
 						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
-						
+				 <!--
 					</ol>
 				</div>
 			</div>
+		-->
 			
-		
-              
+	
+<ul id="menu" align="center">
+  <li ><a href="index.php" style="background-color:#58ACFA;" >Home</a></li>
+  <li><a href="LeavePolicy.php" >Leave Policy</a></li>
+  <li><a href="HolidayCalendar.php">Holiday Calendar</a></li>
+</ul>
+
+   
+<!--<iframe name="Main_iframe" id="Main_iframe" src="Main_iframe.php" border='0'; width="1150px" height="550px" frameborder=0> </frame>-->
+
+
            <!-- <div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
