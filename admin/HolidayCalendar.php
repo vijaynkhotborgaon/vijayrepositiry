@@ -100,7 +100,7 @@
 
 <table class="table ">
 <thead>
-      <tr>
+      <tr style="background-color:#D8D8D8;">
         <th>Sl.No.</th>
         <th>Month </th>
         <th>Date</th>
