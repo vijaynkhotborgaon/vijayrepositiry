@@ -881,8 +881,8 @@ $i=1;
         <select name="title" id="title" class="form-control" required>
 <option value="">Select One</option>
 
-<option value="mr">Mr.</option>
-<option value="ms">Ms.</option>
+<option value="Mr.">Mr.</option>
+<option value="Ms.">Ms.</option>
 
 </select>
       </div>

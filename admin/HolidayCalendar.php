@@ -84,10 +84,10 @@
 
 <div align="center" >
 <?php
-$result_holi = mysql_query("SELECT * FROM holidays");
+$result_holi = mysql_query("SELECT * FROM evenement");
 
 $row_holi = mysql_fetch_array($result_holi);
-$holiday_1=$row_holi['holiday'];
+$holiday_1=$row_holi['start'];
 ?>
 
 <h3 style="font-size:16; color:#000000; font-family:verdana;"> Archon Consulting Systems Pvt Ltd. </h3>

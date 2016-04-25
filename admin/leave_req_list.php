@@ -797,7 +797,9 @@ $row_q = mysql_fetch_array($result_w);
 ?>
 
 
-
+<form action="excel.php" method="post">
+    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
+</form>
 
 
 

@@ -75,7 +75,7 @@
   <li><a href="LeavePolicy.php" >Leave Policy</a></li>
   <li><a href="HolidayCalendar.php">Holiday Calendar</a></li>
 </ul>
-
+<center><h1 style="margin-top:50px;color:#A4A4A4;text-shadow: 2px 2px #848484;"><b>Welcome to Archon Leave Management Tool</b></h1></center>
    
 <!--<iframe name="Main_iframe" id="Main_iframe" src="Main_iframe.php" border='0'; width="1150px" height="550px" frameborder=0> </frame>-->
 
