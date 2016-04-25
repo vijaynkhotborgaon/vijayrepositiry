@@ -390,7 +390,7 @@ if($dept !=''AND $Industry_1=='' AND $emp_code=='')
 <tbody>
 <tr style="text-align: center;">
 <td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Employee ID</strong></td>
+<td><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
 <td><strong>Report To</strong></td>
 <td><strong>Leave Type</strong></td>
@@ -413,7 +413,7 @@ while($row = mysql_fetch_array($result))
      $emp_id=$row['emp_id'];
 
     $result_1 = mysql_query("SELECT * FROM leave_employee_new where emp_id=$emp_id");
-	echo mysql_num_rows($result_1);
+	mysql_num_rows($result_1);
 	while($row_1 = mysql_fetch_array($result_1))
 
 	  { 
@@ -430,8 +430,13 @@ while($row = mysql_fetch_array($result))
 
 <td><?php echo $i; ?></td>
 
-<td><?php echo $row_1['emp_id']; ?></td>
 
+<?php
+$result_new = mysql_query("SELECT * FROM t_employee where emp_id=".$row_1['emp_id']);
+	
+$row_new= mysql_fetch_array($result_new);
+?>
+<td><?php echo $row_new['emp_code']; ?></td>
 
 <?php
 
@@ -527,7 +532,7 @@ if($dept=='' AND $Industry_1!='' AND $emp_code=='')
 <tbody>
 <tr style="text-align: center;">
 <td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Employee ID</strong></td>
+<td><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
 <td><strong>Report To</strong></td>
 <td><strong>Leave Type</strong></td>
@@ -565,8 +570,13 @@ while($row = mysql_fetch_array($result))
 
 <td><?php echo $i; ?></td>
 
-<td><?php echo $row_1['emp_id']; ?></td>
 
+<?php
+$result_new = mysql_query("SELECT * FROM t_employee where emp_id=".$row_1['emp_id']);
+	
+$row_new= mysql_fetch_array($result_new);
+?>
+<td><?php echo $row_new['emp_code']; ?></td>
 
 <?php
 $emp_name=$row['emp_first_name'];
@@ -660,7 +670,7 @@ if($dept=='' AND $Industry_1=='' AND $emp_code!='')
 <tbody>
 <tr style="text-align: center;">
 <td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Employee ID</strong></td>
+<td><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
 <td><strong>Report To</strong></td>
 <td><strong>Leave Type</strong></td>
@@ -699,7 +709,14 @@ while($row = mysql_fetch_array($result))
 
 <td><?php echo $i; ?></td>
 
-<td><?php echo $row_1['emp_id']; ?></td>
+
+<?php
+$result_new = mysql_query("SELECT * FROM t_employee where emp_id=".$row_1['emp_id']);
+	
+$row_new= mysql_fetch_array($result_new);
+?>
+<td><?php echo $row_new['emp_code']; ?></td>
+
 
 
 <?php

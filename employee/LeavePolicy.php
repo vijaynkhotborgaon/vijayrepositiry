@@ -84,9 +84,7 @@
 <h5 style="font-size:110%;">  <b>* The below mentioned Leave Policy is applicable to all permanent employees of Archon Consulting Systems Pvt Ltd. </b></h5>
 <h5 style="font-size:110%;">  <b>* Leaves are calculated for Calendar Year (January to December) </b> </h5>
 </div>
-
 <br>
-
 
 <p class="trigger"><a href="#" style="color:#2E64FE;">+	Annual Leave (AL)</a></p>
 <div class="toggle_container" style="background-color:#CECEF6;padding:10px;border: 2px solid #065F34;border-radius:10px;">

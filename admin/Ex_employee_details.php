@@ -481,7 +481,7 @@ while($rowindustry = mysql_fetch_array($resultid)){
     <td><?php echo $rowindustry['email']; ?></td>
 </tr>
 <tr>
-    <td><b>Was reporting</b></td>
+    <td><b>Was reporting To</b></td>
     <td>
 	 
 <?php 

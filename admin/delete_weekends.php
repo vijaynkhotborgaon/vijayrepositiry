@@ -426,7 +426,54 @@
 
 ?>
 <table class="table" id="delTable">
+  
+  
+  
   <thead class="thead-inverse">
+      <tr style="background-color:#D8D8D8;">
+        <th>Sl.No.</th>
+        <th>Month </th>
+        <th>Date</th>
+		<th>Day</th>
+		<th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+	<?php
+	$resultid = mysql_query("SELECT * FROM holidays where id IS NULL order by holiday ASC");
+$i=1;
+
+
+while($rowindustry = mysql_fetch_array($resultid)){
+
+$holiday=$rowindustry['holiday'];
+$newDate = date("d-m-Y", strtotime($holiday));
+?>
+	<tr id="<?php echo $rowindustry['no']; ?>">
+	<td><?php echo $i++;?></td>
+	<td><?php echo date("F", strtotime($newDate));?></td>
+	<td><?php echo date("d-m-Y", strtotime($newDate));?></td>
+	<td><?php echo date("l", strtotime($newDate));?></td>
+	<td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
+	</tr>
+     <?php }
+	 
+	 ?>
+      
+	  
+    </tbody>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ <!-- <thead class="thead-inverse">
     <tr>
       <th>#</th>
       <th>TITLE	</th>
@@ -435,28 +482,46 @@
     </tr>
   </thead>
   
-<tbody>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <tbody>
+
+
+
+
+
+
+
+
 
 
 
 <?php 
 
 
-$resultid = mysql_query("SELECT * FROM holidays where id IS NULL");
+/*$resultid = mysql_query("SELECT * FROM holidays where id IS NULL");
 $i=1;
 
 
 while($rowindustry = mysql_fetch_array($resultid)){
 
 $holiday=$rowindustry['holiday'];
-$newDate = date("d-m-Y", strtotime($holiday));
+$newDate = date("d-m-Y", strtotime($holiday));*/
 
 ?>
 
 
-    <tr id="<?php echo $rowindustry['no']; ?>">
-      <th scope="row"><?php echo $i++;?></th>
-      <td><?php echo $newDate;?></td>
+    <tr id="<?php //echo $rowindustry['no']; ?>">
+      <th scope="row"><?php //echo $i++;?></th>
+      <td><?php //echo $newDate;?></td>
      
 	   <td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
     </tr>
@@ -466,9 +531,10 @@ $newDate = date("d-m-Y", strtotime($holiday));
 
 
 <?php
-} ?>
+//} 
+?>
 
-</tbody>
+</tbody>-->
 </table>
 
 

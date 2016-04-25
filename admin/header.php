@@ -252,7 +252,10 @@
                             <li class="eborder-top">
                                 <a href="my_profile.php"><i class="icon_profile"></i> My Profile</a>
                             </li>
-                          
+                          <li class="eborder-top">
+                                <a href="change_pass_admin.php"><i class="icon_profile"></i> Change Password</a>
+                            </li>
+                           
                             
                            
                            

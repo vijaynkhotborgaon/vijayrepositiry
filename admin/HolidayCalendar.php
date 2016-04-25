@@ -83,9 +83,15 @@
 <br>
 
 <div align="center" >
+<?php
+$result_holi = mysql_query("SELECT * FROM holidays");
+
+$row_holi = mysql_fetch_array($result_holi);
+$holiday_1=$row_holi['holiday'];
+?>
 
 <h3 style="font-size:16; color:#000000; font-family:verdana;"> Archon Consulting Systems Pvt Ltd. </h3>
-<h3 style="font-size:18; color:#000000; font-family:verdana;"> Holiday List - 2016  </h3>
+<h3 style="font-size:18; color:#000000; font-family:verdana;"> Holiday List - <?php echo date("Y", strtotime($holiday_1));?></h3>
 
 </div>
 
@@ -110,12 +116,11 @@
     </thead>
     <tbody>
 	<?php
-	$result = mysql_query("SELECT * FROM evenement");
-	$i=1;
-while($row = mysql_fetch_array($result))
-{ 
-$row_id=$row['id'];
-$result_1 = mysql_query("SELECT * FROM holidays where id=$row_id");
+	
+
+
+$result_1 = mysql_query("SELECT * FROM holidays join evenement where holidays.id=evenement.id order by holidays.holiday ASC");
+$i=1;
 while($row_1 = mysql_fetch_array($result_1))
 { 
 $holiday=$row_1['holiday'];
@@ -125,10 +130,10 @@ $holiday=$row_1['holiday'];
 	<td><?php echo date("F", strtotime($holiday));?></td>
 	<td><?php echo date("d-m-Y", strtotime($holiday));?></td>
 	<td><?php echo date("l", strtotime($holiday));?></td>
-	<td><?php echo $row['title'];?></td>
+	<td><?php echo $row_1['title'];?></td>
 	</tr>
      <?php }
-	 }
+	 
 	 ?>
       
 	  

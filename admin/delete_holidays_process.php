@@ -21,6 +21,7 @@ if (!$conn) {
 // sql to delete a record
 
 $delete = mysqli_query($conn,"DELETE FROM evenement where id='$id'");
+$delete_holi = mysqli_query($conn,"DELETE FROM holidays where id='$id'");
 
  if($delete)
      echo json_encode(array('status'=>'success'));

@@ -38,7 +38,7 @@
 					  <li style="background-color:gray;"><a class="" href="list_weekends.php">List Weekends</a></li>
 					   <li style="background-color:gray;"><a class="" href="create_weekends.php">Create Weekends</a></li>
 					   <li style="background-color:gray;"><a class="" href="delete_weekends.php">Delete Weekends</a></li>
-					   <li style="background-color:gray;"><a class="" href="list_holiday.php">List Holiday's</a></li>
+					   <li style="background-color:gray;"><a class="" href="HolidayCalendar.php">List Holiday's</a></li>
                           <li style="background-color:gray;"><a class="" href="default.php">Create Holiday's</a></li>
 						  <li style="background-color:gray;"><a class="" href="delete_holidays.php">Delete Holiday's</a></li>                          
                          

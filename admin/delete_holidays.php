@@ -429,9 +429,10 @@
   <thead class="thead-inverse">
     <tr>
       <th>#</th>
-      <th>TITLE	</th>
+     
       <th>START</th>
       <th>END</th>
+	   <th>TITLE	</th>
 	   <th>ACTION</th>
     </tr>
   </thead>
@@ -443,7 +444,7 @@
 <?php 
 
 
-$resultid = mysql_query("SELECT * FROM evenement");
+$resultid = mysql_query("SELECT * FROM evenement order by start ASC");
 $i=1;
 
 
@@ -460,9 +461,10 @@ $newDate_end = date("d-m-Y", strtotime($end));
 
     <tr id="<?php echo $rowindustry['id']; ?>">
       <th scope="row"><?php echo $i++;?></th>
-      <td><?php echo $rowindustry['title'];?></td>
+      
       <td><?php echo $newDate_start;?></td>
       <td><?php echo $newDate_end;?></td>
+	  <td><?php echo $rowindustry['title'];?></td>
 	   <td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
     </tr>
    

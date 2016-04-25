@@ -1,86 +1,3 @@
-
-
-<!--new code-->
-
-
-
-
-<?php
-
-
-	require_once('../config.php');
-	
-	require_once('auth.php');
-
-
-	
-
-
-?>
-
-
-
-
-
-
-
-
-  
-
-
-  
-
-
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-			  
-	
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
-
-
-
-
-											
-
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -89,47 +6,9 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript">
-
-	$(document).ready(function()
-	{
-		$('table#delTable td a.delete').click(function()
-		{
-			if (confirm("Are you sure you want to delete this row?"))
-			{
-				var id = $(this).parent().parent().attr('id');
-				var data = 'id=' + id ;
-				var parent = $(this).parent().parent();
-
-				$.ajax(
-				{
-					   type: "POST",
-					   url: "delete_weekends_process.php",
-					   data: data,
-					   cache: false,
-					
-					   success: function(json)
-					   {
-					   
-					
-							parent.fadeOut('slow', function() {$(this).remove();});
-							
-					   }
-				 });				
-			}
-		});
-		
-		// style the table with alternate colors
-		// sets specified color for every odd row
-		
-	});
-	
-</script>
-
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Creative - Bootstrap Admin Template</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -139,6 +18,7 @@
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
+	<link href="css/DashboardButtonStyles.css" rel="stylesheet">
     <!-- full calendar css-->
     <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
@@ -154,6 +34,11 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/xcharts.min.css" rel=" stylesheet">	
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/ExpandableListStyle.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/ExpandableListStyle.css" rel="stylesheet">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -163,314 +48,54 @@
   </head>
 
   <body>
+
   <!-- container section start -->
+
   <section id="container" class="">
      
-      <?php include('header.php');?>
-
-     <?php include('side_bar.php');?>
+	<?php include('header.php');?>
+	<?php include('side_bar.php');?>
+      
       <!--main content start-->
+	 
       <section id="main-content">
-          <section class="wrapper">            
+         <section class="wrapper">  
               <!--overview start-->
+			  <!--
 			  <div class="row">
 				<div class="col-lg-12">
-					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
+					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
+				 <!--
 					</ol>
 				</div>
 			</div>
-		
-
-
-
-											<?php
-
-
-
-
-
-
-
-
-	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
-
-
-
-
-
-
-
-
-		foreach($_SESSION['ERRMSG_ARR'] as $msg) { ?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-danger">
-  <strong><?php echo $msg; ?></strong> 
-</div>
-
-
+		-->
 			
+	
+<ul id="menu" align="center">
+  <li><a href="index.php">Home</a></li>
+  <li><a href="LeavePolicy.php">Leave Policy</a></li>
+  <li><a href="HolidayCalendar.php" style="background-color:#58ACFA;">Holiday Calendar</a></li>
+</ul>
+<br>
+
+<div align="center" >
+
+<h3 style="font-size:16; color:#000000; font-family:verdana;"> Archon Consulting Systems Pvt Ltd. </h3>
+<h3 style="font-size:18; color:#000000; font-family:verdana;"> Holiday List - 2016  </h3>
 
-
-
-
-<?php
-
-
-
-		}
-
-
-
-
-
-
-
-
-		?>
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-				
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-        <?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['ERRMSG_ARR']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-		  
-
-
-<?php
-
-
-
-
-
-
-
-
-	if(isset($_SESSION['CAMREGMESG']) && $_SESSION['CAMREGMESG']==1 ) {
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>Activity</strong> Assign to Role
 </div>
 
+<br>
+<br>
+<br>
 
+<div>
 
 
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['CAMREGMESG']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-?>
-<!--<table class="table" id="delTable">
-  <thead class="thead-inverse">
-    <tr>
-      <th>#</th>
-      <th>WEEKENDS	</th>
-      
-      
-    </tr>
-  </thead>
-  
-<tbody>
-
-
-
-<?php 
-
-
-/*$resultid = mysql_query("SELECT * FROM holidays where id IS NULL");
-$i=1;
-
-
-while($rowindustry = mysql_fetch_array($resultid)){
-
-$holiday=$rowindustry['holiday'];
-$newDate = date("d-m-Y", strtotime($holiday));*/
-
-
-?>
-
-
-    <tr id="<?php //echo $rowindustry['no']; ?>">
-      <th scope="row"><?php //echo $i++;?></th>
-      <td><?php //echo $newDate;?></td>
-     
-	  
-    </tr>
-   
-  
-
-
-
-<?php
-//} ?>
-
-</tbody>
-</table>-->
 
 
 <table class="table ">
@@ -480,52 +105,40 @@ $newDate = date("d-m-Y", strtotime($holiday));*/
         <th>Month </th>
         <th>Date</th>
 		<th>Day</th>
-		
+		<th>Holiday</th>
       </tr>
     </thead>
     <tbody>
 	<?php
-	$resultid = mysql_query("SELECT * FROM holidays where id IS NULL order by holiday ASC");
-$i=1;
-
-
-while($rowindustry = mysql_fetch_array($resultid)){
-
-$holiday=$rowindustry['holiday'];
-$newDate = date("d-m-Y", strtotime($holiday));
+	$result = mysql_query("SELECT * FROM evenement");
+	$i=1;
+while($row = mysql_fetch_array($result))
+{ 
+$row_id=$row['id'];
+$result_1 = mysql_query("SELECT * FROM holidays where id=$row_id");
+while($row_1 = mysql_fetch_array($result_1))
+{ 
+$holiday=$row_1['holiday'];
 ?>
 	<tr>
 	<td><?php echo $i++;?></td>
-	<td><?php echo date("F", strtotime($newDate));?></td>
-	<td><?php echo date("d-m-Y", strtotime($newDate));?></td>
-	<td><?php echo date("l", strtotime($newDate));?></td>
-	
+	<td><?php echo date("F", strtotime($holiday));?></td>
+	<td><?php echo date("d-m-Y", strtotime($holiday));?></td>
+	<td><?php echo date("l", strtotime($holiday));?></td>
+	<td><?php echo $row['title'];?></td>
 	</tr>
      <?php }
-	 
+	 }
 	 ?>
       
 	  
     </tbody>
   </table>
   
+</div>
 
 
 
-
-
-    
-
-
-
-
-
-			
-
-
-
- 
-           
           </section>
       </section>
       <!--main content end-->
@@ -624,7 +237,43 @@ $newDate = date("d-m-Y", strtotime($holiday));
 
   </body>
 </html>
-			      			        
 
 
-			      			  		</div></div></div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
