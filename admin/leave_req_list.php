@@ -375,6 +375,11 @@ $emp_last_name_1=$row_2['emp_last_name'];
 
 </table>
 
+
+<form action="excel_1.php" method="post">
+    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
+</form>
+
 <?php }?>
 
 
@@ -440,9 +445,9 @@ $row_new= mysql_fetch_array($result_new);
 
 <?php
 
-$emp_name=$row['emp_first_name'];
-$emp_mid_name=$row['emp_middle_name'];
-$emp_last_name=$row['emp_last_name'];
+$emp_name=$row_new['emp_first_name'];
+$emp_mid_name=$row_new['emp_middle_name'];
+$emp_last_name=$row_new['emp_last_name'];
 
 $result_w = mysql_query("SELECT * FROM t_employee where assign_to=".$row_1['assign_to']);
 	
@@ -510,6 +515,11 @@ $row_q = mysql_fetch_array($result_w);
 
 
 </table>
+
+<form action="excel_2.php" method="post">
+     <input type="hidden" name="dept_hidden" value="<?php echo $dept?>">
+    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
+</form>
 
 <?php 
  
@@ -579,9 +589,9 @@ $row_new= mysql_fetch_array($result_new);
 <td><?php echo $row_new['emp_code']; ?></td>
 
 <?php
-$emp_name=$row['emp_first_name'];
-$emp_mid_name=$row['emp_middle_name'];
-$emp_last_name=$row['emp_last_name'];
+$emp_name=$row_new['emp_first_name'];
+$emp_mid_name=$row_new['emp_middle_name'];
+$emp_last_name=$row_new['emp_last_name'];
 
 $result_w = mysql_query("SELECT * FROM t_employee where assign_to=".$row_1['assign_to']);
 	
@@ -649,6 +659,10 @@ $row_q = mysql_fetch_array($result_w);
 
 
 </table>
+<form action="excel_3.php" method="post">
+     <input type="hidden" name="ind_hidden" value="<?php echo $Industry_1;?>">
+    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
+</form>
 
 <?php }
 }
@@ -791,15 +805,18 @@ $row_q = mysql_fetch_array($result_w);
 
 </table>
 
+<form action="excel_4.php" method="post">
+     <input type="hidden" name="code_hidden" value="<?php echo $emp_code;?>">
+    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
+</form>
+
 <?php }
 }
 
 ?>
 
 
-<form action="excel.php" method="post">
-    <input type="submit" name="export_exccel" class="btn btn-success" value="Download report">
-</form>
+
 
 
 

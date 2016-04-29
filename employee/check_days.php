@@ -5,7 +5,7 @@
         $from= $_GET['data_1'];
 		$till=$_GET['data_2'];
 		$half_day=$_GET['data_3']/2;
-		
+		$four=$_GET['data_4'];
 		/*code for excluding sunday, sat, holidays*/
 		/*
 		$holidays=array();
@@ -41,6 +41,56 @@ $dayOfWeek = $date->format( 'N' );
 }
 */
 
+if($from!='' AND $till=='' AND $half_day=='' AND $four==4 )
+{
+$resultid = mysql_query("SELECT * FROM leave_assign");
+$rowindustry = mysql_fetch_array($resultid);
+$row=$rowindustry ['m_l'];
+
+$date = new DateTime($from);
+$date->add(new DateInterval('P'.$row.'D'));
+$date->sub(new DateInterval('P1D'));
+$exact=$date->format('d-m-Y');
+
+
+
+
+$arr = array("date" => $exact, 
+             "days" => $row);
+
+echo json_encode($arr);
+
+
+
+}
+else if($from!='' AND $till=='' AND $half_day=='' AND $four==5 )
+{
+$resultid = mysql_query("SELECT * FROM leave_assign");
+$rowindustry = mysql_fetch_array($resultid);
+$row=$rowindustry ['pat_l'];
+
+$date = new DateTime($from);
+$date->add(new DateInterval('P'.$row.'D'));
+$date->sub(new DateInterval('P1D'));
+$exact=$date->format('d-m-Y');
+
+
+
+
+$arr = array("date" => $exact, 
+             "days" => $row);
+
+echo json_encode($arr);
+
+
+
+}
+
+else
+{
+
+
+
 /* code for including sunday,sat,holidays*/
 $begin = new DateTime("$from" );
 $end = new DateTime("$till");
@@ -61,5 +111,5 @@ else
 {
 echo $date_1;
 }
-    
+ }
 ?>

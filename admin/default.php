@@ -182,7 +182,7 @@ $(document).ready(function() {
 			 start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
 			 end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
 			 $.ajax({
-			 url: 'http://localhost/NiceAdmin/admin/add_events.php',
+			 url: 'http://localhost/NiceAdmin_final_1.1/admin/add_events.php',
 			 dataType:'json',
 			 data: 'title='+ title+'&start='+ start +'&end='+ end ,
 			 type: "POST",

@@ -235,19 +235,43 @@
 
 
 
+
+
+
 function calculate() {
 		var myBox1 = document.getElementById('emp_first_name').value;	
 		var myBox2 = document.getElementById('emp_middle_name').value;
 		var myBox3 = document.getElementById('half_day').value;
-		
+		var myBox4 = document.getElementById('title').value;
 		
 		$.ajax({
         type: "GET",
         url: "check_days.php",
-        data: {'data_1':myBox1, 'data_2':myBox2, 'data_3':myBox3},
-        success: function(result) {
-           
-			$('#result').val(result);
+		dataType:'json',
+        data: {'data_1':myBox1, 'data_2':myBox2, 'data_3':myBox3,  'data_4':myBox4},
+        success: function(data) {
+          
+		   if(data.days == '84')
+		   {
+		   $('#emp_middle_name').val(data.date);
+		  
+		   $('#result').val(data.days);
+		   
+		   }
+		   else if(data.days == '3')
+		   {
+		   $('#emp_middle_name').val(data.date);
+		 
+		   $('#result').val(data.days);
+		   
+		   }
+		   else
+		   {
+			$('#result').val(data);
+			}
+			
+			
+			
         }
     });
       
@@ -373,14 +397,34 @@ unset($_SESSION['till_date']);
 
 <div class="col-sm-6">
 <form class="form-horizontal" action="apply-leaves-process-test-latest.php" method="post" enctype="multipart/form-data" role="form">
-
+<?php
+		$result = mysql_query("SELECT * FROM t_employee  where emp_id='$uid'");
+$row= mysql_fetch_assoc($result);
+$joining=$row['JoiningDate'];
+$date_aftr_six_months = date('d-m-Y', strtotime("+6 months", strtotime($joining)));
+$current_date=date("d-m-Y");
+if(strtotime($joining)<=strtotime($current_date))
+{
+//echo "vijay";
+}
+else{
+//echo "vrushabh";
+}
+?>
 
 	<div class="form-group">
       <label class="control-label col-sm-4" for="email"><strong>Select Leave Type</strong></label>
       <div class="col-sm-8">
         <select name="Industry" id="title" class="form-control">
+		
+		
 
 <option value="">Select Any One</option>
+<?php 
+if(strtotime($date_aftr_six_months)<=strtotime($current_date))
+{
+?>
+
 <?php
 $resultid = mysql_query("SELECT * FROM leave_type");
 while($rowindustry = mysql_fetch_array($resultid)){
@@ -395,15 +439,44 @@ else if($rowindustry['type_name']=='C. L.')
 {?>
 
 <option value="<?php echo $rowindustry['leave_type_id']; ?>">Casual Leave (CL)</option> 
-<?php } 
+<?php }
+
+else if($rowindustry['type_name']=='E.L.') 
+{?>
+
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Annual Leave (EL)</option> 
+<?php }
+else if($rowindustry['type_name']=='M.L.') 
+{?>
+
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Maternity Leave (ML)</option> 
+<?php }
+
 else 
 {?>
-<option value="<?php echo $rowindustry['leave_type_id']; ?>">Earned Leave (EL)</option>
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Paternity Leave (PL)</option>
 
 
 
 <?php
 } 
+}
+}
+else
+{
+?>
+<?php
+$resultid = mysql_query("SELECT * FROM leave_type");
+while($rowindustry = mysql_fetch_array($resultid)){
+if($rowindustry['type_name']=='E.L.') 
+{
+?>
+
+
+
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Annual Leave (EL)</option> 
+<?php }
+}
 }?>
 
 </select>
@@ -416,12 +489,12 @@ else
 	 <div class="form-group">
       <label class="control-label col-sm-4" for="email" ><strong>From Date</strong></label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" placeholder="From" name="activefrom" id="emp_first_name" />
+        <input type="text" class="form-control" placeholder="From" name="activefrom" id="emp_first_name" onchange="calculate()"/>
 		
       </div>
     </div>
 	
-	<div class="form-group">
+	<div class="form-group box_for_maternity">
       <label class="control-label col-sm-4" for="email"><strong>To Date</strong></label>
       <div class="col-sm-8">
         <input type="text" class="form-control" placeholder="To date" name="activetill" id="emp_middle_name" onchange="calculate()"/>
@@ -461,7 +534,7 @@ else
     <div class="form-group">        
       <div class="col-sm-offset-6 col-sm-6">
         
-		 <input type="submit" class="btn btn-info" value="Submit" >
+		 <b><input type="submit" class="btn btn-info" value="Submit" ></b>
       </div>
     </div>
   </form>
@@ -471,372 +544,8 @@ else
   
 </div>
 
+<a href="Leave_description.php" class="btn btn-warning" role="button"><b>My Leave Balance</b></a>
 
-
-
-
-<div class="col-sm-6">
-
-
-			
-
-<?php
-$resultid = mysql_query("SELECT * FROM leave_assign");
-$rowindustry = mysql_fetch_array($resultid);
-$pl_assign=$rowindustry['p_l'];
-$cl_assign=$rowindustry['c_l'];
-$el_assign=$rowindustry['e_l'];
-?>
-
-<article>
-<div id="formWrapper">
-<!--<fieldset class="fBlock" id="Corporate_Details">
-<legend>Leave Description</legend>
-<p>
-<label> Assigned</label>
-<strong><?php echo $pl_assign;?></strong>
-</p>
-<p>
-<label>C. L. Assigned</label>
-<strong><?php echo $cl_assign;?></strong>
-</p>
-<p>
-<label>E. L. Assigned</label>
-<strong><?php echo $el_assign;?></strong>
-</p>
-<p>
-<?php 
-$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
-$row_tot = mysql_fetch_assoc($result_tot);
-
-$forward=$row_tot['forward'];
-
-
-?>
-<label>Carry forward</label>
-<strong><?php //echo $forward;?></strong>
-</p>
-</fieldset>-->
-</div>
-</article>
-
-
-<?php
-$result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid' ORDER BY timestamp DESC LIMIT 1");
-			if(mysql_num_rows($result_plcl)==0)
-			{
-			
-						$la = mysql_query("SELECT * FROM leave_assign");
-						$rowla = mysql_fetch_array($la);
-						$pl=$rowla['p_l'];
-						$cl=$rowla['c_l'];
-						$el=$rowla['e_l'];
-						$total_bal=$pl+$cl+$el;
-
-			
-			?>
-			
-			
-			
-
-<article>
-			<div id="formWrapper">
-			<!--<fieldset class="fBlock" id="Corporate_Details">
-			<legend>Your Leave Balance</legend>
-			<p>
-			<label>P. L. Balance</label>
-			<strong><?php //echo $pl;?></strong>
-			</p>
-			<p>
-			<label>C. L. Balance</label>
-			<strong><?php //echo $cl;?></strong>
-			</p>
-			<p>
-			<label>E. L. Balance + carry forward</label>
-			<strong><?php //echo $el;?></strong>
-			</p>
-
-
-<p>
-<label>Total Balance</label>
-<strong><?php //echo $total_bal;?></strong>
-</p>
-</fieldset>-->
-
-<legend>Leave Description</legend>
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>S.No.</th>
-        <th>Leave Type</th>
-        <th>Carry forward from previous year</th>
-		<th>Assigned Leaves for current Year</th>
-		<th>Total Leaves Available for current Year</th>
-		<th>Leave Balance for current Year</th>
-		
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Sick Leave (SL)</td>
-        <td>0</td>
-		<td><?php echo $pl;?></td>
-        <td><?php echo $pl+0;?></td>
-        <td><?php echo $pl;?></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Casual Leave (CL)</td>
-        <td>0</td>
-		<td><?php echo $cl;?></td>
-        <td><?php echo $cl+0;?></td>
-        <td><?php echo $cl;?></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Earned Leave (EL)</td>
-        <td><?php echo $forward;?></td>
-		<td><?php echo $el;?></td>
-        <td><?php echo $el+$forward;?></td>
-        <td><?php echo $el+$forward;?></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-</div>
-<article>
-<?php }?>
-
-
-
-
-
-
-
-
-
-
-<?php
-
-if(mysql_num_rows($result_plcl)>0)
-{
-
-			$row_plcl = mysql_fetch_array($result_plcl);
-			$pl=$row_plcl['p_l'];
-			$cl=$row_plcl['c_l'];
-			$el=$row_plcl['e_l'];
-			$total_bal=$pl+$cl+$el;
-
-			
-			$result_total = mysql_query("SELECT * FROM leave_assign");
-			$row_total = mysql_fetch_assoc($result_total);
-			$original_el=$row_total['e_l'];	
-				
-			$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
-			$row = mysql_fetch_assoc($result);
-
-
-			$timestamp = $row['timestamp'];
-			$datetime = explode(" ",$timestamp);
-			$date = $datetime[0];
-			$last_year = date('Y', strtotime($date));
-
-			$current_year=date("Y");
-
-			$el_days=$row['e_l'];
- 
- $result_t = mysql_query("SELECT * FROM leave_employee_new");
-$num_rows = mysql_num_rows($result_t);
- 
-			if(($last_year != $current_year) AND ($num_rows != 0))
-			 {
-			 
-			 
-			 
-					$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
-					$row_tot = mysql_fetch_assoc($result_tot);
-					$total_days=$row_tot['total_days'];
-					$forward=$row_tot['forward'];
-					$sum=$total_days+$forward;
-						
-					$result_total = mysql_query("SELECT * FROM leave_assign");
-					$row_total = mysql_fetch_assoc($result_total);
-					$original_el=$row_total['e_l'];	
-			
-		?>
-		<div id="formWrapper">
-<!--<fieldset class="fBlock" id="Corporate_Details" >
-<legend>Your Leave Balance</legend>
-<p>
-<label>P. L. Balance</label>
-<strong><?php //echo $row_total['p_l'];?></strong>
-</p>
-<p>
-<label>C. L. Balance</label>
-<strong><?php //echo $row_total['c_l'];?></strong>
-</p>
-<p>
-<label>E. L. Balance + carry forward</label>
-<strong><?php //echo $sum;?></strong>
-</p>
-
-<p>
-<label>Total Balance</label>
-<strong><?php //echo $row_total['p_l']+$row_total['c_l']+$sum;?></strong>
-</p>
-</fieldset>-->
-
-<legend>Leave Description</legend>
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>S.No.</th>
-        <th>Leave Type</th>
-        <th>Carry forward from previous year</th>
-		<th>Assigned Leaves</th>
-		<th>Total Leaves Balance</th>
-		<th>Remaining Leaves Balance</th>
-		
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Sick Leave (SL)</td>
-        <td>0</td>
-		<td><?php echo $pl_assign;?></td>
-        <td><?php echo $pl_assign+0;?></td>
-        <td><?php echo $pl;?></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Casual Leave (CL)</td>
-        <td>0</td>
-		<td><?php echo $cl_assign;?></td>
-        <td><?php echo $cl_assign+0;?></td>
-        <td><?php echo $cl;?></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Earned Leave (EL)</td>
-        <td><?php echo $forward;?></td>
-		<td><?php echo $el_assign;?></td>
-        <td><?php echo $el_assign+$forward;?></td>
-        <td><?php echo $el_assign+$forward;?></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-		
-<?php 
-}else{?>
-<div id="formWrapper">
-<!--<fieldset class="fBlock" id="Corporate_Details" >
-<legend>Your Leave Balance</legend>
-<p>
-<label>P. L. Balance</label>
-<strong><?php //echo $pl;?></strong>
-</p>
-<p>
-<label>C. L. Balance</label>
-<strong><?php //echo $cl;?></strong>
-</p>
-<p>
-<label>E. L. Balance + carry forward</label>
-<strong><?php //echo $el;?></strong>
-</p>
-
-<p>
-<label>Total Balance</label>
-<strong><?php //echo $total_bal;?></strong>
-</p>
-</fieldset>-->
-<legend>Leave Description</legend>
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>S.No.</th>
-        <th>Leave Type</th>
-        <th>Carry forward from previous year</th>
-		<th>Assigned Leaves</th>
-		<th>Total Leaves Balance</th>
-		<th>Remaining Leaves Balance</th>
-		
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Sick Leave (SL)</td>
-        <td>0</td>
-		<td><?php echo $pl_assign;?></td>
-        <td><?php echo $pl_assign+0;?></td>
-        <td><?php echo $pl;?></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Casual Leave (CL)</td>
-        <td>0</td>
-		<td><?php echo $cl_assign;?></td>
-        <td><?php echo $cl_assign+0;?></td>
-        <td><?php echo $cl;?></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Earned Leave (EL)</td>
-        <td><?php echo $forward;?></td>
-		<td><?php echo $el_assign;?></td>
-        <td><?php echo $el_assign+$forward;?></td>
-        <td><?php echo $el;?></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-
-</div>
-
-
-<?php }
-}
-?>
-
-
-<!-- div for full calendar -->
-<!-- 
-<div id="formWrapper">
-<fieldset class="fBlock" id="Corporate_Details" >
-<legend>Holiday's Calendar</legend>
-
-<div id='calendar'></div>
-<div id="dialog" style="display:none;"></div>
-
-
-</fieldset>
-</div>-->
-
-</article>
-
-
-
-<!-- //Article -->
-</div>
 
 </div>
 

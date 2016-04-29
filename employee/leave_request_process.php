@@ -716,7 +716,8 @@ $row = mysql_fetch_assoc($result);
 	<input type="hidden" name="pl" value="<?php echo $row['p_l'];?>">
 	<input type="hidden" name="cl" value="<?php echo $row['c_l'];?>">
 	<input type="hidden" name="el" value="<?php echo $row['e_l'];?>">
-
+	<input type="hidden" name="ml" value="<?php echo $row['m_l'];?>">
+<input type="hidden" name="patl" value="<?php echo $row['pat_l'];?>">
 
 
 

@@ -232,10 +232,21 @@ $row_id = mysql_fetch_assoc($result);
                             <li>
                                 <p class="blue">Notifications</p>
                             </li>
+							<?php	
+									$result_rows = mysql_query("SELECT * FROM t_employee where assign_to='$uid'");
+									
+									$num_rows=mysql_num_rows($result_rows);
+									
+									if($num_rows>0)
+									{
+
+                                ?>
+							
+							
                             <li>
                                 <a href="leave_request.php">
                                     <span class="label label-primary"><i class="icon_profile"></i></span> 
-                                    Team Pending Leaves
+                                   Team Leaves Status
 									
 								<?php	
 									$result = mysql_query("SELECT * FROM leave_employee_new where assign_to='$uid' AND status='Pending' ORDER BY leave_id DESC");
@@ -256,7 +267,7 @@ $row_id = mysql_fetch_assoc($result);
 							  <li>
                                 <a href="leave-status.php">
                                     <span class="label label-primary"><i class="icon_profile"></i></span> 
-                                    Self Pending Leaves
+                                    My Leaves Status
 									
 								<?php	
 									$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND status='Pending' ORDER BY leave_id DESC");
@@ -272,6 +283,41 @@ $row_id = mysql_fetch_assoc($result);
 								
 								
                             </li>
+							<?php 
+							
+							}
+							else
+							{
+							?>
+							 <li>
+                                <a href="leave-status.php">
+                                    <span class="label label-primary"><i class="icon_profile"></i></span> 
+                                    My Leaves Status
+									
+								<?php	
+									$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND status='Pending' ORDER BY leave_id DESC");
+									
+									$num_of_pending_self=mysql_num_rows($result);
+
+                                ?>
+
+                                    <span class="small italic pull-right" style="color:red;"><?php echo $num_of_pending_self;?></span>
+                                </a>
+								
+								
+								
+								
+                            </li>
+							
+							
+							
+							
+							<?php
+							}
+							?>
+							
+							
+							
                             <!--<li>
                                 <a href="#">
                                     <span class="label label-warning"><i class="icon_pin"></i></span>  

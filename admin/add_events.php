@@ -20,10 +20,7 @@ $end=$_POST['end'];
  }
  
  
- $sql = "INSERT INTO evenement (title, start, end) VALUES (:title, :start, :end)";
-$q = $bdd->prepare($sql);
-$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end));
-$foo = $bdd->lastInsertId();
+
 
 
 
@@ -48,13 +45,16 @@ $foo = $bdd->lastInsertId();
 foreach($range as $range)
 {
 
- $query =  "SELECT * FROM holidays WHERE holiday = :holiday " ;
+ $query =  "SELECT * FROM evenement WHERE start = :holiday OR end = :holiday " ;
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':holiday', $range);
         $blaa = $stmt->rowCount();
         $stmt->execute();
 
-                
+           $sql = "INSERT INTO evenement (title, start, end) VALUES (:title, :start, :end)";
+$q = $bdd->prepare($sql);
+$q->execute(array(':title'=>$title, ':start'=>$range, ':end'=>$range));
+$foo = $bdd->lastInsertId();      
                 
                 
                     if($stmt->rowCount() > 0)
@@ -75,13 +75,13 @@ foreach($range as $range)
 						exit();
 
             }
-                else {
-
-        $sql_1 = "INSERT INTO holidays (id, holiday) VALUES (:id, :holiday)";
+            else
+{
+ $sql_1 = "INSERT INTO holidays (id, holiday) VALUES (:id, :holiday)";
 $q_1 = $bdd->prepare($sql_1);
 $q_1->execute(array(':id'=>$foo, ':holiday'=>$range));
 
-        }
+}			
 
 
 }

@@ -428,11 +428,12 @@
 <table class="table" id="delTable">
   <thead class="thead-inverse">
     <tr>
-      <th>#</th>
+      <th>SI.No.</th>
      
-      <th>START</th>
-      <th>END</th>
-	   <th>TITLE	</th>
+      <th>Month</th>
+      <th>Date</th>
+	   <th>Day</th>
+	   <th>Holiday</th>
 	   <th>ACTION</th>
     </tr>
   </thead>
@@ -462,8 +463,9 @@ $newDate_end = date("d-m-Y", strtotime($end));
     <tr id="<?php echo $rowindustry['id']; ?>">
       <th scope="row"><?php echo $i++;?></th>
       
+      <td><?php echo date("F", strtotime($newDate_start));?></td>
       <td><?php echo $newDate_start;?></td>
-      <td><?php echo $newDate_end;?></td>
+	  <td><?php echo date("l", strtotime($newDate_start));?></td>
 	  <td><?php echo $rowindustry['title'];?></td>
 	   <td><a href="#" class="delete"><img src="img/Delete.png" style="margin-left:5px;" alt="Delete Date" /></a> </td>
     </tr>

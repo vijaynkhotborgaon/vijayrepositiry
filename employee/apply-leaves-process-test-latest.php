@@ -37,6 +37,8 @@ $row_total = mysql_fetch_assoc($result_total);
 $original_el=$row_total['e_l'];
 $original_pl=$row_total['p_l'];
 $original_cl=$row_total['c_l'];	
+$original_ml=$row_total['m_l'];
+$original_patl=$row_total['pat_l'];
 
 	
 $result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
@@ -243,22 +245,6 @@ if (strtotime($from) <$now) {
 	} 
 	
 	
-	if (strtotime($till) < $now || strtotime($till) < strtotime($from)) {
-    $errmsg_arr[] = 'Selected Till Date Invalid';
-
-
-
-
-
-		$errflag = true;
-
-
-
-
-
-	
-	
-	} 
 	
 	
 	if($from == 'Click to select date') {
@@ -321,10 +307,37 @@ if (strtotime($from) <$now) {
 
 	}*/
 	
-	
+		$result_ml = mysql_query("SELECT * FROM leave_employee_new  where emp_id='$uid' AND leave_type='M.L.' ORDER BY leave_id DESC LIMIT 1");
+$num_ml = mysql_fetch_assoc($result_ml);
+$state=$num_ml['status'];
+echo $leave_type1;
+if($state=='Approved' AND $leave_type1=='M.L.')
+{
+
+$errmsg_arr[] = 'You already applied for maternity leave';
 
 
 
+
+
+		$errflag = true;
+
+
+}
+
+if($state=='Approved' AND $leave_type1=='P.L.')
+{
+
+$errmsg_arr[] = 'You already applied for paternity leave';
+
+
+
+
+
+		$errflag = true;
+
+
+}
 
 
 
@@ -366,8 +379,7 @@ exit();
 
 	$result_t = mysql_query("SELECT * FROM leave_employee_new  where emp_id='$uid'");
 $num_rows = mysql_num_rows($result_t);
-	
-	if(($last_year != $current_year) AND ($num_rows != 0))
+if(($current_year!=$last_year) AND ($num_rows != 0))
  {
  
  
@@ -377,6 +389,15 @@ $row_tot = mysql_fetch_assoc($result_tot);
 $total_days=$row_tot['total_days'];
 $forward=$row_tot['forward'];
 $sum=$total_days+$forward;
+
+$result_assign = mysql_query("SELECT * FROM leave_assign");
+$row_assign = mysql_fetch_assoc($result_assign);
+$pl_assign=$row_assign['p_l'];
+$cl_assign=$row_assign['c_l'];
+$ml_assign=$row_assign['m_l'];
+
+$original_pl_remaining=$pl_assign+$row_tot['pl_remaining'];
+$original_cl_remaining=$cl_assign+$row_tot['cl_remaining'];
 
 				if($date_1>$sum)
 
@@ -399,7 +420,7 @@ $result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$assign_to=$row_assign['assign_to'];
 
 
- $qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', '$original_pl', '$original_cl', '$sum')";
+ $qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ,m_l,pat_l,pl_for_previous,cl_for_previous,el_for_previous) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', '$original_pl_remaining', '$original_cl_remaining', '$sum','$original_ml','$original_patl','$original_pl','$original_cl','$sum')";
 			$result = @mysql_query($qry);
 		if($result) {
 
@@ -457,8 +478,10 @@ $result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$pl=$row_plcl['p_l'];
 			$cl=$row_plcl['c_l'];
 			$el=$row_plcl['e_l'];
+			$ml=$row_plcl['m_l'];
+			$patl=$row_plcl['pat_l'];
 			
-			if($leave_type1=='P. L.' AND  ($date_1>$pl OR $pl== 0))
+			/*if($leave_type1=='P. L.' AND  ($date_1>$pl OR $pl== 0))
 			{
 			$_SESSION['from_date'] = 1;
 
@@ -498,16 +521,29 @@ $result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 				exit();
 
 			
-			}
+			}*/
 			
 			$result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$row_assign = mysql_fetch_array($result_assign);
 			$assign_to=$row_assign['assign_to'];
 			
+			$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
+$row_tot = mysql_fetch_assoc($result_tot);
+$total_days=$row_tot['total_days'];
+$forward=$row_tot['forward'];
+$sum=$total_days+$forward;
+			
+			
+			$result_assign = mysql_query("SELECT * FROM leave_assign");
+$row_assign = mysql_fetch_assoc($result_assign);
+$pl_assign=$row_assign['p_l'];
+$cl_assign=$row_assign['c_l'];
+$original_pl_remaining=$pl_assign+$row_tot['pl_remaining'];
+$original_cl_remaining=$cl_assign+$row_tot['cl_remaining'];
 			
 			
 			
-			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', $pl, $cl, $el)";
+			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', $original_pl_remaining, $original_cl_remaining, $el,$ml,$patl,$pl,$cl,$el)";
 			$result = @mysql_query($qry);
 			
 			
@@ -634,10 +670,12 @@ $sendmail= mail($to, $subject, $mail_body, $headers);
 			$pl=$row_plcl['p_l'];
 			$cl=$row_plcl['c_l'];
 			$el=$row_plcl['e_l'];
+			$ml=$row_plcl['m_l'];
+			$patl=$row_plcl['pat_l'];
 			$pl_or_cl=$row_plcl['leave_type'];
 			
 			
-			if($leave_type1=='P. L.' AND  ($date_1>$pl OR $pl== 0))
+			/*if($leave_type1=='P. L.' AND  ($date_1>$pl OR $pl== 0))
 			{
 			$_SESSION['from_date'] = 1;
 
@@ -673,14 +711,14 @@ $sendmail= mail($to, $subject, $mail_body, $headers);
 				exit();
 
 			
-			}
+			}*/
 				$result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$row_assign = mysql_fetch_array($result_assign);
 			$assign_to=$row_assign['assign_to'];
 			
 			
 			
-			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to, leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ) VALUES('$uid', '$assign_to','$leave_type1','$from','$till', $date_1,'$purpose','Pending' ,'-No Comments-', $pl, $cl, $el)";
+			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to, leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid', '$assign_to','$leave_type1','$from','$till', $date_1,'$purpose','Pending' ,'-No Comments-', $pl, $cl, $el,$ml,$patl,$pl,$cl,$el)";
 			$result = @mysql_query($qry);
 			
 				
