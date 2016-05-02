@@ -91,7 +91,16 @@ $holiday_1=$row_holi['start'];
 ?>
 
 <h3 style="font-size:16; color:#000000; font-family:verdana;"> Archon Consulting Systems Pvt Ltd. </h3>
-<h3 style="font-size:18; color:#000000; font-family:verdana;"> Holiday List - <?php echo date("Y", strtotime($holiday_1));?></h3>
+<h3 style="font-size:18; color:#000000; font-family:verdana;"> Holiday List - <?php 
+if($holiday_1=='')
+{
+echo "";
+}
+else
+{
+echo date("Y", strtotime($holiday_1));
+}
+?></h3>
 
 </div>
 

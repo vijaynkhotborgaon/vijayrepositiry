@@ -383,6 +383,7 @@ $cl_assign=$rowindustry['c_l'];
 $el_assign=$rowindustry['e_l'];
 $ml_assign=$rowindustry['m_l'];
 $patl_assign=$rowindustry['pat_l'];
+$sabl_assign=$rowindustry['sab_l'];
 ?>
 
 <article>
@@ -430,6 +431,7 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
 						$el=$rowla['e_l'];
 						$ml=$rowla['m_l'];
 						$patl=$rowla['pat_l'];
+						$sabl=$rowla['sab_l'];
 						$total_bal=$pl+$cl+$el;
 
 			
@@ -462,7 +464,11 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
 </p>
 </fieldset>-->
 
-<legend>Leave Description</legend>
+<h2>Leave Description</h2>
+ <a href="apply-leaves.php" class="btn btn-info" role="button" style="float:right;margin-bottom:5px;">BACK</a>
+ 
+
+
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -556,6 +562,20 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
         <td><?php echo $patl;?></td>
         <td><?php echo $patl;?></td>
       </tr>
+	  
+	   <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+     <td>0</td>
+		
+		
+		
+		
+        <td>0</td>
+		<td><?php echo $sabl;?></td>
+        <td><?php echo $sabl;?></td>
+        <td><?php echo $sabl;?></td>
+      </tr>
     </tbody>
   </table>
 
@@ -585,6 +605,7 @@ if(mysql_num_rows($result_plcl)>0)
 			$el=$row_plcl['e_l'];
 			$ml=$row_plcl['m_l'];
 			$patl=$row_plcl['pat_l'];
+			$sabl=$row_plcl['sab_l'];
 			$total_bal=$pl+$cl+$el;
 
 			
@@ -650,7 +671,10 @@ $num_rows = mysql_num_rows($result_t);
 </p>
 </fieldset>-->
 
-<legend>Leave Description</legend>
+<h2>Leave Description</h2>
+ <a href="apply-leaves.php" class="btn btn-info" role="button" style="float:right;margin-bottom:5px;">BACK</a>
+ 
+
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -728,6 +752,20 @@ $num_rows = mysql_num_rows($result_t);
         <td><?php echo $patl_assign;?></td>
         <td><?php echo $patl_assign;?></td>
       </tr>
+	  
+	  <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+      <td>0</td>
+		
+		
+		
+		
+        <td>0</td>
+		<td><?php echo $sabl_assign;?></td>
+        <td><?php echo $sabl_assign;?></td>
+        <td><?php echo $sabl_assign;?></td>
+      </tr>
     </tbody>
   </table>
 
@@ -767,8 +805,12 @@ $num_rows = mysql_num_rows($result_t);
 <strong><?php //echo $total_bal;?></strong>
 </p>
 </fieldset>-->
-<legend>Leave Description</legend>
-<table class="table table-bordered">
+<h2>Leave Description</h2>
+ <a href="apply-leaves.php" class="btn btn-info" role="button" style="float:right;margin-bottom:5px;">BACK</a>
+ 
+ 
+ 
+<table class="table table-bordered" style="">
     <thead>
       <tr>
         <th>S.No.</th>
@@ -877,6 +919,20 @@ $num_rows = mysql_num_rows($result_t);
 		<td><?php echo $patl_assign;?></td>
         <td><?php echo $patl_assign;?></td>
         <td><?php echo $row_fetch['pat_l'];?></td>
+      </tr>
+	  
+	  	   <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+		<td>0</td>
+		
+		
+		
+		
+        <td>0</td>
+		<td><?php echo $sabl_assign;?></td>
+        <td><?php echo $sabl_assign;?></td>
+        <td><?php echo $row_fetch['sab_l'];?></td>
       </tr>
     </tbody>
   </table>

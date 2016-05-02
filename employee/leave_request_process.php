@@ -718,6 +718,7 @@ $row = mysql_fetch_assoc($result);
 	<input type="hidden" name="el" value="<?php echo $row['e_l'];?>">
 	<input type="hidden" name="ml" value="<?php echo $row['m_l'];?>">
 <input type="hidden" name="patl" value="<?php echo $row['pat_l'];?>">
+<input type="hidden" name="sabl" value="<?php echo $row['sab_l'];?>">
 
 
 
@@ -791,10 +792,14 @@ $row = mysql_fetch_assoc($result);
 
 
 
+<?php
+$result_new = mysql_query("SELECT * FROM t_employee where emp_id=".$row['emp_id']);
+	
+$row_new= mysql_fetch_array($result_new);
+?>
 
 
-
-<td><?php echo $row['emp_id']; ?></td>
+<td><?php echo $row_new['emp_code']; ?></td>
 
 
 

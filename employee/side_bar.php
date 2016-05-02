@@ -113,8 +113,8 @@
 	
  <li style="background-color:gray;"><a class="" href="leave_request.php">Team Leave Requests</a></li>
 	<?php }
-	if($for_ceo!='')
-	{
+	//if($for_ceo!='')
+	//{
 	?>
     
 	 <li style="background-color:gray;"><a class="" href="apply-leaves.php">Apply Leaves</a></li>
@@ -123,7 +123,7 @@
 	  <li style="background-color:gray;"><a class="" href="leave-status.php">Leave Status</a></li>
 	 	<!-- <li><a href="cancel-leaves.php" title="canceled leaves">Cancel Leaves</a></li>-->
 	 
-	 <?php }?>
+	 <?php //}?>
 					  
 					  
 					  

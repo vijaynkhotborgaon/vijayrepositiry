@@ -253,14 +253,20 @@ function calculate() {
           
 		   if(data.days == '84')
 		   {
+		   
 		   $('#emp_middle_name').val(data.date);
-		  
+		    $('#emp_first_name').attr('readonly','true');
+		  $('#emp_middle_name').attr('readonly','true');
+
 		   $('#result').val(data.days);
+		    
 		   
 		   }
 		   else if(data.days == '3')
 		   {
 		   $('#emp_middle_name').val(data.date);
+		    $('#emp_first_name').attr('readonly','true');
+		  $('#emp_middle_name').attr('readonly','true');
 		 
 		   $('#result').val(data.days);
 		   
@@ -402,6 +408,7 @@ unset($_SESSION['till_date']);
 $row= mysql_fetch_assoc($result);
 $joining=$row['JoiningDate'];
 $date_aftr_six_months = date('d-m-Y', strtotime("+6 months", strtotime($joining)));
+$date_aftr_three_years = date('d-m-Y', strtotime("+3 years", strtotime($joining)));
 $current_date=date("d-m-Y");
 if(strtotime($joining)<=strtotime($current_date))
 {
@@ -452,14 +459,22 @@ else if($rowindustry['type_name']=='M.L.')
 <option value="<?php echo $rowindustry['leave_type_id']; ?>">Maternity Leave (ML)</option> 
 <?php }
 
-else 
+else if($rowindustry['type_name']=='P.L.')
 {?>
 <option value="<?php echo $rowindustry['leave_type_id']; ?>">Paternity Leave (PL)</option>
 
 
 
 <?php
-} 
+}
+else if(strtotime($date_aftr_three_years)<=strtotime($current_date))
+{?>
+<option value="6">Sabbatical Leave (SabL)</option>
+
+
+
+<?php
+}  
 }
 }
 else

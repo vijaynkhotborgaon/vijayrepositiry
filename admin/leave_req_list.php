@@ -275,7 +275,7 @@ if($dept=='' AND $Industry_1=='' AND $emp_code=='')
 <td><strong>To</strong></td>
 <td><strong>Number of Days</strong></td>
 <td><strong>Purpose</strong></td>
-<td><strong>Comment from manager</strong></td>
+<td><strong>Comments</strong></td>
 <td><strong>Status</strong></td>
 </tr>
 <?php
@@ -403,7 +403,7 @@ if($dept !=''AND $Industry_1=='' AND $emp_code=='')
 <td><strong>To</strong></td>
 <td><strong>Number of Days</strong></td>
 <td><strong>Purpose</strong></td>
-<td><strong>Comment from manager</strong></td>
+<td><strong>Comments</strong></td>
 <td><strong>Status</strong></td>
 </tr>
 <?php
@@ -550,7 +550,7 @@ if($dept=='' AND $Industry_1!='' AND $emp_code=='')
 <td><strong>To</strong></td>
 <td><strong>Number of Days</strong></td>
 <td><strong>Purpose</strong></td>
-<td><strong>Comment from manager</strong></td>
+<td><strong>Comments</strong></td>
 <td><strong>Status</strong></td>
 </tr>
 <?php
@@ -692,7 +692,7 @@ if($dept=='' AND $Industry_1=='' AND $emp_code!='')
 <td><strong>To</strong></td>
 <td><strong>Number of Days</strong></td>
 <td><strong>Purpose</strong></td>
-<td><strong>Comment from manager</strong></td>
+<td><strong>Comments</strong></td>
 <td><strong>Status</strong></td>
 </tr>
 <?php

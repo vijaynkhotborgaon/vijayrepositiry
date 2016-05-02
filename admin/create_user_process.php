@@ -318,6 +318,9 @@ if($report_to=='my')
 {
 $qry = "INSERT INTO t_employee(emp_code, title, emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, JoiningDate, dept_id,  priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email', '$dateofjoining','$dept','$role', NULL,'$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);
+$last_id=mysql_insert_id();
+$qry_1 = "UPDATE t_employee SET assign_to=$last_id WHERE emp_id=$last_id";
+	$result_1 = @mysql_query($qry_1);
 }else{
 $qry = "INSERT INTO t_employee(emp_code, title,emp_first_name, emp_middle_name, emp_last_name, mobile, address, email, JoiningDate, dept_id, priority_id, assign_to, username, password) VALUES('$emp_code','$title','$first_name','$middle_name','$last_name','$mobile','$address', '$email', '$dateofjoining', '$dept','$role', '$report_to','$new_str2', '$pass_emp' )";
 $result = @mysql_query($qry);

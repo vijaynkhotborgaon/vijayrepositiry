@@ -231,7 +231,7 @@
 
 
 
-<td><strong>Till</strong></td>
+<td><strong>To</strong></td>
 
 
 
@@ -244,6 +244,10 @@
 
 <td><strong>Number of Days</strong></td>
 
+<td><strong>Purpose</strong></td>
+
+<td><strong>Comment</strong></td>
+<td><strong>Status</strong></td>
 
 
 
@@ -345,7 +349,13 @@ while($row = mysql_fetch_array($result))
 
 <td><?php echo $i; ?></td>
 
-<td><?php echo $row['emp_id']; ?></td>
+<?php
+$result_new = mysql_query("SELECT * FROM t_employee where emp_id=".$row['emp_id']);
+	
+$row_new= mysql_fetch_array($result_new);
+?>
+
+<td><?php echo $row_new['emp_code']; ?></td>
 
 
 <?php
@@ -394,6 +404,9 @@ $emp_last_name=$row_1['emp_last_name'];
 
 
 <td><?php echo $row['number_of_day']; ?></td>
+<td><?php echo $row['purpose']; ?></td>
+<td><?php echo $row['comment']; ?></td>
+<td><?php echo $row['status']; ?></td>
 
 
 
