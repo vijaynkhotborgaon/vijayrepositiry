@@ -407,7 +407,7 @@ unset($_SESSION['till_date']);
 		$result = mysql_query("SELECT * FROM t_employee  where emp_id='$uid'");
 $row= mysql_fetch_assoc($result);
 $joining=$row['JoiningDate'];
-$date_aftr_six_months = date('d-m-Y', strtotime("+6 months", strtotime($joining)));
+$date_aftr_six_months = date('d-m-Y', strtotime("+7 months", strtotime($joining)));
 $date_aftr_three_years = date('d-m-Y', strtotime("+3 years", strtotime($joining)));
 $current_date=date("d-m-Y");
 if(strtotime($joining)<=strtotime($current_date))

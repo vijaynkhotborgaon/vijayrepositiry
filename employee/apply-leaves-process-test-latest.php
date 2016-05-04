@@ -39,7 +39,7 @@ $original_pl=$row_total['p_l'];
 $original_cl=$row_total['c_l'];	
 $original_ml=$row_total['m_l'];
 $original_patl=$row_total['pat_l'];
-
+$original_sabl=$row_total['sab_l'];
 	
 $result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
 $row = mysql_fetch_assoc($result);
@@ -196,6 +196,44 @@ $errmsg_arr[] = 'You should apply Annual Leave 21 days before';
 
 
 		$errflag = true;
+
+}
+
+if($date_1>$original_sabl AND $leave_type1=="Sab.L.")
+{
+$errmsg_arr[] = 'Number of days exceeds your sabbatical leaves';
+
+
+
+
+
+		$errflag = true;
+
+
+}
+
+$result_error = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND leave_type='P.L.' AND status='Approved'");
+$row_error = mysql_num_rows($result_error);
+if($row_error==1)
+{
+
+$errmsg_arr[] = 'You already applied';
+$errflag = true;
+
+
+
+}
+
+
+$result_mat = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND leave_type='M.L.' AND status='Approved'");
+$row_mat = mysql_num_rows($result_mat);
+if($row_mat==1)
+{
+
+$errmsg_arr[] = 'You already applied';
+$errflag = true;
+
+
 
 }
 

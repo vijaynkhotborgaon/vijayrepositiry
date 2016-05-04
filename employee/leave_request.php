@@ -210,7 +210,7 @@
 
 
 
-<td><strong>Employee ID</strong></td>
+<td><strong>Employee Code</strong></td>
 <td><strong>Employee Name</strong></td>
 
 <td><strong>Leave Type</strong></td>
