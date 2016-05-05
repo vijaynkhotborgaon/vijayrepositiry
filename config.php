@@ -15,5 +15,5 @@ if(!$db) {
 die("Unable to select database");
 }
 ini_set('post_max_size', '64M');
-$mainurl="http://localhost/archonsystem_test/";
+$mainurl="http://localhost/NiceAdmin_final_1.1/";
 ?>

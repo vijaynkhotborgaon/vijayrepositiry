@@ -106,7 +106,7 @@ $(document).ready(function() {
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-		
+		var url="<?php echo $mainurl;?>"
 		
 		
 		var calendar=$('#calendar').fullCalendar({
@@ -114,8 +114,8 @@ $(document).ready(function() {
 			
 			
 		
-		
-			events: "http://localhost/NiceAdmin/admin/events.php",
+			
+			events: url+'admin/events.php',
 			
 			
 			
@@ -182,7 +182,7 @@ $(document).ready(function() {
 			 start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
 			 end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
 			 $.ajax({
-			 url: 'http://localhost/NiceAdmin_final_1.1/admin/add_events.php',
+			 url: url+'admin/add_events.php',
 			 dataType:'json',
 			 data: 'title='+ title+'&start='+ start +'&end='+ end ,
 			 type: "POST",
@@ -219,7 +219,7 @@ $(document).ready(function() {
 			 start = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm:ss");
 			 end = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm:ss");
 			 $.ajax({
-			 url: 'http://localhost/NiceAdmin/admin/update_events.php',
+			 url: url+'admin/update_events.php',
 			 data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
 			 type: "POST",
 			 success: function(json) {
@@ -231,7 +231,7 @@ $(document).ready(function() {
 			 start = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm:ss");
 			 end = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm:ss");
 			 $.ajax({
-			 url: 'http://localhost/NiceAdmin/admin/update_events.php',
+			 url: url+'admin/update_events.php',
 			 data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
 			 type: "POST",
 			 success: function(json) {
@@ -277,7 +277,7 @@ $(document).ready(function() {
 						   if (title){
 						   event.title = title;
 						   $.ajax({
-							 url: 'http://localhost/NiceAdmin/admin/event_update_1.php',
+							 url: url+'admin/event_update_1.php',
 							 data: 'title='+title+'&eventid='+event.id,
 							 type: 'POST',
 							 dataType: 'json',
