@@ -32,31 +32,19 @@
 	//Sanitize the POST values
 
 
-$activity=clean($_POST['role_name']);
-
-
-$result = mysql_query("SELECT * FROM t_activity WHERE act_name='$activity'");
-$num_rows = mysql_num_rows($result);
-
-if ($num_rows) {
-   $errmsg_arr[] = 'Already Exists';
-   $errflag = true;
-}
+echo $role=clean($_POST['Industry']);
 
 
 
 	
 	
-if($activity == '') {
+if($role == '') {
 
 
 
 
 
-		$errmsg_arr[] = 'Enter Activity';
-
-
-
+		$errmsg_arr[] = 'Select Role';
 
 
 		$errflag = true;
@@ -66,31 +54,6 @@ if($activity == '') {
 
 
 	}
-	
-	
-	/*if($middle_name == '') {
-
-
-
-
-
-		$errmsg_arr[] = 'Enter middle Name';
-
-
-
-
-
-		$errflag = true;
-
-
-
-
-
-	}*/
-	
-	
-	
-
 
 
 
@@ -118,7 +81,7 @@ if($activity == '') {
 
 
 
-		header("location: add_activity.php");
+		header("location: delete_role.php");
 
 
 
@@ -134,7 +97,7 @@ if($activity == '') {
 
 	
 
-$qry = "INSERT INTO t_activity(act_name) VALUES('$activity')";
+$qry = "DELETE FROM t_priority_role WHERE priority_id='$role'";
 $result = @mysql_query($qry);
 
 
@@ -146,7 +109,7 @@ if($result) {
 
 			session_write_close();
 
-			header("location: add_activity.php");
+			header("location: delete_role.php");
 
 			exit();
 

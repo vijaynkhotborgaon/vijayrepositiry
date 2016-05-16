@@ -434,9 +434,9 @@ function change3() {
 
 <form class="form-horizontal" action="add_activity_process.php"  method="post"  role="form">
     <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Add Activity</strong></label>
+      <label class="control-label col-sm-2" for="email"><strong>Activity Name: </strong></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Type">
+        <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Activity Name">
       </div>
     </div>
    
@@ -444,7 +444,7 @@ function change3() {
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         
-		 <input type="submit" class="btn btn-info" value="Submit">
+		 <input type="submit" class="btn btn-info" value="Create Activity">
       </div>
     </div>
   </form>

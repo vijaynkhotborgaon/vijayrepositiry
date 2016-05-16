@@ -89,13 +89,6 @@
                       <!--</ul>
                   </li>  -->
 
-					  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_genius"></i>
-                          <span>Leave System</span>
-                          <!--<span class="menu-arrow arrow_carrot-right"></span>-->
-                      </a>
-                      <ul class="sub">
 					  
 					  <?php
 			$result_act_new = mysql_query("SELECT * FROM t_employee where emp_id='$uid'");	
@@ -110,19 +103,40 @@
 			 {
 			 
 			?>
+			
+					  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_genius"></i>
+                          <span>Team Leave System</span>
+                          <!--<span class="menu-arrow arrow_carrot-right"></span>-->
+                      </a>
+                      <ul class="sub">
 	
  <li style="background-color:gray;"><a class="" href="leave_request.php">Team Leave Requests</a></li>
+  <li style="background-color:gray;"> <a class="" href="reportees.php">
+                         
+                          <span>My Reportee's</span>
+                      </a></li></ul></li>
 	<?php }
 	//if($for_ceo!='')
 	//{
 	?>
+	  <li class="sub-menu">
+	
+                      <a href="javascript:;" class="">
+                          <i class="icon_desktop"></i>
+                          <span>My Leave System</span>
+                          <!--<span class="menu-arrow arrow_carrot-right"></span>-->
+                      </a>
+                      <ul class="sub">
     
 	 <li style="background-color:gray;"><a class="" href="apply-leaves.php">Apply Leaves</a></li>
 	 
 	
 	  <li style="background-color:gray;"><a class="" href="leave-status.php">Leave Status</a></li>
+	  </ul>
 	 	<!-- <li><a href="cancel-leaves.php" title="canceled leaves">Cancel Leaves</a></li>-->
-	 
+	 </li>
 	 <?php //}?>
 					  
 					  
@@ -137,7 +151,10 @@
                          
 						  
                       </ul>
+					  
                   </li> 
+				  
+				  
 <!--
  <li class="sub-menu">
                       <a href="javascript:;" class="">

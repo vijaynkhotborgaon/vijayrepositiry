@@ -1,7 +1,4 @@
 
-
-<!--new code-->
-
 <?php
 
 
@@ -16,7 +13,7 @@
 ?>
 
 
-
+<!DOCTYPE html>
 
 
 
@@ -170,11 +167,7 @@ function change3() {
 					</ol>
 				</div>
 			</div>
-		
-
-
-
-											<?php
+			<?php
 
 
 
@@ -224,18 +217,18 @@ function change3() {
 
 
 
-
 <div class="alert alert-danger">
   <strong><?php echo $msg; ?></strong> 
 </div>
+
 
 
 			
 
 
 
-
 <?php
+
 
 
 
@@ -354,8 +347,10 @@ function change3() {
 
 
 <div class="alert alert-success">
-  <strong>Activities assigned to selected Role:</strong>
+  <strong>Role deleted successfully</strong>
 </div>
+
+
 
 
 
@@ -418,57 +413,31 @@ function change3() {
 
 <?php
 
-
-
 $emp_id=$_SESSION['SESS_ID'];
 
-
-
 $result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id'");
-
-
-
-
-
-
-
 
 $row = mysql_fetch_assoc($result);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 
+			  
+			 
+			  
+			  
+			  
+			 
+			<!-- TemplateEndEditable --></div>
 
 
 
-    
 
-
-
-
-
-			
-			
-
-
-<form class="form-horizontal" action="View_RoleActivity_process.php" method="post"  role="form">
+<form class="form-horizontal" action="delete_role_process.php"  method="post"  role="form">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Select Role</strong></label>
-      <div class="col-sm-10">
+	  
+<div class="col-sm-10">
         <select name="Industry" id="Industry" class="form-control">
 <option value="">Select a Role</option>
 <?php
@@ -480,200 +449,23 @@ while($rowindustry = mysql_fetch_array($resultid)){
 } ?>
 </select>
       </div>
-    </div>
-	
-
+	  </div>
    
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        
-		
-		
-		 <input type="submit" class="btn btn-info" value="View Activities and Previlages">
-      </div>
-    </div>
-  </form>
-  </br>
-  
-  
-  <?php if(isset($_SESSION['successful_emp_search']) && $_SESSION['successful_emp_search'] == 1)
-
-
-{
-
-
-
-
-
-
-?>
-</br>
-
- <div class="col-sm-8">
- <div class="table-responsive">  
-<table class="table">
-<tbody>
-<tr>
-<?php
+ <?php
 $result_role = mysql_query("SELECT * FROM t_priority_role WHERE priority_id='$emp_id' ");
 
 $row_role = mysql_fetch_array($result_role);
 
 
 ?>
-<td colspan="6"><h4><strong>Role : <?php echo $row_role['role_name'];?></strong></h4></td>
-<td align="left" colspan="6">  
-<a href="Edit_RoleActivity.php?role_name=<?php echo $row_role['role_name'];?>"><input type="submit" class="btn btn-info" value="Edit Activities and Previlages"></a></td>
-</tr>
-<tr style="text-align: center;">
-<td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Activities</strong></td>
-
-<td colspan="3"><strong>Previligies</strong></td>
-
-</tr>
-<?php
-if($emp_id != '')
-{
-$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id' Group by act_id ");
-$i=1;
-while($row = mysql_fetch_array($result))
-{ 
-
-?>
-<tr style="text-align: center; border:none;">
-<td style="border:none;"><?php echo $i; ?></td>
-
-<?php
-$activity=$row['act_id'];
-$result_act = mysql_query("SELECT * FROM t_activity WHERE act_id='$activity' ");
-
-$row_act = mysql_fetch_array($result_act);
-
-
-?>
-
-
-<td style="border:none;"><?php echo $row_act['act_name']; ?></td>
-<?php
-$act_id=$row['act_id'];
-$result_act = mysql_query("SELECT * FROM t_manage_activity WHERE act_id='$act_id' AND priority_id='$emp_id'");
-while($row_act = mysql_fetch_array($result_act))
-{ 
-
-$activity_pri=$row_act['pri_id'];
-$result_act_1 = mysql_query("SELECT * FROM t_privilage WHERE pri_id='$activity_pri' ");
-
-while($row_act_1 = mysql_fetch_array($result_act_1))
-{
-
-
-?>
-
-
-
-
-<td style="border:none;"><?php echo $row_act_1['pri_name']; ?></td>
-
-<?php }}?>
-</tr>
-<?php   $i++; }} ?>
-
-
-
-</tbody>
-</table>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- //Article -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- //MAIN CONTENT -->
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['successful_emp_search']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-
-
-
+   
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        
+		 <a href="delete_role_process.php?role_name=<?php echo $row_role['role_name'];?>"> <input type="submit" class="btn btn-info" value="Delete Row"> </a>
+      </div>
+    </div>
+  </form>
 
 
  
@@ -700,7 +492,7 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>
@@ -776,7 +568,3 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 
   </body>
 </html>
-			      			        
-
-
-			      			  		</div></div></div></body></html>

@@ -729,7 +729,7 @@ $row = mysql_fetch_assoc($result);
       <label class="control-label col-sm-2" for="email"><strong>Select Department</strong></label>
       <div class="col-sm-10">
         <select name="dept" id="dept" class="form-control" required>
-<option value="">Select Any One</option>
+
 <?php
 $resultid = mysql_query("SELECT * FROM t_dept");
 while($rowindustry = mysql_fetch_array($resultid)){
@@ -776,8 +776,13 @@ while($rowindustry = mysql_fetch_array($resultid)){
       <label class="control-label col-sm-2" for="email"><strong>Report To</strong></label>
       <div class="col-sm-10">
         <select name="Industry_1" id="Industry_1" class="form-control" >
-		
-		<option value="my">Himself/Herself</option>
+		<?php
+		$rows = mysql_result(mysql_query('SELECT COUNT(*) FROM t_employee'), 0);
+		if (!$rows) {
+		?>
+<option value="my">Himself/Herself</option>
+<?php
+}?>
 		<?php
 $resultid = mysql_query("SELECT * FROM t_employee");
 while($rowindustry = mysql_fetch_array($resultid)){

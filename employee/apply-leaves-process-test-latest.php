@@ -659,7 +659,8 @@ $headers = "From: ".$emp_mail." \r\n";
 $sendmail= mail($to, $subject, $mail_body, $headers);
 
 /* mail to HR or Admin on leave request */
-$result_admin = mysql_query("SELECT * FROM users");
+
+/*$result_admin = mysql_query("SELECT * FROM users");
 			$row_admin = mysql_fetch_array($result_admin);
 			$admin_mail=$row_admin['email_admin'];
 
@@ -686,7 +687,7 @@ $headers = "From: ".$emp_mail." \r\n";
   $headers .= "MIME-Version: 1.0\r\n";
   $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-$sendmail= mail($to, $subject, $mail_body, $headers);
+$sendmail= mail($to, $subject, $mail_body, $headers);*/
 
 
 
@@ -835,7 +836,8 @@ $sendmail= mail($to, $subject, $mail_body, $headers);
 
 
 /* mail to HR or Admin on leave request */
-$result_admin = mysql_query("SELECT * FROM users");
+
+/*$result_admin = mysql_query("SELECT * FROM users");
 			$row_admin = mysql_fetch_array($result_admin);
 			$admin_mail=$row_admin['email_admin'];
 
@@ -862,7 +864,7 @@ $headers = "From: ".$emp_mail." \r\n";
   $headers .= "MIME-Version: 1.0\r\n";
   $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-$sendmail= mail($to, $subject, $mail_body, $headers);
+$sendmail= mail($to, $subject, $mail_body, $headers); */
 
 
 

@@ -233,7 +233,7 @@
 		<p>	d. &nbsp; &nbsp; If LOP is availed for a month or more, AL for those days will not get accrued. </P>
 		<br>
 		
-		<p>	d. &nbsp; &nbsp; The number of LOP will get deducted from the calculation during the incentive/variable/commission payout. </P>
+		<p>	e. &nbsp; &nbsp; The number of LOP will get deducted from the calculation during the incentive/variable/commission payout. </P>
 		<br>		
 
     </div>
@@ -258,13 +258,13 @@
 		<p>	d. &nbsp; &nbsp; Company contribution towards PF and Gratuity will be calculated based on the revised salary. </P>
 		<br>
 		
-		<p>	d. &nbsp; &nbsp; Medical Insurance coverage will continue during this period provided the employee pays the premium amount before heading on Sabbatical Leave. </P>
+		<p>	e. &nbsp; &nbsp; Medical Insurance coverage will continue during this period provided the employee pays the premium amount before heading on Sabbatical Leave. </P>
 		<br>
 		
-		<p>	e. &nbsp; &nbsp; Request for Sabbatical leave must be made minimum 3 months in advance. </P>
+		<p>	f. &nbsp; &nbsp; Request for Sabbatical leave must be made minimum 3 months in advance. </P>
 		<br>
 		
-		<p>	f. &nbsp; &nbsp; Approval of Sabbatical leave is solely at Managements discretion and subject to Business needs. </P>
+		<p>	g. &nbsp; &nbsp; Approval of Sabbatical leave is solely at Managements discretion and subject to Business needs. </P>
 		<br>
 		
     </div>
@@ -309,8 +309,19 @@
 <div class="toggle_container" style="background-color:#CECEF6;padding:10px;border: 2px solid #065F34;border-radius:10px;">
    <div class="block">
    
-		<p> Content Here. </p>
+		<p> a.&nbsp; &nbsp; All leaves should be applied in the portal for the approval. </p>
 		<br>
+		<p>	b. &nbsp; &nbsp; An employee may go for the leaves only if it is Approved by reporting manager in the portal. </p>
+		<br>
+		<p>	c. &nbsp; &nbsp; Employees working at customer/client location, should seek prior approval from their respective managers from the customer/client side along with their reporting manager from Archon Consulting Systems Pvt Ltd. approval in portal. </p>
+		<br>
+
+		<p>	d. &nbsp; &nbsp; An employee may avail sick leave keeping reporting manager and HR representative informed. However, the leave records need to be applied/updated in the portal after reporting to work. </P>
+		<br>
+		
+		<p>	e. &nbsp; &nbsp; Annual Leave should be applied at least 3 weeks in advance. </P>
+		<br>
+		
 		
     </div>
 </div>

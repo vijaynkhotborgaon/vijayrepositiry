@@ -451,7 +451,7 @@ else if($rowindustry['type_name']=='C. L.')
 else if($rowindustry['type_name']=='E.L.') 
 {?>
 
-<option value="<?php echo $rowindustry['leave_type_id']; ?>">Annual Leave (EL)</option> 
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Annual Leave (AL)</option> 
 <?php }
 else if($rowindustry['type_name']=='M.L.') 
 {?>
@@ -467,6 +467,14 @@ else if($rowindustry['type_name']=='P.L.')
 
 <?php
 }
+else if($rowindustry['type_name']=='L.O.P.')
+{?>
+<option value="<?php echo $rowindustry['leave_type_id']; ?>">Loss of Pay (LOP)</option>
+
+
+
+<?php
+}
 else if(strtotime($date_aftr_three_years)<=strtotime($current_date))
 {?>
 <option value="6">Sabbatical Leave (SabL)</option>
@@ -474,7 +482,8 @@ else if(strtotime($date_aftr_three_years)<=strtotime($current_date))
 
 
 <?php
-}  
+} 
+
 }
 }
 else

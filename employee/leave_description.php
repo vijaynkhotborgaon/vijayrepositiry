@@ -517,7 +517,7 @@ $result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid'
       </tr>
       <tr>
         <td>3</td>
-        <td>Earned Leave (EL)</td>
+        <td>Annual Leave (AL)</td>
         <?php if($forward!=''){?>
         <td><?php echo $forward;?></td>
 		<?php } else {?>
@@ -709,7 +709,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>3</td>
-        <td>Earned Leave (EL)</td>
+        <td>Annual Leave (AL)</td>
        <?php if($forward!=''){?>
         <td><?php echo $forward;?></td>
 		<?php } else {?>
@@ -877,7 +877,7 @@ $num_rows = mysql_num_rows($result_t);
       </tr>
       <tr>
         <td>3</td>
-        <td>Earned Leave (EL)</td>
+        <td>Annual Leave (AL)</td>
 		<?php if($forward!=''){?>
         <td><?php echo $forward;?></td>
 		<?php } else {?>

@@ -34,6 +34,13 @@
 
 $role=clean($_POST['role_name']);
 
+$result = mysql_query("SELECT * FROM t_priority_role WHERE role_name='$role'");
+$num_rows = mysql_num_rows($result);
+
+if ($num_rows) {
+   $errmsg_arr[] = 'Already Exists';
+   $errflag = true;
+}
 
 	
 	

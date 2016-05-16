@@ -17,8 +17,10 @@
                           <!--<span class="menu-arrow arrow_carrot-right"></span>-->
                       </a>
                       <ul class="sub" >
-                          <li style="background-color:gray;"><a class="" href="add_role.php">Add Role</a></li>      
-						  <li style="background-color:gray;"><a class="" href="add_activity.php">Add Activity</a></li>                          
+                          <li style="background-color:gray;"><a class="" href="add_role.php">Add Role</a></li>    
+						  <li style="background-color:gray;"><a class="" href="delete_role.php">Delete Role</a></li>
+						  <li style="background-color:gray;"><a class="" href="add_activity.php">Add Activity</a></li>
+						  <li style="background-color:gray;"><a class="" href="delete_activity.php">Delete Activity</a></li>                          
                           <li style="background-color:gray;"><a class="" href="map_activity.php">Map Activity</a></li>
 						  <li style="background-color:gray;"><a class="" href="View_RoleActivity.php">View Roles & Activities</a></li>                          
 						   <li style="background-color:gray;"><a class="" href="create_user.php">Create Employee</a></li>

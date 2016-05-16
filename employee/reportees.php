@@ -1,8 +1,13 @@
 
-
-<!--new code-->
-
-<?php
+  
+  
+  
+  
+  
+  
+  
+  
+  <?php
 
 
 	require_once('../config.php');
@@ -17,67 +22,6 @@
 
 
 
-
-
-
-
-
-  
-
-
-  
-
-
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-			  
-	
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
-
-
-
-
-											
-
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,37 +31,85 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 	
-	<script>
-function changecontent1() {
-   window.location="emp-details.php";
-}
+	
+	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
 
-function changecontent2(){
-   window.location="asset-man.php";
-}
+/*	
+//for delating row and slide down(hide) a row
+$(document).ready(function()
+	{
+		$('table#delTable td a.delete').click(function()
+		{
+			if (confirm("Are you sure you want to delete this row?"))
+			{
+				var id = $(this).parent().parent().attr('id');
+				var data = 'id=' + id ;
+				var parent = $(this).parent().parent();
 
-function changecontent3() {
-   window.location="leave-man.php";
-}
+				$.ajax(
+				{
+					   type: "POST",
+					   url: "delete_pending_process.php",
+					   data: data,
+					   cache: false,
+					
+					   success: function(json)
+					   {
+					   
+					
+							parent.fadeOut('slow', function() {$(this).remove();});
+							
+					   }
+				 });				
+			}
+		});
+		
+		
+		
+	});*/
+	
+	$(document).ready(function()
+	
+	{
+	
+		$('table#delTable td a.delete').click(function()
+		{
+	 var reason = prompt("Reason");
+    if (reason === null) {
+        return; //break out of the function early
+    }
+    
+    var id = $(this).parent().parent().attr('id');
+				var data = 'id=' + id + '&reason=' +reason;
+				var parent = $(this).parent().parent();
 
-function change1() {
-   window.location="main.php";
-}
-
-function change2() {
-   window.location="main.php";
-}
-
-function change3() {
-   window.location="main.php";
-}
-
-
+				$.ajax(
+				{
+					   type: "POST",
+					   url: "delete_pending_process.php",
+					   data: data,
+					   cache: false,
+					
+					   success: function(json)
+					   {
+					   
+					location.reload();
+							
+							
+					   }
+				 });				
+});
+});
+	
 </script>
-
+	
+	
+	
+	
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Creative - Bootstrap Admin Template</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -148,9 +140,68 @@ function change3() {
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
-  </head>
+ 
 
-  <body>
+  <link rel="stylesheet" href="../css/css-be258.css" type="text/css">
+
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+
+<script>
+
+
+  $(function() {
+
+
+    $( "#emp_first_name" ).datepicker({ dateFormat: 'dd-mm-yy' });
+	 $( "#emp_middle_name" ).datepicker({ dateFormat: 'dd-mm-yy' });
+
+
+  });
+
+
+  </script>
+
+
+
+
+
+</head>
+
+
+
+
+
+
+
+
+<body>
+
   <!-- container section start -->
   <section id="container" class="">
      
@@ -166,291 +217,16 @@ function change3() {
 					<!--<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>-->
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->							  	
+						<!--<li><i class="fa fa-laptop"></i>Dashboard</li>	-->		
+						
 					</ol>
 				</div>
 			</div>
-		
-
-
-
-											<?php
-
-
-
-
-
-
-
-
-	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
-
-
-
-
-
-
-
-
-		foreach($_SESSION['ERRMSG_ARR'] as $msg) { ?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-							
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="alert alert-danger">
-  <strong><?php echo $msg; ?></strong> 
-</div>
-
-
 			
 
-
-
-
-<?php
-
-
-
-		}
-
-
-
-
-
-
-
-
-		?>
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-				
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-        <?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['ERRMSG_ARR']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-		  
-
-
-<?php
-
-
-
-
-
-
-
-
-	if(isset($_SESSION['CAMREGMESG']) && $_SESSION['CAMREGMESG']==1 ) {
-
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-<div class="alert alert-success">
-  <strong>Activities assigned to selected Role:</strong>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-       									
-
-
-
-
-
-
-
-
-					
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['CAMREGMESG']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-?>
-
-
-
-<?php
-
-
-
-$emp_id=$_SESSION['SESS_ID'];
-
-
-
-$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id'");
-
-
-
-
-
-
-
-
-$row = mysql_fetch_assoc($result);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
+<div id="content"><!-- TemplateBeginEditable name="edit1" -->
+			  
+			  
 
 
 
@@ -461,132 +237,221 @@ $row = mysql_fetch_assoc($result);
 
 
 
-			
-			
 
 
-<form class="form-horizontal" action="View_RoleActivity_process.php" method="post"  role="form">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><strong>Select Role</strong></label>
-      <div class="col-sm-10">
-        <select name="Industry" id="Industry" class="form-control">
-<option value="">Select a Role</option>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
-$resultid = mysql_query("SELECT * FROM t_priority_role");
-while($rowindustry = mysql_fetch_array($resultid)){
+
+
+
+
+
+
+
+
+	//if(isset($_SESSION['CAMDELMESG']) && $_SESSION['CAMDELMESG']==1 ) {
+
+
+
+
+
+
+
+
 ?>
-<option value="<?php echo $rowindustry['priority_id']; ?>"><?php echo $rowindustry['role_name']; ?></option>
+
+
+
+
+
+
+
+
+ <!-- <div id="system-message">
+
+
+
+
+
+
+
+
+							<div class="alert alert-message">
+
+
+
+
+
+
+
+
+<p>Delete CAM successfully</p>
+
+
+
+
+
+
+
+
+       									</div>
+
+
+
+
+
+
+
+
+					</div>	-->
+
+
+
+
+
+
+
+
 <?php
-} ?>
-</select>
-      </div>
-    </div>
+
+
+
+
+
+
+
+
+		//unset($_SESSION['CAMDELMESG']);
+
+
+
+
+
+
+
+
+	//}
+
+
+
+
+
+
+
+
+?>
+<article>
+<form >
 	
 
-   
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        
-		
-		
-		 <input type="submit" class="btn btn-info" value="View Activities and Previlages">
-      </div>
-    </div>
-  </form>
-  </br>
-  
-  
-  <?php if(isset($_SESSION['successful_emp_search']) && $_SESSION['successful_emp_search'] == 1)
 
 
-{
+ 
+ 
+<div class="col-sm-12" style="background:;">
 
+  <h3><b>Reportee's</b></h3>
+  <div class="table-responsive">
+  <table class="table"><tbody><tr style="text-align: center;">
+<td style="text-align: center;"><strong>SlNo.</strong></td>
+<td style="text-align: center;"><strong>Employee Code</strong></td>
+<td><strong>Employee Name</strong></td>
+<td><strong>Mobile</strong></td>
+<td><strong>Email ID</strong></td>
 
-
-
-
-
-?>
-</br>
-
- <div class="col-sm-8">
- <div class="table-responsive">  
-<table class="table">
-<tbody>
-<tr>
-<?php
-$result_role = mysql_query("SELECT * FROM t_priority_role WHERE priority_id='$emp_id' ");
-
-$row_role = mysql_fetch_array($result_role);
-
-
-?>
-<td colspan="6"><h4><strong>Role : <?php echo $row_role['role_name'];?></strong></h4></td>
-<td align="left" colspan="6">  
-<a href="Edit_RoleActivity.php?role_name=<?php echo $row_role['role_name'];?>"><input type="submit" class="btn btn-info" value="Edit Activities and Previlages"></a></td>
-</tr>
-<tr style="text-align: center;">
-<td style="text-align: center;"><strong>No.</strong></td>
-<td><strong>Activities</strong></td>
-
-<td colspan="3"><strong>Previligies</strong></td>
+<td><strong>Designation</strong></td>
 
 </tr>
-<?php
-if($emp_id != '')
-{
-$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$emp_id' Group by act_id ");
+
+
+  
+  <?php
+  $resultid = mysql_query("SELECT * FROM t_employee where assign_to='$uid'");
 $i=1;
-while($row = mysql_fetch_array($result))
-{ 
 
+
+while($rowindustry = mysql_fetch_array($resultid)){
 ?>
-<tr style="text-align: center; border:none;">
-<td style="border:none;"><?php echo $i; ?></td>
+
+<tr style="text-align: center;">
+
+
+<td><?php echo $i; ?></td>
+
+
+<td><?php echo $rowindustry['emp_code']; ?></td>
+
+
 
 <?php
-$activity=$row['act_id'];
-$result_act = mysql_query("SELECT * FROM t_activity WHERE act_id='$activity' ");
-
-$row_act = mysql_fetch_array($result_act);
-
-
+$full_name=$rowindustry['emp_first_name']." ".$rowindustry['emp_middle_name']." ".$rowindustry['emp_last_name'];
 ?>
 
 
-<td style="border:none;"><?php echo $row_act['act_name']; ?></td>
-<?php
-$act_id=$row['act_id'];
-$result_act = mysql_query("SELECT * FROM t_manage_activity WHERE act_id='$act_id' AND priority_id='$emp_id'");
-while($row_act = mysql_fetch_array($result_act))
-{ 
-
-$activity_pri=$row_act['pri_id'];
-$result_act_1 = mysql_query("SELECT * FROM t_privilage WHERE pri_id='$activity_pri' ");
-
-while($row_act_1 = mysql_fetch_array($result_act_1))
-{
+<td><?php echo $full_name; ?></td>
 
 
-?>
+<td><?php echo $rowindustry['mobile']; ?></td>
+
+
+<td><?php echo $rowindustry['email']; ?></td>
+
+<?php 
+
+
+$resultcam = mysql_query("SELECT * FROM t_employee WHERE emp_id=".$rowindustry['emp_id']);
+$row_1 = mysql_fetch_array($resultcam);
+$result_final = mysql_query("SELECT * FROM t_priority_role WHERE priority_id=".$row_1['priority_id']);
+$row_2 = mysql_fetch_array($result_final);
+
+
+ ?>
+
+
+<td>
+<?php 
 
 
 
 
-<td style="border:none;"><?php echo $row_act_1['pri_name']; ?></td>
 
-<?php }}?>
+
+echo $row_2['role_name'];
+ ?>
+</td>
+
 </tr>
-<?php   $i++; }} ?>
 
 
 
-</tbody>
+
+<?php   
+$i++; } 
+?>
+
 </table>
-
-</div>
 </div>
 
+  </div>
 
 
 
@@ -594,6 +459,27 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+</form>
 
 
 
@@ -611,73 +497,12 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 
 
 
+</div>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- //MAIN CONTENT -->
-
-
-
-
-
-
-<?php
-
-
-
-
-
-
-
-
-		unset($_SESSION['successful_emp_search']);
-
-
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-           
           </section>
       </section>
       <!--main content end-->
@@ -776,7 +601,3 @@ while($row_act_1 = mysql_fetch_array($result_act_1))
 
   </body>
 </html>
-			      			        
-
-
-			      			  		</div></div></div></body></html>
