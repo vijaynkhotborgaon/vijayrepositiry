@@ -37,14 +37,60 @@
 
 
 $act_id=$_POST['Industry_1'];
-print_r($act_id);
-$priv_id=$_POST['Previlages'];
-print_r($priv_id);
-$role_id=clean($_POST['Industry']);
-echo $role_id;
 
+$priv_id=$_POST['Previlages'];
+
+$role_id=clean($_POST['Industry']);
+
+
+
+
+		$id_array=array();
+		foreach ($priv_id as $priv_id){	
+				$string_array = explode("(",$priv_id); 
+				$id_array[] = rtrim($string_array[1], ")");
+				
+	  }
+	  
+foreach ($act_id as $act_id){	
+			if(in_array($act_id,$id_array))
+			{
+			continue;
+			}
+			else{
+				$errmsg_arr[] = 'You must assign at-least one privilege to a activity';
+				$errflag = true;
+				break;
+			}
+				
+	  }
+ 
+
+
+
+
+if($act_id == '' AND $priv_id=='') {
+
+
+
+
+
+		$errmsg_arr[] = 'You removed all activities for a particular role';
+
+
+
+
+
+		$errflag = true;
+
+
+
+
+
+	}
 	
-if($role_id == '') {
+	
+	if($role_id == '') {
 
 
 
@@ -67,47 +113,11 @@ if($role_id == '') {
 	
 	
 	
-if($act_id == '') {
 
-
-
-
-
-		$errmsg_arr[] = 'Select activity';
-
-
-
-
-
-		$errflag = true;
-
-
-
-
-
-	}
 	
 	
 	
-	/*if($middle_name == '') {
-
-
-
-
-
-		$errmsg_arr[] = 'Enter middle Name';
-
-
-
-
-
-		$errflag = true;
-
-
-
-
-
-	}*/
+	
 	
 	
 	
@@ -139,7 +149,7 @@ if($act_id == '') {
 
 
 
-		header("location: map_activity.php");
+		header("location: Edit_Activity.php?id=$role_id");
 
 
 
@@ -159,14 +169,14 @@ $result_act=mysql_query($delete_act);
 	
 	
 
-	
+$priv_id=$_POST['Previlages'];	
 
 foreach ($priv_id as $priv_id){	
 $string_array = explode("(",$priv_id); 
 echo $id = rtrim($string_array[1], ")");
 
 $mystring = $priv_id;
-$first = strtok($mystring, '(');
+echo $first = strtok($mystring, '(');
 
 
 
@@ -188,11 +198,11 @@ if($result) {
 
 		}else {
 
-			die("Query failed");
+			die("Query failed............");
 
 		}
 		
-		
+	
 		
 		
 	?>

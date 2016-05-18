@@ -514,7 +514,7 @@ $newsfeed=array();
 ?>
 <div class="checkbox-inline">
 						
-                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
+                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" onclick='callfunction(<?php echo $rowindustry['act_id']; ?>)' <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
 						
 															<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
 						
@@ -596,22 +596,22 @@ else{
 ?>
 <div class="checkbox-inline">
 						
-                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
+                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" onclick='callfunction(<?php echo $rowindustry['act_id']; ?>)' <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
 						
 									<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
 						<ul class="checkbox-inline">
 						
 						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" > View  </li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled > View  </li>
 						
 					
 						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" > Edit 
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled > Edit 
 						</li>
 						
 						<li>
 						
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>"> Delete 
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>" disabled > Delete 
 						</li>
 						
 						</ul>
