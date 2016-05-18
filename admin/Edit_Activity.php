@@ -380,7 +380,7 @@ $(document).ready(function() {
 
 
 <div class="alert alert-success">
-  <strong>Activities are updated to the Role Succesfully</strong>
+  <strong>Activities are updated Successfully</strong>
 </div>
 
 
@@ -449,29 +449,37 @@ $(document).ready(function() {
 
 
 
+<?php
 
+$sess_id=$_SESSION['SESS_ID'];
+
+if($sess_id=='')
+{
+$sess_id=$_GET['id'];
+
+}
+
+$result_priority = mysql_query("SELECT * FROM t_priority_role WHERE priority_id='$sess_id'");
+
+$row_priority = mysql_fetch_assoc($result_priority);
+
+
+?>
 
 			
 			
 
 
-<form class="form-horizontal" action="map_activity_process.php" method="post"  role="form">
+<form class="form-horizontal" action="edit_activity_process.php" method="post"  role="form">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email"><strong>Role</strong></label>
       <div class="col-sm-10">
-		<input name="role" value="<?php echo $_GET['role_name']; ?>" readonly> </input>
+		<input name="role" value="<?php echo $row_priority['role_name']; ?>" readonly> </input>
       </div>
     </div>
 	
 
-	<?php
-
-$sess_id=$_SESSION['SESS_ID'];
-
-
-
-
-?>
+	
 
 
 
@@ -494,50 +502,137 @@ $sess_id=$_SESSION['SESS_ID'];
       <div class="col-sm-10">
         <?php
 $resultid = mysql_query("SELECT * FROM t_activity");
-while($rowindustry = mysql_fetch_array($resultid)){
+while($rowindustry = mysql_fetch_assoc($resultid)){
 
-$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$sess_id' group by act_id");
+$id=$rowindustry['act_id'];
+$result = mysql_query("SELECT * FROM t_manage_activity WHERE priority_id='$sess_id' AND act_id='$id' group by act_id");
 
-while($row = mysql_fetch_assoc($result)){
-
+$row = mysql_fetch_assoc($result);
+if($rowindustry['act_id'] == $row['act_id'])
+{
+$newsfeed=array();
 ?>
 <div class="checkbox-inline">
 						
                         <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
 						
+															<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
+						
+						
+						<?php 
+						$result_1 = mysql_query("SELECT * FROM t_manage_activity join t_privilage ON t_manage_activity.act_id='$id' AND t_manage_activity.priority_id='$sess_id' AND t_manage_activity.pri_id=t_privilage.pri_id");
+
+                        while($row_1 = mysql_fetch_assoc($result_1))
+						{
+							array_push($newsfeed, $row_1['pri_id']);
+						}
+						
+											
+							
+
+						
+						?>
+						
+
+						<ul class="checkbox-inline">
+						
+						<?php if(in_array(1, $newsfeed)) { ?>
+						<li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if(in_array(1, $newsfeed)){?>checked<?php }?> > View  </li>
+						
+						<?php } else { ?>
+						<li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" > View  </li>
+						
+						<?php }?>
+						
+						
+						
+						<?php if(in_array(2, $newsfeed)) { ?>
+						<li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if(in_array(2, $newsfeed)){?>checked<?php }?>> Edit 
+						</li>
+						
+						<?php } else { ?>
+						<li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" > Edit 
+						</li>
+						<?php } ?>
+						
+						
+						
+						<?php if(in_array(3, $newsfeed)) { ?>
+						<li>
+						
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if(in_array(3, $newsfeed)){?>checked<?php }?>> Delete 
+						</li>
+						
+						<?php } else { ?>
+						
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>" > Delete 
+						</li>
+						
+						<?php }?>
+						
+						
+						
+						</ul>
+						
 						<?php
 						
-									
 						
+						?>
+						</div>
+</div>	
+
+
+
+
+
+					
+<?php
+}
+else{
 ?>
+<div class="checkbox-inline">
 						
+                        <input type="checkbox" class='main_group<?php echo $rowindustry['act_id']; ?>' name="Industry_1[]"  id="Industry_1" value="<?php echo $rowindustry['act_id']; ?>" <?php if($rowindustry['act_id'] == $row['act_id']){?>checked<?php }?> /><?php echo $rowindustry['act_name']; ?> 
 						
-						<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
+									<div style="margin:5px;background-color:#CEF6F5;padding:5px;border: 3px solid #086A87; ">
 						<ul class="checkbox-inline">
 						
 						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if($row_act['pri_id']==1){?>checked<?php }?> > View  </li>
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="1<?php echo '('.$rowindustry['act_id'].')'; ?>" > View  </li>
 						
 					
 						<li>
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if($row_act['pri_id']==2){?>checked<?php }?>> Edit 
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="2<?php echo '('.$rowindustry['act_id'].')'; ?>" > Edit 
 						</li>
 						
 						<li>
 						
-						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>" <?php if($row_act['pri_id']==3){?>checked<?php }?>> Delete 
+						<input type="checkbox" name="Previlages[]" class='group<?php echo $rowindustry['act_id']; ?>' value="3<?php echo '('.$rowindustry['act_id'].')'; ?>"> Delete 
 						</li>
 						
 						</ul>
 						</div>
-					
-					
 						
-						
-</div>  
-<?php
+</div>	
+
+<?php 
+
 
 }
+
+?>
+
+
+
+
+
+
+<?php
+
 }
 ?>
 
@@ -551,6 +646,11 @@ while($row = mysql_fetch_assoc($result)){
 
       </div>
     </div>
+	
+	
+	
+	
+
 
 
 
@@ -627,7 +727,9 @@ while($row = mysql_fetch_assoc($result)){
       <div class="col-sm-offset-2 col-sm-10">
 	  
         </br>
-		 <input type="submit" class="btn btn-info" value="Edit Activities">
+		
+		<input type="hidden" name="Industry" value="<?php echo $sess_id;?>">
+		 <input type="submit" class="btn btn-info" value="Update the Activities">
       </div>
     </div>
   </form>
