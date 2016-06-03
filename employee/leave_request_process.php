@@ -719,6 +719,7 @@ $row = mysql_fetch_assoc($result);
 	<input type="hidden" name="ml" value="<?php echo $row['m_l'];?>">
 <input type="hidden" name="patl" value="<?php echo $row['pat_l'];?>">
 <input type="hidden" name="sabl" value="<?php echo $row['sab_l'];?>">
+<input type="hidden" name="lop" value="<?php echo $row['l_o_p'];?>">
 
 
 

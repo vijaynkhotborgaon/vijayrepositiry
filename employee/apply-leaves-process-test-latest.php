@@ -40,6 +40,8 @@ $original_cl=$row_total['c_l'];
 $original_ml=$row_total['m_l'];
 $original_patl=$row_total['pat_l'];
 $original_sabl=$row_total['sab_l'];
+$original_lop=$row_total['l_o_p'];
+
 	
 $result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
 $row = mysql_fetch_assoc($result);
@@ -212,6 +214,9 @@ $errmsg_arr[] = 'Number of days exceeds your sabbatical leaves';
 
 }
 
+
+if($leave_type1=='P.L.')
+{
 $result_error = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND leave_type='P.L.' AND status='Approved'");
 $row_error = mysql_num_rows($result_error);
 if($row_error==1)
@@ -219,12 +224,14 @@ if($row_error==1)
 
 $errmsg_arr[] = 'You already applied';
 $errflag = true;
-
-
-
+}
 }
 
 
+
+
+if($leave_type1=='M.L.')
+{
 $result_mat = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' AND leave_type='M.L.' AND status='Approved'");
 $row_mat = mysql_num_rows($result_mat);
 if($row_mat==1)
@@ -235,6 +242,7 @@ $errflag = true;
 
 
 
+}
 }
 
 	
@@ -452,6 +460,7 @@ $pl_assign=$row_assign['p_l'];
 $cl_assign=$row_assign['c_l'];
 $ml_assign=$row_assign['m_l'];
 $sab_assign=$row_assign['sab_l'];
+$lop_assign=$row_assign['l_o_p'];
 
 
 
@@ -480,7 +489,7 @@ $result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$assign_to=$row_assign['assign_to'];
 
 
- $qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ,m_l,pat_l,sab_l,pl_for_previous,cl_for_previous,el_for_previous) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', '$original_pl_remaining', '$original_cl_remaining', '$sum','$original_ml','$original_patl','$sab_assign','$original_pl','$original_cl','$sum')";
+ $qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l ,m_l,pat_l,sab_l,l_o_p,pl_for_previous,cl_for_previous,el_for_previous) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', '$original_pl_remaining', '$original_cl_remaining', '$sum','$original_ml','$original_patl','$sab_assign','$lop_assign','$original_pl','$original_cl','$sum')";
 			$result = @mysql_query($qry);
 		if($result) {
 
@@ -541,6 +550,8 @@ $result_assign = mysql_query("SELECT * FROM t_employee WHERE emp_id='$uid'");
 			$ml=$row_plcl['m_l'];
 			$patl=$row_plcl['pat_l'];
 			$sabl=$row_plcl['sab_l'];
+			$lop=$row_plcl['l_o_p'];
+			
 			
 			/*if($leave_type1=='P. L.' AND  ($date_1>$pl OR $pl== 0))
 			{
@@ -604,7 +615,7 @@ $original_cl_remaining=$cl_assign+$row_tot['cl_remaining'];
 			
 			
 			
-			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,sab_l,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', $original_pl_remaining, $original_cl_remaining, $el,$ml,$patl,$sabl,$pl,$cl,$el)";
+			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to,leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,sab_l,l_o_p,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid','$assign_to', '$leave_type1','$from','$till',$date_1,'$purpose','Pending' ,'-No Comments-', $original_pl_remaining, $original_cl_remaining, $el,$ml,$patl,$sabl,$lop,$pl,$cl,$el)";
 			$result = @mysql_query($qry);
 			
 			
@@ -735,6 +746,7 @@ $sendmail= mail($to, $subject, $mail_body, $headers);*/
 			$ml=$row_plcl['m_l'];
 			$patl=$row_plcl['pat_l'];
 			$sabl=$row_plcl['sab_l'];
+			$lop=$row_plcl['l_o_p'];
 			$pl_or_cl=$row_plcl['leave_type'];
 			
 			
@@ -781,7 +793,7 @@ $sendmail= mail($to, $subject, $mail_body, $headers);*/
 			
 			
 			
-			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to, leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,sab_l,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid', '$assign_to','$leave_type1','$from','$till', $date_1,'$purpose','Pending' ,'-No Comments-', $pl, $cl, $el,$ml,$patl,$sabl,$pl,$cl,$el)";
+			$qry = "INSERT INTO leave_employee_new(emp_id, assign_to, leave_type, from_date, till, number_of_day, purpose, status, comment, p_l, c_l, e_l,m_l,pat_l,sab_l,l_o_p,pl_for_previous,cl_for_previous,el_for_previous ) VALUES('$uid', '$assign_to','$leave_type1','$from','$till', $date_1,'$purpose','Pending' ,'-No Comments-', $pl, $cl, $el,$ml,$patl,$sabl,$lop,$pl,$cl,$el)";
 			$result = @mysql_query($qry);
 			
 				

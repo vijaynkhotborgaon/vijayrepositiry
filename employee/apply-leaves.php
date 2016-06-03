@@ -568,10 +568,481 @@ if($rowindustry['type_name']=='E.L.')
   
 </div>
 
-<a href="Leave_description.php" class="btn btn-warning" role="button"><b>My Leave Balance</b></a>
+
+<div class="col-sm-6">
+
+
+
+
+
+
+
+
+
+
+
+			
+
+<?php
+$resultid = mysql_query("SELECT * FROM leave_assign");
+$rowindustry = mysql_fetch_array($resultid);
+$pl_assign=$rowindustry['p_l'];
+$cl_assign=$rowindustry['c_l'];
+$el_assign=$rowindustry['e_l'];
+$ml_assign=$rowindustry['m_l'];
+$patl_assign=$rowindustry['pat_l'];
+$sabl_assign=$rowindustry['sab_l'];
+?>
+
+<article>
+<div id="formWrapper">
+<!--<fieldset class="fBlock" id="Corporate_Details">
+<legend>Leave Description</legend>
+<p>
+<label> Assigned</label>
+<strong><?php echo $pl_assign;?></strong>
+</p>
+<p>
+<label>C. L. Assigned</label>
+<strong><?php echo $cl_assign;?></strong>
+</p>
+<p>
+<label>E. L. Assigned</label>
+<strong><?php echo $el_assign;?></strong>
+</p>
+<p>
+<?php 
+$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
+$row_tot = mysql_fetch_assoc($result_tot);
+
+$forward=$row_tot['forward'];
+
+
+?>
+<label>Carry forward</label>
+<strong><?php //echo $forward;?></strong>
+</p>
+</fieldset>-->
+</div>
+</article>
+
+
+<?php
+$result_plcl = mysql_query("SELECT * FROM leave_employee_new WHERE emp_id='$uid' ORDER BY timestamp DESC LIMIT 1");
+			if(mysql_num_rows($result_plcl)==0)
+			{
+			
+						$la = mysql_query("SELECT * FROM leave_assign");
+						$rowla = mysql_fetch_array($la);
+						$pl=$rowla['p_l'];
+						$cl=$rowla['c_l'];
+						$el=$rowla['e_l'];
+						$ml=$rowla['m_l'];
+						$patl=$rowla['pat_l'];
+						$sabl=$rowla['sab_l'];
+						$total_bal=$pl+$cl+$el;
+
+			
+			?>
+			
+			
+			
+
+<article>
+			<div id="formWrapper">
+			<!--<fieldset class="fBlock" id="Corporate_Details">
+			<legend>Your Leave Balance</legend>
+			<p>
+			<label>P. L. Balance</label>
+			<strong><?php //echo $pl;?></strong>
+			</p>
+			<p>
+			<label>C. L. Balance</label>
+			<strong><?php //echo $cl;?></strong>
+			</p>
+			<p>
+			<label>E. L. Balance + carry forward</label>
+			<strong><?php //echo $el;?></strong>
+			</p>
+
+
+<p>
+<label>Total Balance</label>
+<strong><?php //echo $total_bal;?></strong>
+</p>
+</fieldset>-->
+
+<h2>Leave Description</h2>
+ 
+ 
+
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Leave Type</th>
+        
+		<th>Total Leaves Available for current Year</th>
+		<th>Leave Balance for current Year</th>
+		<?php	$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
+					$row_tot = mysql_fetch_assoc($result_tot);
+					$total_days=$row_tot['total_days'];
+					$forward=$row_tot['forward'];
+					$sum=$total_days+$forward;
+					
+					$pl_remaining=$row_tot['pl_remaining'];
+					$cl_remaining=$row_tot['cl_remaining'];
+					
+					$result_fetch = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
+			$row_fetch = mysql_fetch_assoc($result_fetch);
+					
+					?>
+		
+		
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Sick Leave (SL)</td>
+       
+        <td><?php echo $pl+$pl_remaining;?></td>
+        <td><?php echo $pl;?></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Casual Leave (CL)</td>
+       
+        <td><?php echo $cl+$cl_remaining;?></td>
+        <td><?php echo $cl;?></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Annual Leave (AL)</td>
+       
+        <td><?php echo $el+$forward;?></td>
+        <td><?php echo $el+$forward;?></td>
+      </tr>
+	  
+	   <tr>
+        <td>4</td>
+        <td>Maternity Leave (ML)</td>
+       
+       
+        <td><?php echo $ml;?></td>
+        <td><?php echo $ml;?></td>
+      </tr>
+	  
+	   <tr>
+        <td>5</td>
+        <td>Paternity Leave (EL)</td>
+    
+        <td><?php echo $patl;?></td>
+        <td><?php echo $patl;?></td>
+      </tr>
+	  
+	   <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+    
+        <td><?php echo $sabl;?></td>
+        <td><?php echo $sabl;?></td>
+      </tr>
+    </tbody>
+  </table>
+
 
 
 </div>
+<article>
+<?php }?>
+
+
+
+
+
+
+
+
+
+
+<?php
+
+if(mysql_num_rows($result_plcl)>0)
+{
+
+			$row_plcl = mysql_fetch_array($result_plcl);
+			$pl=$row_plcl['p_l'];
+			$cl=$row_plcl['c_l'];
+			$el=$row_plcl['e_l'];
+			$ml=$row_plcl['m_l'];
+			$patl=$row_plcl['pat_l'];
+			$sabl=$row_plcl['sab_l'];
+			$total_bal=$pl+$cl+$el;
+
+			
+			$result_total = mysql_query("SELECT * FROM leave_assign");
+			$row_total = mysql_fetch_assoc($result_total);
+			$original_el=$row_total['e_l'];	
+				
+			$result = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
+			$row = mysql_fetch_assoc($result);
+
+
+			$timestamp = $row['timestamp'];
+			$datetime = explode(" ",$timestamp);
+			$date = $datetime[0];
+			$last_year = date('Y', strtotime($date));
+
+			$current_year=date("Y");
+
+			$el_days=$row['e_l'];
+ 
+ $result_t = mysql_query("SELECT * FROM leave_employee_new");
+$num_rows = mysql_num_rows($result_t);
+ 
+			if(($current_year !=$last_year) AND ($num_rows != 0))
+			 {
+			 
+			 
+			 
+					$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
+					$row_tot = mysql_fetch_assoc($result_tot);
+					$total_days=$row_tot['total_days'];
+					$forward=$row_tot['forward'];
+					$sum=$total_days+$forward;
+					
+					$pl_remaining=$row_tot['pl_remaining'];
+					$cl_remaining=$row_tot['cl_remaining'];
+						
+					$result_total = mysql_query("SELECT * FROM leave_assign");
+					$row_total = mysql_fetch_assoc($result_total);
+					$original_el=$row_total['e_l'];
+					
+			
+		?>
+		<div id="formWrapper">
+<!--<fieldset class="fBlock" id="Corporate_Details" >
+<legend>Your Leave Balance</legend>
+<p>
+<label>P. L. Balance</label>
+<strong><?php //echo $row_total['p_l'];?></strong>
+</p>
+<p>
+<label>C. L. Balance</label>
+<strong><?php //echo $row_total['c_l'];?></strong>
+</p>
+<p>
+<label>E. L. Balance + carry forward</label>
+<strong><?php //echo $sum;?></strong>
+</p>
+
+<p>
+<label>Total Balance</label>
+<strong><?php //echo $row_total['p_l']+$row_total['c_l']+$sum;?></strong>
+</p>
+</fieldset>-->
+
+<h2>Leave Description</h2>
+ 
+ 
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Leave Type</th>
+        
+		<th>Total Leaves Available for current Year</th>
+		<th>Leave Balance for current Year</th>
+		
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Sick Leave (SL)</td>
+       
+        <td><?php echo $pl_assign+$pl_remaining;?></td>
+        <td><?php echo $pl_assign+$pl_remaining;?></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Casual Leave (CL)</td>
+      
+        <td><?php echo $cl_assign+$cl_remaining;?></td>
+        <td><?php echo $cl_assign+$cl_remaining;?></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Annual Leave (AL)</td>
+      
+        <td><?php echo $el_assign+$forward;?></td>
+        <td><?php echo $el_assign+$forward;?></td>
+      </tr>
+	  
+	  <tr>
+        <td>4</td>
+        <td>Maternity Leave (ML)</td>
+     
+        <td><?php echo $ml_assign;?></td>
+        <td><?php echo $ml_assign;?></td>
+      </tr>
+	  
+	  <tr>
+        <td>5</td>
+        <td>Paternity Leave (PL)</td>
+    
+        <td><?php echo $patl_assign;?></td>
+        <td><?php echo $patl_assign;?></td>
+      </tr>
+	  
+	  <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+     
+        <td><?php echo $sabl_assign;?></td>
+        <td><?php echo $sabl_assign;?></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+		
+<?php 
+}else{?>
+<div id="formWrapper">
+<!--<fieldset class="fBlock" id="Corporate_Details" >
+<legend>Your Leave Balance</legend>
+<p>
+<label>P. L. Balance</label>
+<strong><?php //echo $pl;?></strong>
+</p>
+<p>
+<label>C. L. Balance</label>
+<strong><?php //echo $cl;?></strong>
+</p>
+<p>
+<label>E. L. Balance + carry forward</label>
+<strong><?php //echo $el;?></strong>
+</p>
+
+<p>
+<label>Total Balance</label>
+<strong><?php //echo $total_bal;?></strong>
+</p>
+</fieldset>-->
+<h2>Leave Description</h2>
+ 
+ 
+ 
+ 
+<table class="table table-bordered" style="">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Leave Type</th>
+       
+		<th>Total Leaves Available for current Year</th>
+		<th>Leave Balance for current Year</th>
+		
+	<?php	$result_tot = mysql_query("SELECT * FROM total_carry_forward_with_assigned where id='$uid' ORDER BY no DESC LIMIT 1");
+					$row_tot = mysql_fetch_assoc($result_tot);
+					$total_days=$row_tot['total_days'];
+					$forward=$row_tot['forward'];
+					$sum=$total_days+$forward;
+					
+					$pl_remaining=$row_tot['pl_remaining'];
+					$cl_remaining=$row_tot['cl_remaining'];
+					
+						
+			$result_fetch = mysql_query("SELECT * FROM leave_employee_new where emp_id='$uid' ORDER BY leave_id DESC LIMIT 1");
+			$row_fetch = mysql_fetch_assoc($result_fetch);
+					
+					?>
+		
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Sick Leave (SL)</td>
+       
+        <td><?php echo $pl_assign+$pl_remaining;?></td>
+        <td><?php echo $row_fetch['p_l'];?></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Casual Leave (CL)</td>
+       
+        <td><?php echo $cl_assign+$cl_remaining;?></td>
+        <td><?php echo $row_fetch['c_l'];?></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Annual Leave (AL)</td>
+		
+        <td><?php echo $el_assign+$forward;?></td>
+        <td><?php echo $el;?></td>
+      </tr>
+	  
+	   <tr>
+        <td>4</td>
+        <td>Maternity Leave (ML)</td>
+		
+        <td><?php echo $ml_assign;?></td>
+        <td><?php echo $row_fetch['m_l'];?></td>
+      </tr>
+	  
+	   <tr>
+        <td>5</td>
+        <td>Paternity Leave (PL)</td>
+		
+        <td><?php echo $patl_assign;?></td>
+        <td><?php echo $row_fetch['pat_l'];?></td>
+      </tr>
+	  
+	  	   <tr>
+        <td>6</td>
+        <td>Sabbatical Leave (SabL)</td>
+		
+        <td><?php echo $sabl_assign;?></td>
+        <td><?php echo $row_fetch['sab_l'];?></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>
+
+
+<?php }
+}
+?>
+
+<a href="Leave_description.php" class="btn btn-warning pull-right" role="button" ><b>More Details</b></a>
+ </div>
+
+
+
+
+
+
+
 
 
           </section>

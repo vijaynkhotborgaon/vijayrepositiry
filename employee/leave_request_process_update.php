@@ -40,6 +40,7 @@ $el = clean($_POST['el']);
 $ml = clean($_POST['ml']);
 $patl = clean($_POST['patl']);
 $sabl = clean($_POST['sabl']);
+$lop = clean($_POST['lop']);
 
 	
 	//$result = mysql_query("SELECT * FROM leave_type where leave_type_id= $leave_type");
@@ -217,9 +218,11 @@ if (isset($_POST['approve']))
 	$qry = "UPDATE leave_employee_new SET status='Approved', comment='$comment',p_l=$pl,pl_for_previous=$pl   WHERE leave_id=$leave_id";
 	$result = @mysql_query($qry);
 
-	$qry_1 = "UPDATE leave_employee_new SET p_l=$pl,pl_for_previous=$pl   WHERE emp_id=$emp_id AND status='Pending'";
+	$qry_1 = "UPDATE leave_employee_new SET p_l=$pl,pl_for_previous=$pl   WHERE emp_id=$emp_id";
 	$result_1 = @mysql_query($qry_1);
 
+	/*$qry_1 = "UPDATE leave_employee_new SET p_l=$pl,pl_for_previous=$pl   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);*/
 
 
 
@@ -254,8 +257,11 @@ if (isset($_POST['approve']))
 
 		$result = @mysql_query($qry);
 
-   $qry_1 = "UPDATE leave_employee_new SET c_l=$cl,cl_for_previous=$cl   WHERE emp_id=$emp_id AND status='Pending'";
+   $qry_1 = "UPDATE leave_employee_new SET c_l=$cl,cl_for_previous=$cl   WHERE emp_id=$emp_id";
 	$result_1 = @mysql_query($qry_1);
+	
+	/*$qry_1 = "UPDATE leave_employee_new SET c_l=$cl,cl_for_previous=$cl   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);*/
 
 
 
@@ -292,8 +298,11 @@ if (isset($_POST['approve']))
 
 
 		$result = @mysql_query($qry);
-    $qry_1 = "UPDATE leave_employee_new SET e_l=$el,el_for_previous=$el   WHERE emp_id=$emp_id AND status='Pending'";
+    $qry_1 = "UPDATE leave_employee_new SET e_l=$el,el_for_previous=$el   WHERE emp_id=$emp_id";
 	$result_1 = @mysql_query($qry_1);
+	
+	/*$qry_1 = "UPDATE leave_employee_new SET e_l=$el,el_for_previous=$el   WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);*/
 
 
 
@@ -407,6 +416,43 @@ if (isset($_POST['approve']))
 		$result = @mysql_query($qry);
 
    $qry_1 = "UPDATE leave_employee_new SET sab_l=$sabl  WHERE emp_id=$emp_id AND status='Pending'";
+	$result_1 = @mysql_query($qry_1);
+
+
+
+	if($result) {
+
+				$_SESSION['CAMREGMESG'] = 1;
+
+				session_write_close();
+
+				header("location: leave_request_process.php?request=$leave_id");
+
+				exit();
+
+			}
+			
+			else {
+
+				die("Query failed");
+
+			}
+			
+	}
+	
+	 if($plcl=='L.O.P.')
+	{
+
+	$lop=$lop-$days;
+	$qry = "UPDATE leave_employee_new SET status='Approved', comment='$comment',l_o_p=$lop WHERE leave_id=$leave_id";
+
+
+
+
+
+		$result = @mysql_query($qry);
+
+   $qry_1 = "UPDATE leave_employee_new SET l_o_p=$lop  WHERE emp_id=$emp_id AND status='Pending'";
 	$result_1 = @mysql_query($qry_1);
 
 
